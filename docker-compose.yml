@@ -1,0 +1,49 @@
+version: "3.1"
+services:
+  php:
+    build:
+      context: ./
+      dockerfile: php.Dockerfile
+    container_name: auction-app
+    volumes:
+      - ./:/var/www/html
+
+  webserver:
+    image: nginx:1.17.10
+    container_name: auction-webserver
+    links:
+      - php:fpm
+    environment:
+      - FPM_HOST=fpm
+      - FPM_PORT=9000
+    working_dir: /application
+    volumes:
+      - .:/application
+      - ./:/var/www/html
+      - ./docker/nginx_conf:/etc/nginx/conf.d/
+    ports:
+      - "8080:80"
+  db:
+    platform: linux/x86_64
+    image: mysql:5.7
+    working_dir: /application
+    volumes:
+      - .:/application
+    container_name: auction-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: auction
+      MYSQL_USER: auction
+      MYSQL_PASSWORD: auction
+    ports:
+      - 3306:3306
+
+  #phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_laravel
+    restart: always
+    ports:
+      - '8081:80'
+    environment:
+      PMA_HOST: db
