@@ -8,14 +8,23 @@ use App\Models\Comment;
 use App\Models\Item;
 use App\Models\CategoryValue;
 use App\Models\ItemValue;
+use App\Models\AuctionStatus;
+use Illuminate\Support\Facades\DB;
 
 class AuctionAdminService implements AuctionAdminServiceInterface
 {
     public function getListAuctions()
     {
+        $auctionId = AuctionStatus::whereIn('status', [4, 5])
+            ->get()
+            ->pluck('auction_id')
+            ->toArray();
+        
         $auctions = Auction::with('category', 'auctionStatus')
+            ->where('auction_id', '<>', $auctionId)
             ->get()
             ->toArray();
+
         return $auctions;
     }
 
@@ -90,5 +99,16 @@ class AuctionAdminService implements AuctionAdminServiceInterface
             ->toArray();
 
         return $categoryValue;
+    }
+
+    //list auctions chưa được duyệt
+    public function getListAuctionsWait()
+    {
+        $auctions = DB::table('auctions')
+            ->join('auctions_status', 'auctions.auction_id', '=', 'auctions_status.auction_id')
+            ->whereIn('auctions_status.status', [4, 5])
+            ->get()
+            ->toArray();
+        return $auctions;
     }
 }

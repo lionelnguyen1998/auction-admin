@@ -47,8 +47,11 @@ Route::post('admin/users/login/store', [LoginController::class, 'store']);
         Route::prefix('auctions')->group(function () {
             Route::get('list', [AuctionController::class, 'index']);
             Route::get('view/{auctionId}', [AuctionController::class, 'show']);
-            Route::post('wait/{auctionId}', [AuctionController::class, 'store']);
+            Route::get('wait', [AuctionController::class, 'list']);
+            Route::get('viewAuctionWait/{auctionId}', [AuctionController::class, 'viewAuctionWait']);
+            Route::get('accept/{auctionStatusId}', [AuctionController::class, 'accept']);
             Route::get('destroy/{auctionId}', [AuctionController::class, 'destroy']);
+            Route::post('reject', [AuctionController::class, 'reject'])->name('auctionreject');
         });
 
         //Comments

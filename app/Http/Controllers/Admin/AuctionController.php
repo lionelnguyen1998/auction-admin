@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Services\AuctionAdminService;
 use App\Models\Auction;
+use App\Models\AuctionStatus;
+use App\Models\AuctionDeny;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AuctionController extends Controller
 {
@@ -47,5 +50,71 @@ class AuctionController extends Controller
             'infors' => $this->auctionService->getInfor($auctionId),
             'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId)
         ]);
+    }
+
+
+    // duyet auctions
+    public function list()
+    {
+        return view('admin.auctions.wait', [
+            'title' => 'Duyệt phiên đấu giá',
+            'auctions' => $this->auctionService->getListAuctionsWait()
+        ]);
+    }
+
+    //view autions wait ( xem thông tin auction cần phê duyệt)
+    public function viewAuctionWait($auctionId)
+    {
+        return view('admin.auctions.viewAuctionWait', [
+            'title' => 'Chi tiết phiên đấu giá',
+            'auction' => $this->auctionService->getDetailAuctions($auctionId),
+            'userSelling' => $this->auctionService->getSellingUser($auctionId),
+            'infors' => $this->auctionService->getInfor($auctionId),
+            'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId)
+        ]);
+    }
+
+    //accept auction
+    public function accept($auctionStatusId)
+    {
+        $auctionId = AuctionStatus::find($auctionStatusId)->auction_id;
+        $startDate = Auction::find($auctionId)->start_date;
+        $auctionStatus = AuctionStatus::find($auctionStatusId);
+        if ($auctionStatus) {
+            if ($startDate < now()) {
+                $auctionStatus->status = 2;
+            } else {
+                $auctionStatus->status = 1;
+            }
+            $auctionStatus->update();
+        }
+        return redirect('/admin/auctions/list');
+    }
+
+    //delete auctions
+    public function destroy($auctionId)
+    {
+        $auctions = Auction::find($auctionId)->delete();
+        return redirect('admin/auctions/list');
+    }
+
+    //reject auctions
+    public function reject(Request $request)
+    {
+        $auctionId = $request->auction_id;
+        $auctionStatusId = $request->auction_status_id;
+        $reason = $request->reason;
+        $deny = AuctionDeny::create([
+            'auction_id' => $auctionId,
+            'reason' => $reason ?? ''
+        ]);
+
+        $statusId = AuctionStatus::find($auctionStatusId);
+        if ($statusId) {
+            $statusId->status = 5;
+            $statusId->update();
+        }
+
+        return redirect('admin/auctions/wait');
     }
 }
