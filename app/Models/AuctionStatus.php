@@ -10,7 +10,7 @@ class AuctionStatus extends Model
     use HasFactory;
 
     protected $table = 'auctions_status';
-    protected $primaryKey = 'auctions_status_id';
+    protected $primaryKey = 'auction_status_id';
 
     protected $fillable = [
         'auction_status_id',

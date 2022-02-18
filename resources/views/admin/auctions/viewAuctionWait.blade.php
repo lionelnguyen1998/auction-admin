@@ -44,22 +44,24 @@
                   <li class="list-group-item">
                     <b>Giá khởi điểm</b> <p class="float-right">{{ $auction[0]["items"][0]["starting_price"] }}</p>
                   </li>
+                  @php
+                    $status = config('const.status');
+                    $index = $auction[0]['auction_status']['status'];
+                  @endphp
+                  @if ($index == 4)
+                    <li class="list-group-item">
+                      <p class="btn btn-success"><a style="color:white" href="/admin/auctions/accept/{{ $auction[0]["auction_status"]["auction_status_id"] }}">Chấp nhận</a></p>  
+                      <p class="float-right">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
+                          Từ chối
+                        </button>
+                      </p>
+                    </li>
+                  @else 
                   <li class="list-group-item">
-                    <b>Giá cao nhất</b> <p class="float-right">{{ $maxPrice }}</p>
+                    <p class="btn btn-secondary">{{ $status[$index] }}</p>
                   </li>
-                  <li class="list-group-item">
-                    @php
-                        $status = config('const.status');
-                        $index = $auction[0]['auction_status']['status'];
-                    @endphp
-                    @if ($index == 1)
-                        <p class="btn btn-success">{{ $status[$index] }}</p>
-                    @elseif ($index == 2)
-                        <p class="btn btn-warning">{{ $status[$index] }}</p>
-                    @else
-                        <p class="btn btn-danger">{{ $status[$index] }}</p>
-                    @endif
-                  </li>
+                  @endif
                 </ul>
               </div>
               <!-- /.card-body -->
@@ -72,8 +74,6 @@
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active" href="#item" data-toggle="tab">Sản phẩm</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#bid" data-toggle="tab">Trả giá</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#comment" data-toggle="tab">Comment</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -127,64 +127,6 @@
                         </div>
                     <!-- /.post -->
                     </div>
-                  <!-- /.tab-pane -->
-                  <div class="tab-pane" id="bid">
-                    <!-- Post -->
-                    @foreach ($bids as $key => $bid)
-                    @php 
-                        $avatar = $bid['users']['avatar']
-                    @endphp
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="user image">
-                        <span class="username">
-                          <p>{{ $bid['users']['nick_name'] }}</p>
-                        </span>
-                        <span class="description">{{ date("d-m-Y H:i", strtotime($bid['updated_at'])) }}</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        {{ $bid['price'] }}
-                      </p>
-
-                      <p>
-                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                        <a href="#" class="link-black text-sm mr-2"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                        <a href="/admin/bids/destroy/{{ $bid['bid_id'] }}" class="link-black text-sm"><i class="fas fa-trash mr-1"></i> Delete</a>
-                      </p>
-                    </div>
-                    @endforeach
-                    <!-- /.post -->
-                  </div>
-                  
-                  <div class="tab-pane" id="comment">
-                    <!-- Post -->
-                    @foreach ($comments as $key => $comment)
-                    @php 
-                        $avatar = $comment['users']['avatar']
-                    @endphp
-                    <div class="post">
-                      <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="user image">
-                        <span class="username">
-                          <p>{{ $comment['users']['nick_name'] }}</p>
-                        </span>
-                        <span class="description">{{ date("d-m-Y H:i", strtotime($comment['updated_at'])) }}</span>
-                      </div>
-                      <!-- /.user-block -->
-                      <p>
-                        {{ $comment['content'] }}
-                      </p>
-
-                      <p>
-                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                        <a href="#" class="link-black text-sm mr-2"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                        <a href="/admin/comments/destroy/{{ $comment['comment_id'] }}" class="link-black text-sm"><i class="fas fa-trash mr-1"></i> Delete</a>
-                      </p>
-                    </div>
-                    @endforeach
-                    <!-- /.post -->
-                  </div>
                 </div>
                 <!-- /.tab-content -->
               </div><!-- /.card-body -->
@@ -195,6 +137,36 @@
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
+      <!-- /.modal -->
+      <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Lý do từ chối</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="{{ route('auctionreject') }}" method="POST">
+              <input type="hidden" name="auction_id" value="{{ $auction[0]["auction_id"] }}">
+              <input type="hidden" name="auction_status_id" value="{{ $auction[0]["auction_status"]["auction_status_id"] }}">
+              <div class="card-body">
+                <div class="modal-body">
+                  <textarea class="form-control" aria-label="With textarea" name="reason" id="reason"></textarea>
+                </div>
+              </div>
+              <!-- /.card-body -->
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary">Gửi</button>
+              </div>
+              @csrf
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
     </section>
     <!-- /.content -->
 @endsection
@@ -207,6 +179,10 @@
         $('.product-image-thumb.active').removeClass('active')
         $(this).addClass('active')
         })
+
+        $('.toastrDefaultError').click(function() {
+          toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+        });
     })
     </script>
 @endsection

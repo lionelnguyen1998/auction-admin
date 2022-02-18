@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Đấu giá</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item active">Auctions</li>
             </ol>
           </div>
         </div>
@@ -26,7 +26,7 @@
             <!-- /.card -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+                <h3 class="card-title">Danh sách phiên đấu giá</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -77,7 +77,7 @@
                                 <a class="btn btn-primary btn-sm" href="/admin/auctions/view/{{$auction["auction_id"] }}">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="/admin/auctions/destroy" class="btn btn-danger btn-sm">
+                                <a href="/admin/auctions/destroy/{{ $auction["auction_id"] }}" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
