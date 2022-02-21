@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Đấu giá</h1>
+            <h1>Danh sách thương hiệu</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Auctions</li>
+              <li class="breadcrumb-item active">Brands</li>
             </ol>
           </div>
         </div>
@@ -26,66 +26,39 @@
             <!-- /.card -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Danh sách phiên đấu giá</h3>
+                <h3 class="card-title">Danh sách thương hiệu</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
+                  <button type="button" class="btn btn-block btn-success" style="margin-bottom:10px; width:150px">
+                    <a style="color:white" href="create">Thêm thương hiệu</a>
+                  </button>
                   <thead>
                   <tr>
-                    <th style="width:50px">Auction ID</th>
-                    <th>Category</th>
-                    <th>Title</th>
-                    <th>Title(En)</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Start Time</th>
-                    <th>Date Time</th>
-                    <th>Status</th>
-                    <th>&nbsp;</th>
+                    <th style="width:50px">Brand ID</th>
+                    <th>Name</th>
+                    <th>Name (En)</th>
+                    <th style="width:70px">&nbsp;</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach ($auctions as $key => $auction)
-                    @php
-                    $status = config('const.status');
-                    $index = $auction['auction_status']['status'];
-                    @endphp
+                    @foreach ($brands as $key => $brand)
                         <tr>
-                            <td>{{ $auction["auction_id"] }}</td>
-                            <td>{{ $auction["category"]["name"] }}</td>
-                            <td>{{ $auction["title"]}}</td>
-                            <td>{{ $auction["title_en"] }}</td>
-                            <td>{{ $auction["start_date"] }}</td>
-                            <td>{{ $auction["end_date"] }}</td>
-                            <td>{{ $auction["start_time"] }}</td>
-                            <td>{{ $auction["end_time"] }}</td>
-                            @if ($index == 1)
+                            <td>{{ $brand["brand_id"] }}</td>
+                            <td>{{ $brand["name"] }}</td>
+                            <td>{{ $brand["name_en"] ?? '--' }}</td>
                             <td>
-                              <p class="btn btn-success">{{ $status[$index] }}</p>
-                            </td>
-                            @elseif ($index == 2)
-                            <td>
-                              <p class="btn btn-warning">{{ $status[$index] }}</p>
-                            </td>
-                            @else
-                            <td>
-                              <p class="btn btn-danger">{{ $status[$index] }}</p>
-                            </td>
-                            @endif
-                            <td>
-                                <a class="btn btn-primary btn-sm" href="/admin/auctions/view/{{$auction["auction_id"] }}">
-                                    <i class="fas fa-eye"></i>
+                                <a href="/admin/brands/edit/{{ $brand["brand_id"] }}" class="btn btn-info btn-sm">
+                                    <i class="fas fa-edit"></i>
                                 </a>
-                                @if ($index == 3)
-                                <a href="/admin/auctions/destroy/{{ $auction["auction_id"] }}" class="btn btn-danger btn-sm">
+                                <a href="/admin/brands/destroy/{{ $brand["brand_id"] }}" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </a>
-                                @endif
                             </td>
                         </tr>
                     @endforeach
-                  </tbody>
+                  </tfoot>
                 </table>
               </div>
               <!-- /.card-body -->

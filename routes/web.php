@@ -6,6 +6,10 @@ use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\AuctionController;
 use App\Http\Controllers\Admin\CommentController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ItemController;
+use App\Http\Controllers\Admin\SeriesController;
+use App\Http\Controllers\Admin\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +56,44 @@ Route::post('admin/users/login/store', [LoginController::class, 'store']);
             Route::get('accept/{auctionStatusId}', [AuctionController::class, 'accept']);
             Route::get('destroy/{auctionId}', [AuctionController::class, 'destroy']);
             Route::post('reject', [AuctionController::class, 'reject'])->name('auctionreject');
+        });
+
+        //Cartegory
+        Route::prefix('categories')->group(function () {
+            Route::get('list', [CategoryController::class, 'index']);
+            Route::get('create', [CategoryController::class, 'create']);
+            Route::post('store', [CategoryController::class, 'store'])->name('insertcategories');
+            Route::get('view/{categoryId}', [CategoryController::class, 'view']);
+            Route::get('edit/{categoryId}', [CategoryController::class, 'edit']);
+            Route::post('update', [CategoryController::class, 'update'])->name('updatecategory');
+            Route::get('destroy/{categoryId}', [CategoryController::class, 'destroy']);
+        });
+
+        //Item
+        Route::prefix('items')->group(function () {
+            Route::get('list/{categoryId}', [ItemController::class, 'index']);
+        });
+
+        //Brand
+        Route::prefix('brands')->group(function () {
+            Route::get('list', [BrandController::class, 'index']);
+            Route::get('create', [BrandController::class, 'create']);
+            Route::post('store', [BrandController::class, 'store'])->name('insertbrand');
+            Route::get('view/{brandId}', [BrandController::class, 'view']);
+            Route::get('edit/{brandId}', [BrandController::class, 'edit']);
+            Route::post('update', [BrandController::class, 'update'])->name('updatebrand');
+            Route::get('destroy/{brandId}', [BrandController::class, 'destroy']);
+        });
+
+        //Series
+        Route::prefix('series')->group(function () {
+            Route::get('list', [SeriesController::class, 'index']);
+            Route::get('create', [SeriesController::class, 'create']);
+            Route::post('store', [SeriesController::class, 'store'])->name('insertseries');
+            Route::get('view/{seriesId}', [SeriesController::class, 'view']);
+            Route::get('edit/{seriesId}', [SeriesController::class, 'edit']);
+            Route::post('update', [SeriesController::class, 'update'])->name('updateseries');
+            Route::get('destroy/{seriesId}', [SeriesController::class, 'destroy']);
         });
 
         //Comments
