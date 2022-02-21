@@ -49,6 +49,7 @@
                     <i class="nav-icon fas fa-table"></i>
                     <p>
                         Quản lý phiên đấu giá
+                        <i class="right fas fa-angle-left"></i>
                     </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -79,6 +80,41 @@
                     <i class="nav-icon fas fa-table"></i>
                     <p>
                         Quản lý sản phẩm
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/admin/categories/list" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách danh mục sản phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/items/list" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách sản phẩm</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/brands/list" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách thương hiệu</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/series/list" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Danh sách series</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="admin/news/list" class="nav-link">
+                    <i class="nav-icon fas fa-table"></i>
+                    <p>
+                        Quản lý bài viết
                     </p>
                     </a>
                 </li>
