@@ -13,4 +13,5 @@ interface AuctionAdminServiceInterface
     public function getInfor($datas);
     public function getCategoryValueName($datas);
     public function getListAuctionsWait();
+    public function getGeneralInfo();
 }

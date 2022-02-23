@@ -17,6 +17,6 @@ class CommentController extends Controller
     public function destroy($commentId)
     {
         $comment = Comment::where('comment_id', $commentId)->delete();
-        return redirect('admin/auctions/list');
+        return redirect()->route('listAuctions');
     }
 }

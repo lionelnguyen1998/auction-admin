@@ -19,9 +19,9 @@ class AuctionAdminService implements AuctionAdminServiceInterface
             ->get()
             ->pluck('auction_id')
             ->toArray();
-        
+            
         $auctions = Auction::with('category', 'auctionStatus')
-            ->where('auction_id', '<>', $auctionId)
+            ->whereNotIn('auction_id', $auctionId)
             ->get()
             ->toArray();
 
@@ -107,8 +107,31 @@ class AuctionAdminService implements AuctionAdminServiceInterface
         $auctions = DB::table('auctions')
             ->join('auctions_status', 'auctions.auction_id', '=', 'auctions_status.auction_id')
             ->whereIn('auctions_status.status', [4, 5])
+            ->whereNull('auctions.deleted_at')
             ->get()
             ->toArray();
         return $auctions;
+    }
+
+    //general auction
+    public function getGeneralInfo()
+    {
+        $countAuction = Auction::count('auction_id');
+
+        $status1 = AuctionStatus::where('status', 1)
+            ->count('auction_id');
+        $status2 = AuctionStatus::where('status', 2)
+            ->count('auction_id');
+        $status4 = AuctionStatus::where('status', 4)
+            ->count('auction_id');
+
+        $auctionInfo = [
+            'all' => $countAuction,
+            'status1' => $status1,
+            'status2' => $status2,
+            'status4' => $status4
+        ];
+
+        return $auctionInfo;
     }
 }

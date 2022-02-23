@@ -49,10 +49,10 @@
                             <td>{{ $brand["name"] }}</td>
                             <td>{{ $brand["name_en"] ?? '--' }}</td>
                             <td>
-                                <a href="/admin/brands/edit/{{ $brand["brand_id"] }}" class="btn btn-info btn-sm">
+                                <a href="{{ route('editBrand', ['brandId' => $brand["brand_id"]]) }}" class="btn btn-info btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="/admin/brands/destroy/{{ $brand["brand_id"] }}" class="btn btn-danger btn-sm">
+                                <a href="{{ route('deleteBrand', ['brandId' => $brand["brand_id"]]) }}" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -73,36 +73,3 @@
     </section>
     <!-- /.content -->
 @endsection
-@section('footer')
-    <!-- DataTables  & Plugins -->
-    <script src="/template/admin/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="/template/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="/template/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/template/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="/template/admin/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="/template/admin/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="/template/admin/plugins/jszip/jszip.min.js"></script>
-    <script src="/template/admin/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="/template/admin/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="/template/admin/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="/template/admin/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="/template/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <script>
-        $(function () {
-            $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["csv", "excel", "pdf"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            });
-        });
-    </script>
-@endsection
-

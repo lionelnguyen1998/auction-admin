@@ -42,6 +42,14 @@ class UserController extends Controller
         ]);
     }
 
+    public function info() 
+    {
+        $userId = auth()->user()->user_id;
+        return view('admin.users.info', [
+            'title' => 'Thông tin admin',
+            'user' => $this->userService->getAdminInfo($userId)
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -51,6 +59,6 @@ class UserController extends Controller
     public function destroy($userId)
     {
         $user = User::where('user_id', $userId)->delete();
-        return redirect('admin/users/list');
+        return redirect()->route('listUser');
     }
 }
