@@ -1,44 +1,59 @@
-
 @include('admin.header')
+<style>
+    .profile-user-img {
+        border: none !important;
+    }
+</style>
 <body class="hold-transition login-page">
         <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>Admin</b></a>
+            <a href="#"><b>ログイン</b></a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">ログイン</p>
+                <div class="text-center">
+                <img class="profile-user-img img-fluid img-circle"
+                       src="/template/images/logo.jpg"
+                       alt="">
+                </div>
+                <p class="login-box-msg"></p>
                 @include('admin.alert')
-                <form action="/admin/users/login/store" method="post">
+                <form action="{{ route('storeUser') }}" method="post">
                     <div class="input-group mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Email">
+                        <input type="email" name="email" class="form-control" placeholder="メールを入力してください" value="{{ old('email') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
                     </div>
+                    @if($errors->has('email'))
+                        <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('email')}}</label><br/>
+                    @endif
                     <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="パスワードを入力してください">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>
+                    @if($errors->has('password'))
+                        <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('password')}}</label><br/>
+                    @endif
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
                                 <input type="checkbox" name="remember" id="remember">
                                 <label for="remember">
-                                    Remember Me
+                                    レメンバ
                                 </label>
                             </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block">登録</button>
                         </div>
                         <!-- /.col -->
                     </div>
@@ -49,5 +64,4 @@
     </div>
 <!-- /.login-box -->
 
-    @include('admin.footer')
-
+@include('admin.footer')

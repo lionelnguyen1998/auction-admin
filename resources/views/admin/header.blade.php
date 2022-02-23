@@ -10,6 +10,8 @@
       href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="/template/admin/plugins/fontawesome-free/css/all.min.css">
+<!-- flag-icon-css -->
+<link rel="stylesheet" href="/template/admin/plugins/flag-icon-css/css/flag-icon.min.css">
 <!-- icheck bootstrap -->
 <link rel="stylesheet" href="/template/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <!-- Theme style -->

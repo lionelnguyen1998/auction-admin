@@ -50,7 +50,7 @@
                   @endphp
                   @if ($index == 4)
                     <li class="list-group-item">
-                      <p class="btn btn-success"><a style="color:white" href="/admin/auctions/accept/{{ $auction[0]["auction_status"]["auction_status_id"] }}">Chấp nhận</a></p>  
+                      <p class="btn btn-success"><a style="color:white" href="{{ route('acceptAuction', ['auctionStatusId' => $auction[0]["auction_status"]["auction_status_id"]]) }}">Chấp nhận</a></p>  
                       <p class="float-right">
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
                           Từ chối

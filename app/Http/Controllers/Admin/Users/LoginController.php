@@ -6,9 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Models\User;
+use App\Http\Services\UserAdminService;
 
 class LoginController extends Controller
 {
+    protected $userService;
+    
+    public function __construct(UserAdminService $userService)
+    {
+        $this->userService = $userService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +25,7 @@ class LoginController extends Controller
     public function index()
     {
         return view('admin.users.login', [
-            'title' => 'Login'
+            'title' => 'ログイン'
         ]);
     }
 
@@ -29,20 +37,50 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email:filter',
-            'password' => 'required'
-        ]);
+        $validated = $this->userService->loginValidation($request->all());
 
-        if (Auth::attempt([
-                'email' => $request->input('email'),
-                'password' => $request->input('password')
-            ], $request->input('remember'))) {
-
-            return redirect()->route('admin');
+        if ($validated->fails()) {
+            return redirect(url()->previous())
+                ->withErrors($validated)
+                ->withInput();
         }
 
-        Session::flash('error', 'Email hoặc Password không đúng');
-        return redirect()->back();
+        $email = $request['email'];
+        $password = $request['password'];
+        $remember = $request['remember'];
+
+        if (Auth::attempt([
+                'email' => $email,
+                'password' => $password,
+                'role' => 1,
+            ], $remember)) {
+            //save session 
+            $request->session()->put('email', $email);
+            $request->session()->put('password', $password);
+
+            //check remember 
+            if (isset($remember)) {
+                setcookie('email', $email, time() + 600);
+                setcookie('password', $password, time() + 600);
+            }
+
+            return redirect()->route('admin'); 
+        } elseif (Auth::attempt([
+            'email' => $email,
+            'password' => $password,
+            'role' => 2,
+            ])) {
+                Session::flash('error', 'アカウントは権限がありません');
+                return redirect()->back();
+        } else {
+            Session::flash('error', 'メールとパスワードは違いました');
+            return redirect()->back();
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+        return redirect('admin/users/login');
     }
 }

@@ -81,7 +81,7 @@ class BrandController extends Controller
             'brand_info' => $brandInfo ?? null
         ]);
 
-        return redirect("admin/brands/list");
+        return redirect()->route('listBrands');
     }
 
     public function edit($brandId)
@@ -116,12 +116,12 @@ class BrandController extends Controller
             $brand->update();
         }
 
-        return redirect("admin/brands/list");
+        return redirect()->route('listBrands');
     }
 
     public function destroy($brandId) 
     {
         $brand = Brand::findOrFail($brandId)->delete();
-        return redirect("admin/brands/list");
+        return redirect()->route('listBrands');
     }
 }

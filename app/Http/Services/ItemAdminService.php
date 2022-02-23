@@ -22,4 +22,11 @@ class ItemAdminService implements ItemAdminServiceInterface
 
         return $listItems;
     }
+
+    public function getAllItems()
+    {
+        return Item::with('series', 'brands', 'categories')
+            ->get()
+            ->toArray();
+    }
 }

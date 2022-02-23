@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -15,6 +16,7 @@ class User extends Authenticatable
     use SoftDeletes; 
 
     protected $table = 'users';
+    protected $primaryKey = 'user_id';
 
     /**
      * The attributes that are mass assignable.
@@ -59,4 +61,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // public function scopeByEmail($query, $email)
+    // {
+    //     return $query->where('email', $email);
+    // }
+
+    // //Login by email 
+    // public function loginByEmail($request)
+    // {
+    //     $user = self::byEmail($request['email'])->first();
+
+    //     if (!empty($user) && Hash::check($request['password'], $user->password)) {
+    //         return $user;
+    //     }
+
+    //     return false;
+    // }
 }

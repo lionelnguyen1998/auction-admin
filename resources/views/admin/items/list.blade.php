@@ -33,41 +33,38 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th style="width:50px">User ID</th>
-                    <th>Role</th>
+                    <th style="width:50px">Item ID</th>
+                    <th>Category</th>
+                    <th>Auction</th>
+                    <th>Selling User</th>
+                    <th>Buying User</th>
+                    <th>Brand</th>
+                    <th>Series</th>
                     <th>Name</th>
-                    <th>Nick Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Phone</th>
+                    <th>Name En</th>
                     <th>&nbsp;</th>
                   </tr>
                   </thead>
                   <tbody>
-                    @foreach ($users as $key => $user)
-                    @php
-                    $role = config('const.role');
-                    $index = $user['role'];
-                    @endphp
+                    @foreach ($items as $key => $item)
                         <tr>
-                            <td>{{ $user->user_id }}</td>
-                            <td>{{ $role[$index] }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->nick_name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->address }}</td>
-                            <td>{{ $user->phone }}</td>
+                            <td>{{ $item["item_id"] }}</td>
+                            <td>{{ $item["categories"]["name"] }}</td>
+                            <td>{{ $item["auction_id"] }}</td>
+                            <td>{{ $item["selling_user_id"] ?? '--' }}</td>
+                            <td>{{ $item["buying_user_id"] ?? '--' }}</td>
+                            <td>{{ $item["brands"]["name"] ?? '--' }}</td>
+                            <td>{{ $item["series"]["name"] ?? '--' }}</td>
+                            <td>{{ $item["name"] }}</td>
+                            <td>{{ $item["name_en"] ?? '--' }}</td>
                             <td>
-                                <a class="btn btn-primary btn-sm" href="{{ route('viewUser', ['userId' => $user->user_id]) }}">
+                                <a class="btn btn-primary btn-sm" href="{{ route('viewItem', ['itemId' => $item["item_id"]]) }}">
                                     <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="{{ route('deleteUser', ['userId' => $user->user_id]) }}" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
                                 </a>
                             </td>
                         </tr>
                     @endforeach
-                  </tfoot>
+                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->

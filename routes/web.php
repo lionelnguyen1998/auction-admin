@@ -26,82 +26,87 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//home
-Route::resource('auctions', App\Http\Controllers\AuctionController::class);
-
 //admin login
 Route::get('admin/users/login', [LoginController::class, 'index'])->name('login');
-Route::post('admin/users/login/store', [LoginController::class, 'store']);
+Route::get('admin/users/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('admin/users/login/store', [LoginController::class, 'store'])->name('storeUser');
 
 //admin
-///Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::prefix('admin')->group(function () {
-
+        
         Route::get('/', [MainController::class, 'index'])->name('admin');
-        Route::get('main', [MainController::class, 'index']);
+        Route::get('main', [MainController::class, 'index'])->name('admin');
 
         //User
         Route::prefix('users')->group(function () {
-            Route::get('list', [UserController::class, 'index']);
-            Route::get('view/{userId}', [UserController::class, 'show']);
-            Route::get('destroy/{userId}', [UserController::class, 'destroy']);
+            Route::get('list', [UserController::class, 'index'])->name('listUser');
+            Route::get('view/{userId}', [UserController::class, 'show'])->name('viewUser');
+            Route::get('destroy/{userId}', [UserController::class, 'destroy'])->name('deleteUser');
+            Route::get('info', [UserController::class, 'info'])->name('adminInfo');
         });
 
         //Auction
         Route::prefix('auctions')->group(function () {
-            Route::get('list', [AuctionController::class, 'index']);
-            Route::get('view/{auctionId}', [AuctionController::class, 'show']);
-            Route::get('wait', [AuctionController::class, 'list']);
-            Route::get('viewAuctionWait/{auctionId}', [AuctionController::class, 'viewAuctionWait']);
-            Route::get('accept/{auctionStatusId}', [AuctionController::class, 'accept']);
-            Route::get('destroy/{auctionId}', [AuctionController::class, 'destroy']);
+            Route::get('list', [AuctionController::class, 'index'])->name('listAuctions');
+            Route::get('view/{auctionId}', [AuctionController::class, 'show'])->name('viewAuction');
+            Route::get('wait', [AuctionController::class, 'list'])->name('listAuctionsIsWait');
+            Route::get('viewAuctionWait/{auctionId}', [AuctionController::class, 'viewAuctionWait'])->name('viewAuctionIsWait');
+            Route::get('accept/{auctionStatusId}', [AuctionController::class, 'accept'])->name('acceptAuction');
+            Route::get('destroy/{auctionId}', [AuctionController::class, 'destroy'])->name('deleteAuction');
             Route::post('reject', [AuctionController::class, 'reject'])->name('auctionreject');
         });
 
         //Cartegory
         Route::prefix('categories')->group(function () {
-            Route::get('list', [CategoryController::class, 'index']);
-            Route::get('create', [CategoryController::class, 'create']);
+            Route::get('list', [CategoryController::class, 'index'])->name('listCategories');
+            Route::get('create', [CategoryController::class, 'create'])->name('createCategory');
             Route::post('store', [CategoryController::class, 'store'])->name('insertcategories');
-            Route::get('view/{categoryId}', [CategoryController::class, 'view']);
-            Route::get('edit/{categoryId}', [CategoryController::class, 'edit']);
+            Route::get('view/{categoryId}', [CategoryController::class, 'view'])->name('viewCategory');
+            Route::get('edit/{categoryId}', [CategoryController::class, 'edit'])->name('editCategory');
             Route::post('update', [CategoryController::class, 'update'])->name('updatecategory');
-            Route::get('destroy/{categoryId}', [CategoryController::class, 'destroy']);
+            Route::get('destroy/{categoryId}', [CategoryController::class, 'destroy'])->name('deleteCategory');
         });
 
         //Item
         Route::prefix('items')->group(function () {
-            Route::get('list/{categoryId}', [ItemController::class, 'index']);
+            Route::get('list', [ItemController::class, 'index'])->name('listItems');
+            Route::get('view/{itemId}', [ItemController::class, 'show'])->name('viewItem');
         });
 
         //Brand
         Route::prefix('brands')->group(function () {
-            Route::get('list', [BrandController::class, 'index']);
-            Route::get('create', [BrandController::class, 'create']);
+            Route::get('list', [BrandController::class, 'index'])->name('listBrands');
+            Route::get('create', [BrandController::class, 'create'])->name('createBrand');
             Route::post('store', [BrandController::class, 'store'])->name('insertbrand');
-            Route::get('view/{brandId}', [BrandController::class, 'view']);
-            Route::get('edit/{brandId}', [BrandController::class, 'edit']);
+            Route::get('view/{brandId}', [BrandController::class, 'view'])->name('viewBrand');
+            Route::get('edit/{brandId}', [BrandController::class, 'edit'])->name('editBrand');
             Route::post('update', [BrandController::class, 'update'])->name('updatebrand');
-            Route::get('destroy/{brandId}', [BrandController::class, 'destroy']);
+            Route::get('destroy/{brandId}', [BrandController::class, 'destroy'])->name('deleteBrand');
         });
 
         //Series
         Route::prefix('series')->group(function () {
-            Route::get('list', [SeriesController::class, 'index']);
+            Route::get('list', [SeriesController::class, 'index'])->name('listSeries');
             Route::get('create', [SeriesController::class, 'create']);
             Route::post('store', [SeriesController::class, 'store'])->name('insertseries');
-            Route::get('view/{seriesId}', [SeriesController::class, 'view']);
-            Route::get('edit/{seriesId}', [SeriesController::class, 'edit']);
+            Route::get('view/{seriesId}', [SeriesController::class, 'view'])->name('viewSeries');
+            Route::get('edit/{seriesId}', [SeriesController::class, 'edit'])->name('editSeries');
             Route::post('update', [SeriesController::class, 'update'])->name('updateseries');
-            Route::get('destroy/{seriesId}', [SeriesController::class, 'destroy']);
+            Route::get('destroy/{seriesId}', [SeriesController::class, 'destroy'])->name('deleteSeries');
         });
 
         //Comments
         Route::prefix('comments')->group(function () {
-            Route::get('destroy/{commentId}', [CommentController::class, 'destroy']);
+            Route::get('destroy/{commentId}', [CommentController::class, 'destroy'])->name('deleteComment');
+        });
+
+        //News
+        Route::prefix('news')->group(function () {
+            Route::get('list', [NewController::class, 'index'])->name('listNews');
         });
     });
-//});
+});
 
 //client
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);

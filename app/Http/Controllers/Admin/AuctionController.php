@@ -24,7 +24,7 @@ class AuctionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('admin.auctions.list', [
             'title' => 'Danh sách phiên đấu giá',
@@ -88,14 +88,14 @@ class AuctionController extends Controller
             }
             $auctionStatus->update();
         }
-        return redirect('/admin/auctions/list');
+        return redirect()->route('listAuctions');
     }
 
     //delete auctions
     public function destroy($auctionId)
     {
         $auctions = Auction::find($auctionId)->delete();
-        return redirect('admin/auctions/list');
+        return redirect()->route('listAuctions');
     }
 
     //reject auctions
@@ -109,12 +109,13 @@ class AuctionController extends Controller
             'reason' => $reason ?? ''
         ]);
 
-        $statusId = AuctionStatus::find($auctionStatusId);
+        $statusId = AuctionStatus::findOrFail($auctionStatusId);
         if ($statusId) {
             $statusId->status = 5;
             $statusId->update();
+            $auctionDelete = Auction::findOrFail($auctionId)->delete();
         }
 
-        return redirect('admin/auctions/wait');
+        return redirect()->route('listAuctionsIsWait');
     }
 }

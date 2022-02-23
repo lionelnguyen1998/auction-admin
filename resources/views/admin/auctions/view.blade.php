@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Chi tiết Room {{ $auction[0]["auction_id"] }}</h1>
+            <h1>Chi tiết Room {{ $auction[0]["title"] }}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Room {{ $auction[0]["auction_id"] }}</li>
+              <li class="breadcrumb-item active">Room {{ $auction[0]["title"] }}</li>
             </ol>
           </div>
         </div>
@@ -179,7 +179,7 @@
                       <p>
                         <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
                         <a href="#" class="link-black text-sm mr-2"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                        <a href="/admin/comments/destroy/{{ $comment['comment_id'] }}" class="link-black text-sm"><i class="fas fa-trash mr-1"></i> Delete</a>
+                        <a href="{{ route('deleteComment', ['commentId' => $comment['comment_id']]) }}" class="link-black text-sm"><i class="fas fa-trash mr-1"></i> Delete</a>
                       </p>
                     </div>
                     @endforeach
