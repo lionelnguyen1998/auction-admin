@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1>Thêm danh thương hiệu</h1>
+            <h1>ブランド追加</h1>
           </div>
           <div class="col-sm-12">
             <ol class="breadcrumb float-sm-right">
@@ -26,28 +26,28 @@
             <!-- general form elements -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Thêm thương hiệu</h3>
+                <h3 class="card-title">ブランド追加</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form action="{{ route('insertbrand') }}" method="POST">
                 <div class="card-body" style="width:70%;margin-left:15%">
                   <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên" value="{{ old('name') }}">
+                    <label for="name">名前</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="名前を入力してください" value="{{ old('name') }}">
                     @if($errors->has('name'))
                     <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('name')}}</label><br/>
                     @endif
                   </div>
                   <div class="form-group">
-                    <label for="name_en">Name (En)</label>
-                    <input type="text" class="form-control" id="name_en" name="name_en" placeholder="Nhập tên Tiếng Anh" value="{{ old('name_en') }}">
+                    <label for="name_en">名前（英語）</label>
+                    <input type="text" class="form-control" id="name_en" name="name_en" placeholder="英語で名前を入力してください" value="{{ old('name_en') }}">
                     @if($errors->has('name'))
                     <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('name_en')}}</label><br/>
                     @endif
                   </div>
                   <div class="form-group">
-                    <label for="brand_info">Thông tin thương hiệu</label>
+                    <label for="brand_info">ブランドの情報</label>
                     <textarea id="summernote" name="brand_info">
                         
                     </textarea>
@@ -56,7 +56,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer" style="width:100%">
-                  <button type="submit" class="btn btn-primary float-right">Submit</button>
+                  <button type="submit" class="btn btn-primary float-right">送信</button>
                 </div>
                 @csrf
               </form>

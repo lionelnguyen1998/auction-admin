@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Chi tiết Room {{ $auction[0]["title"] }}</h1>
+            <h1>{{ $auction[0]["title"] }}の詳細</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Room {{ $auction[0]["title"] }}</li>
+              <li class="breadcrumb-item active">{{ $auction[0]["title"] }}</li>
             </ol>
           </div>
         </div>
@@ -31,21 +31,21 @@
                        src="{{ $auction[0]["category"]["image"] }}"
                        alt="{{ $auction[0]["category"]["name"] }}">
                 </div>
-                <h3 class="text-center">Room {{ $auction[0]["auction_id"] }}</h3>
+                <h3 class="text-center">{{ $auction[0]["title"] }}</h3>
                 <p class="text-muted text-center">{{ $auction[0]["category"]["name"] }}</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Thời gian bắt đầu</b> <p class="float-right">{{ $auction[0]["start_date"] }}</p>
+                    <b>始める時間</b> <p class="float-right">{{ $auction[0]["start_date"] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>Thời gian kết thúc</b> <p class="float-right">{{ $auction[0]["end_date"] }}</p>
+                    <b>終わる時間</b> <p class="float-right">{{ $auction[0]["end_date"] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>Giá khởi điểm</b> <p class="float-right">{{ $auction[0]["items"][0]["starting_price"] }}</p>
+                    <b>始値</b> <p class="float-right">{{ $auction[0]["items"][0]["starting_price"] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>Giá cao nhất</b> <p class="float-right">{{ $maxPrice }}</p>
+                    <b>最後値段</b> <p class="float-right">{{ $maxPrice }}</p>
                   </li>
                   <li class="list-group-item">
                     @php
@@ -53,11 +53,11 @@
                         $index = $auction[0]['auction_status']['status'];
                     @endphp
                     @if ($index == 1)
-                        <p class="btn btn-success">{{ $status[$index] }}</p>
+                        <p class="btn btn-success" disabled>{{ $status[$index] }}</p>
                     @elseif ($index == 2)
-                        <p class="btn btn-warning">{{ $status[$index] }}</p>
+                        <p class="btn btn-warning" disabled>{{ $status[$index] }}</p>
                     @else
-                        <p class="btn btn-danger">{{ $status[$index] }}</p>
+                        <p class="btn btn-danger" disabled>{{ $status[$index] }}</p>
                     @endif
                   </li>
                 </ul>
@@ -71,9 +71,9 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#item" data-toggle="tab">Sản phẩm</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#bid" data-toggle="tab">Trả giá</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#comment" data-toggle="tab">Comment</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#item" data-toggle="tab">アイテムの情報</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#bid" data-toggle="tab">値段</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#comment" data-toggle="tab">コメントする</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -96,23 +96,21 @@
                             <div class="row mb-3">
                                 <div class="col-12 col-sm-12">
                                 <div class="col-12">
-                                    <img src="{{ $userSelling[0]["image1"] }}" class="product-image" alt="Product Image">
+                                    <img src="{{ $images[0] }}" class="product-image" alt="Product Image">
                                 </div>
                                 <div class="col-12 product-image-thumbs">
-                                    <div class="product-image-thumb active"><img src="{{ $userSelling[0]["image1"] }}" alt="Product Image"></div>
-                                    <div class="product-image-thumb" ><img src="{{ $userSelling[0]["image2"] }}" alt="Product Image"></div>
-                                    <div class="product-image-thumb" ><img src="{{ $userSelling[0]["image3"] }}" alt="Product Image"></div>
-                                    <div class="product-image-thumb" ><img src="{{ $userSelling[0]["image4"] }}" alt="Product Image"></div>
-                                    <div class="product-image-thumb" ><img src="{{ $userSelling[0]["image5"] }}" alt="Product Image"></div>
+                                  @foreach($images as $key => $image)
+                                    <div class="product-image-thumb"><img src="{{ $image }}" alt="Product Image"></div>
+                                  @endforeach
                                 </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-sm-12">
-                                <h3>Thông tin sản phẩm</h3>
+                                <h3>アイテムの情報</h3>
                                 <p>{{ $userSelling[0]["description"] }}</p>
                                 <hr>
-                                <h4>Thông tin kỹ thuật</h4>
+                                <h4>技術の情報</h4>
                                 <div class="col-12 col-sm-12">
                                   <ul class="list-group list-group-unbordered mb-3 col-sm-12">
                                     @foreach ($infors as $key => $infor)
@@ -148,9 +146,9 @@
                       </p>
 
                       <p>
-                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                        <a href="#" class="link-black text-sm mr-2"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                        <a href="/admin/bids/destroy/{{ $bid['bid_id'] }}" class="link-black text-sm"><i class="fas fa-trash mr-1"></i> Delete</a>
+                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> シェア</a>
+                        <a href="#" class="link-black text-sm mr-2"><i class="far fa-thumbs-up mr-1"></i> いいね</a>
+                        <a href="{{ route('deleteBid', ['bidId' => $bid['bid_id']]) }}" class="link-black text-sm"><i class="fas fa-trash mr-1"></i> 削除</a>
                       </p>
                     </div>
                     @endforeach
@@ -177,9 +175,9 @@
                       </p>
 
                       <p>
-                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
-                        <a href="#" class="link-black text-sm mr-2"><i class="far fa-thumbs-up mr-1"></i> Like</a>
-                        <a href="{{ route('deleteComment', ['commentId' => $comment['comment_id']]) }}" class="link-black text-sm"><i class="fas fa-trash mr-1"></i> Delete</a>
+                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> シェア</a>
+                        <a href="#" class="link-black text-sm mr-2"><i class="far fa-thumbs-up mr-1"></i> いいね</a>
+                        <a href="{{ route('deleteComment', ['commentId' => $comment['comment_id']]) }}" class="link-black text-sm"><i class="fas fa-trash mr-1"></i> 削除</a>
                       </p>
                     </div>
                     @endforeach

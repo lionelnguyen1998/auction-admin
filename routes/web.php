@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ItemController;
 use App\Http\Controllers\Admin\SeriesController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\NewController;
+use App\Http\Controllers\Admin\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +70,9 @@ Route::middleware(['auth'])->group(function () {
             Route::get('destroy/{categoryId}', [CategoryController::class, 'destroy'])->name('deleteCategory');
         });
 
+        //Upload
+        Route::post('upload/services', [UploadController::class, 'store'])->name('uploadFiles');
+
         //Item
         Route::prefix('items')->group(function () {
             Route::get('list', [ItemController::class, 'index'])->name('listItems');
@@ -104,7 +109,18 @@ Route::middleware(['auth'])->group(function () {
         //News
         Route::prefix('news')->group(function () {
             Route::get('list', [NewController::class, 'index'])->name('listNews');
+            Route::get('create', [NewController::class, 'create'])->name('createNew');
+            Route::post('store', [NewController::class, 'store'])->name('insertNew');
+            Route::get('edit/{newId}', [NewController::class, 'edit'])->name('editNew');
+            Route::put('update/{newId}', [NewController::class, 'update'])->name('updateNew');
+            Route::get('delete/{newId}', [NewController::class, 'delete'])->name('deleteNew');
         });
+
+        //Bid
+        Route::prefix('bids')->group(function () {
+            Route::get('destroy/{bidId}', [BidController::class, 'destroy'])->name('deleteBid');
+        });
+        
     });
 });
 

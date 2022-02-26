@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Đấu giá</h1>
+            <h1>オークション</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -26,22 +26,20 @@
             <!-- /.card -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Danh sách phiên đấu giá chưa duyệt</h3>
+                <h3 class="card-title">オークション評価一覧</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th style="width:50px">Auction ID</th>
-                    <th>Category</th>
-                    <th>Title</th>
-                    <th>Title(En)</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Start Time</th>
-                    <th>Date Time</th>
-                    <th>Status</th>
+                    <th>オークションID</th>
+                    <th>カテゴリー</th>
+                    <th>テーマ</th>
+                    <th>テーマ（英語）</th>
+                    <th>始まる時間</th>
+                    <th>終わる時間</th>
+                    <th>スターテス</th>
                     <th>&nbsp;</th>
                   </tr>
                   </thead>
@@ -58,8 +56,6 @@
                             <td>{{ $auction->title_en }}</td>
                             <td>{{ $auction->start_date }}</td>
                             <td>{{ $auction->end_date }}</td>
-                            <td>{{ $auction->start_time }}</td>
-                            <td>{{ $auction->end_time }}</td>
                             <td>
                               <p class="btn btn-info">{{ $status[$index] }}</p>
                             </td>

@@ -14,8 +14,8 @@ class AddNameOfCategoryValuesTable extends Migration
     public function up()
     {
         Schema::table('category_values', function (Blueprint $table) {
-            $table->string('name_en', 100)->nullable()->after('type');
-            $table->string('name', 100)->after('type');
+            $table->string('name_en', 100)->nullable()->after('category_id');
+            $table->string('name', 100)->after('category_id');
         });
     }
 

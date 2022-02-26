@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\AuctionAdminService;
+use App\Http\Services\ItemAdminService;
 use App\Models\Auction;
+use App\Models\Item;
 use App\Models\AuctionStatus;
 use App\Models\AuctionDeny;
 use Illuminate\Http\Request;
@@ -12,11 +14,12 @@ use Illuminate\Support\Facades\Validator;
 
 class AuctionController extends Controller
 {
-    protected $auctionService;
+    protected $auctionService, $itemService;
 
-    public function __construct(AuctionAdminService $auctionService)
+    public function __construct(AuctionAdminService $auctionService, ItemAdminService $itemService)
     {
         $this->auctionService = $auctionService;
+        $this->itemService = $itemService;
     }
 
     /**
@@ -27,7 +30,7 @@ class AuctionController extends Controller
     public function index(Request $request)
     {
         return view('admin.auctions.list', [
-            'title' => 'Danh sách phiên đấu giá',
+            'title' => 'オークション一覧',
             'auctions' => $this->auctionService->getListAuctions()
         ]);
     }
@@ -40,15 +43,20 @@ class AuctionController extends Controller
      */
     public function show($auctionId)
     {
+        $itemId = Item::where('auction_id', $auctionId)
+            ->get()
+            ->pluck('item_id');
+
         return view('admin.auctions.view', [
-            'title' => 'Chi tiết phiên đấu giá',
+            'title' => 'オークション詳細',
             'auction' => $this->auctionService->getDetailAuctions($auctionId),
             'maxPrice' => $this->auctionService->getMaxPrice($auctionId),
             'bids' => $this->auctionService->getBids($auctionId),
             'userSelling' => $this->auctionService->getSellingUser($auctionId),
             'comments' => $this->auctionService->getComments($auctionId),
             'infors' => $this->auctionService->getInfor($auctionId),
-            'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId)
+            'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId),
+            'images' => $this->itemService->getImageLists($itemId)
         ]);
     }
 
@@ -57,7 +65,7 @@ class AuctionController extends Controller
     public function list()
     {
         return view('admin.auctions.wait', [
-            'title' => 'Duyệt phiên đấu giá',
+            'title' => 'オークション評価',
             'auctions' => $this->auctionService->getListAuctionsWait()
         ]);
     }
@@ -65,12 +73,17 @@ class AuctionController extends Controller
     //view autions wait ( xem thông tin auction cần phê duyệt)
     public function viewAuctionWait($auctionId)
     {
+        $itemId = Item::where('auction_id', $auctionId)
+            ->get()
+            ->pluck('item_id');
+
         return view('admin.auctions.viewAuctionWait', [
-            'title' => 'Chi tiết phiên đấu giá',
+            'title' => 'オークション詳細',
             'auction' => $this->auctionService->getDetailAuctions($auctionId),
             'userSelling' => $this->auctionService->getSellingUser($auctionId),
             'infors' => $this->auctionService->getInfor($auctionId),
-            'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId)
+            'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId),
+            'images' => $this->itemService->getImageLists($itemId)
         ]);
     }
 

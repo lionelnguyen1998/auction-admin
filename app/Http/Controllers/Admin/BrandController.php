@@ -19,7 +19,7 @@ class BrandController extends Controller
     public function index()
     {
         return view('admin.brands.list', [
-            'title' => 'Danh sách thương hiệu',
+            'title' => 'ブランド一覧',
             'brands' => $this->brandService->getListBrands()
         ]);
     }
@@ -27,7 +27,7 @@ class BrandController extends Controller
     public function create()
     {
         return view('admin.brands.create', [
-            'title' => 'Thêm thương hiệu'
+            'title' => 'ブランド追加'
         ]);
     }
 
@@ -87,7 +87,7 @@ class BrandController extends Controller
     public function edit($brandId)
     {
         return view('admin.brands.edit', [
-            'title' => 'Chỉnh sửa thương hiệu',
+            'title' => 'ブランド編集',
             'brand' => $this->brandService->getBrand($brandId)
         ]);
     }

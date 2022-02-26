@@ -41,7 +41,7 @@ class CategoryAdminService implements CategoryAdminServiceInterface
         ];
 
         $attributes = [
-            'name' => 'Tên danh mục'
+            'name' => 'カテゴリー'
         ];
 
         $validated = Validator::make($request, $rules, $messages, $attributes);

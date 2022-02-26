@@ -9,6 +9,7 @@ use App\Http\Services\CategoryValueAdminService;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\CategoryValue;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -25,7 +26,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('admin.categories.list', [
-            'title' => 'Danh sách danh mục sản phẩm',
+            'title' => 'カテゴリー一覧',
             'categories' => $this->categoryService->getCategoryList()
         ]);
     }
@@ -33,13 +34,13 @@ class CategoryController extends Controller
     public function create()
     {
         return view('admin.categories.create', [
-            'title' => 'Thêm danh mục sản phẩm'
+            'title' => 'カテゴリー追加'
         ]);
     }
 
     public function store(Request $request)
     {
-        $icon = $request->image;
+        $icon = $request->thumb;
         $name = $request->name;
         $nameEn = $request->name_en;
 
@@ -63,13 +64,15 @@ class CategoryController extends Controller
             'name' => $request->name ?? null
         ]);
 
+        Session::flash('success', '成功する追加');
+
         return redirect()->route('listCategories');
     }
 
     public function edit($categoryId) 
     {
         return view('admin.categories.edit',[
-            'title' => 'Chỉnh sửa danh mục sản phẩm',
+            'title' => 'カテゴリー編集',
             'category' => $this->categoryService->getCategory($categoryId)
         ]);
     }
@@ -77,7 +80,7 @@ class CategoryController extends Controller
     public function update(Request $request) 
     {
         $categoryId = $request->category_id;
-        $icon = $request->icon;
+        $image = $request->thumb;
         $name = $request->name;
         $nameEn = $request->name_en;
 
@@ -92,7 +95,7 @@ class CategoryController extends Controller
         $category = Category::findOrFail($categoryId);
 
         if ($category) {
-            $category->image = $icon ?? null;
+            $category->image = $image ?? null;
             $category->name = $name;
             $category->name_en = $nameEn ?? null;
             $category->update();
@@ -103,7 +106,7 @@ class CategoryController extends Controller
     public function view($categoryId) 
     {
         return view('admin.categories.view', [
-            'title' => 'Chi tiết danh mục sản phẩm',
+            'title' => 'カテゴリー詳細',
             'category' => $this->categoryService->getCategory($categoryId),
             'countItems' => $this->itemService->getCountItems($categoryId),
             'items' => $this->itemService->getListItems($categoryId),

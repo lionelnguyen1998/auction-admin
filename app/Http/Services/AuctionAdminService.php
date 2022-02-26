@@ -134,4 +134,5 @@ class AuctionAdminService implements AuctionAdminServiceInterface
 
         return $auctionInfo;
     }
+
 }

@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Thông tin chi tiết</h1>
+            <h1>ユーザー詳細</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">General Form</li>
+              <li class="breadcrumb-item active">detail user</li>
             </ol>
           </div>
         </div>
@@ -28,37 +28,37 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Thông tin chi tiết</h3>
+                <h3 class="card-title">ユーザー詳細</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form>
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="name">Name</label>
+                    <label for="name">名前</label>
                     <input type="text" class="form-control" id="name" value="{{ $user[0]['name'] }}" disabled>
                   </div>
                   <div class="form-group">
-                    <label for="nick_name">Nick name</label>
+                    <label for="nick_name">ニックネーム</label>
                     <input type="text" class="form-control" id="nick_name" value="{{ $user[0]['nick_name'] }}" disabled>
                   </div>
                   <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">メール</label>
                     <input type="email" class="form-control" id="email" value="{{ $user[0]['email'] }}" disabled>
                   </div>
                   <div class="form-group">
-                    <label for="address">Address</label>
+                    <label for="address">住所</label>
                     <input type="text" class="form-control" id="address" value="{{ $user[0]['address'] }}" disabled>
                   </div>
                   <div class="form-group">
-                    <label for="phone">Phone</label>
+                    <label for="phone">電話</label>
                     <input type="text" class="form-control" id="phone" value="{{ $user[0]['phone'] }}" disabled>
                   </div>
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="cancel" class="btn btn-danger btn-cancel">Cancel</button>
+                  <button type="cancel" class="btn btn-danger btn-cancel">キャンセル</button></button>
                 </div>
               </form>
             </div>

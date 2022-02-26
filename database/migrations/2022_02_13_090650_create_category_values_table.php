@@ -16,8 +16,6 @@ class CreateCategoryValuesTable extends Migration
         Schema::create('category_values', function (Blueprint $table) {
             $table->increments('category_value_id');
             $table->unsignedInteger('category_id');
-            $table->string('icon')->nulable();
-            $table->tinyInteger('type');
             $table->timestamps();
             $table->softDeletes();
         });
