@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1>chỉnh sửa thương hiệu</h1>
+            <h1>ブランド</h1>
           </div>
           <div class="col-sm-12">
             <ol class="breadcrumb float-sm-right">
@@ -26,7 +26,7 @@
             <!-- general form elements -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Chỉnh sửa thương hiệu</h3>
+                <h3 class="card-title">ブランドの編集</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -34,21 +34,21 @@
                 <input type="hidden" name="brand_id" value="{{ $brand[0]['brand_id'] }}"/>
                 <div class="card-body" style="width:70%;margin-left:15%">
                   <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên" value="{{ old('name') ?? $brand[0]['name'] }}">
+                    <label for="name">名前</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="名前を入力してください" value="{{ old('name') ?? $brand[0]['name'] }}">
                     @if($errors->has('name'))
                     <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('name')}}</label><br/>
                     @endif
                   </div>
                   <div class="form-group">
-                    <label for="name_en">Name (En)</label>
-                    <input type="text" class="form-control" id="name_en" name="name_en" placeholder="Nhập tên Tiếng Anh" value="{{ old('name_en') ?? $brand[0]['name_en'] }}">
+                    <label for="name_en">名前（英語）</label>
+                    <input type="text" class="form-control" id="name_en" name="name_en" placeholder="英語で名前を入力してください" value="{{ old('name_en') ?? $brand[0]['name_en'] }}">
                     @if($errors->has('name'))
                     <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('name_en')}}</label><br/>
                     @endif
                   </div>
                   <div class="form-group">
-                    <label for="brand_info">Thông tin thương hiệu</label>
+                    <label for="brand_info">ブランドの情報</label>
                     <textarea id="summernote" name="brand_info">
                         {{ $brand[0]['brand_info'] }}
                     </textarea>
@@ -57,7 +57,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer" style="width:100%">
-                  <button type="submit" class="btn btn-primary float-right">Submit</button>
+                  <button type="submit" class="btn btn-primary float-right">編集</button>
                 </div>
                 @csrf
               </form>

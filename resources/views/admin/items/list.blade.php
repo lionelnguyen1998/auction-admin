@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>アイテム一覧</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item active">items</li>
             </ol>
           </div>
         </div>
@@ -26,22 +26,22 @@
             <!-- /.card -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
+                <h3 class="card-title">アイテム一覧</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th style="width:50px">Item ID</th>
-                    <th>Category</th>
-                    <th>Auction</th>
-                    <th>Selling User</th>
-                    <th>Buying User</th>
-                    <th>Brand</th>
-                    <th>Series</th>
-                    <th>Name</th>
-                    <th>Name En</th>
+                    <th style="width:50px">アイテムID</th>
+                    <th>カテゴリー</th>
+                    <th>オークション</th>
+                    <th>販売者</th>
+                    <th>購入者</th>
+                    <th>ブランド</th>
+                    <th>シリーズ</th>
+                    <th>名前</th>
+                    <th>名前（英語）</th>
                     <th>&nbsp;</th>
                   </tr>
                   </thead>

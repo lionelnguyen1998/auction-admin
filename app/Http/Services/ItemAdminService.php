@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Models\Item;
+use App\Models\Image;
 
 class ItemAdminService implements ItemAdminServiceInterface
 {
@@ -28,5 +29,25 @@ class ItemAdminService implements ItemAdminServiceInterface
         return Item::with('series', 'brands', 'categories')
             ->get()
             ->toArray();
+    }
+
+    public function getItem($itemId)
+    {
+        $item = Item::with('users', 'categories', 'auctions', 'brands', 'series')
+            ->where('item_id', $itemId)
+            ->get()
+            ->toArray();
+        
+        return $item;
+    }
+
+    //get images items
+    public function getImageLists($itemId)
+    {
+        $image = Image::where('item_id', $itemId)
+            ->get()
+            ->pluck('image');
+        
+        return $image;
     }
 }

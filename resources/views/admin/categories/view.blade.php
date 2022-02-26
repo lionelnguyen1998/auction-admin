@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Chi tiết danh mục sản phẩm</h1>
+            <h1>カテゴリー詳細</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -35,13 +35,13 @@
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Tên danh mục (Tiếng Nhật)</b> <p class="float-right">{{ $category['name'] }}</p>
+                    <b>名前（日本語）</b></b> <p class="float-right">{{ $category['name'] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>Tên danh mục (Tiếng Anh)</b> <p class="float-right">{{ $category['name_en'] }}</p>
+                    <b>名前（英語）</b></b> <p class="float-right">{{ $category['name_en'] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>Tổng số sản phẩm</b> <p class="float-right">{{ $countItems }}</p>
+                    <b>アイテムの合計</b> <p class="float-right">{{ $countItems }}</p>
                   </li>
                 </ul>
               </div>
@@ -54,8 +54,8 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#list_item" data-toggle="tab">Sản phẩm</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#category_values" data-toggle="tab">Danh mục thông tin</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#list_item" data-toggle="tab">アイテム</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#category_values" data-toggle="tab">技術の情報</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -68,15 +68,15 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th style="width:50px">Item ID</th>
-                                    <th>Auction ID</th>
-                                    <th>Selling User ID</th>
-                                    <th>Buying User ID</th>
-                                    <th>Brand</th>
-                                    <th>Series</th>
-                                    <th>Name</th>
-                                    <th>Name (En)</th>
-                                    <th>Starting Price</th>
+                                    <th style="width:50px">アイテムID</th>
+                                    <th>オークションID</th>
+                                    <th>販売者ID</th>
+                                    <th>購入者ID</th>
+                                    <th>ブランド</th>
+                                    <th>シリーズ</th>
+                                    <th>名前</th>
+                                    <th>名前（英語）</th>
+                                    <th>始値</th>
                                 </tr>
                                 </thead>
                                 <tbody>

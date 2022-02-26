@@ -1,16 +1,21 @@
 @extends('admin.main')
 
 @section('content')
+<style>
+  .input-group .form-control {
+    height: 44px !important;
+  }
+</style>
 <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1>Thêm danh mục sản phẩm</h1>
+            <h1>カテゴリー追加</h1>
           </div>
           <div class="col-sm-12">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">General Form</li>
+              <li class="breadcrumb-item active">add category</li>
             </ol>
           </div>
         </div>
@@ -26,34 +31,32 @@
             <!-- general form elements -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Thêm danh mục sản phẩm</h3>
+                <h3 class="card-title">カテゴリー追加</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form action="{{ route('insertcategories') }}" method="POST">
                 <div class="card-body" style="width:70%;margin-left:15%">
                   <div class="form-group">
-                    <label for="image">Icon</label>
+                    <label for="image">写真</label>
                     <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="image" name="image" value="{{ old('image') }}">
-                        <label class="custom-file-label" for="image">Choose file</label>
-                        @if($errors->has('name'))
-                        <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('image')}}</label><br/>
-                        @endif
-                      </div>
+                        <input type="file" style="margin-bottom:5px" class="form-control" id="upload" value="{{ old('thumb') }}">
+                        <input type="hidden" name="thumb" id="thumb" value="{{ old('thumb') }}">
+                    </div>
+                    <div id="image_show" style="margin-top:10px">
+
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập tên" value="{{ old('name') }}">
+                    <label for="name">名前</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="名前を入力してください" value="{{ old('name') }}">
                     @if($errors->has('name'))
                     <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('name')}}</label><br/>
                     @endif
                   </div>
                   <div class="form-group">
-                    <label for="name_en">Name (En)</label>
-                    <input type="text" class="form-control" id="name_en" name="name_en" placeholder="Nhập tên Tiếng Anh" value="{{ old('name_en') }}">
+                    <label for="name_en">名前（英語）</label>
+                    <input type="text" class="form-control" id="name_en" name="name_en" placeholder="英語で名前を入力してください" value="{{ old('name_en') }}">
                     @if($errors->has('name'))
                     <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('name_en')}}</label><br/>
                     @endif
@@ -67,7 +70,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer" style="width:100%">
-                  <button type="submit" class="btn btn-primary float-right">Submit</button>
+                  <button type="submit" class="btn btn-primary float-right">送信</button>
                 </div>
                 @csrf
               </form>

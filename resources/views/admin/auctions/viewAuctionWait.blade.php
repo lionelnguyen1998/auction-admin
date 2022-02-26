@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Chi tiết Room {{ $auction[0]["auction_id"] }}</h1>
+            <h1>{{ $auction[0]["title"] }} の詳細</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Room {{ $auction[0]["auction_id"] }}</li>
+              <li class="breadcrumb-item active">{{ $auction[0]["title"] }}</li>
             </ol>
           </div>
         </div>
@@ -31,18 +31,18 @@
                        src="{{ $auction[0]["category"]["image"] }}"
                        alt="{{ $auction[0]["category"]["name"] }}">
                 </div>
-                <h3 class="text-center">Room {{ $auction[0]["auction_id"] }}</h3>
+                <h3 class="text-center">{{ $auction[0]["title"] }}</h3>
                 <p class="text-muted text-center">{{ $auction[0]["category"]["name"] }}</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Thời gian bắt đầu</b> <p class="float-right">{{ $auction[0]["start_date"] }}</p>
+                    <b>始まる時間</b> <p class="float-right">{{ $auction[0]["start_date"] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>Thời gian kết thúc</b> <p class="float-right">{{ $auction[0]["end_date"] }}</p>
+                    <b>終わる時間</b> <p class="float-right">{{ $auction[0]["end_date"] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>Giá khởi điểm</b> <p class="float-right">{{ $auction[0]["items"][0]["starting_price"] }}</p>
+                    <b>始値</b> <p class="float-right">{{ $auction[0]["items"][0]["starting_price"] }}</p>
                   </li>
                   @php
                     $status = config('const.status');
@@ -50,10 +50,10 @@
                   @endphp
                   @if ($index == 4)
                     <li class="list-group-item">
-                      <p class="btn btn-success"><a style="color:white" href="{{ route('acceptAuction', ['auctionStatusId' => $auction[0]["auction_status"]["auction_status_id"]]) }}">Chấp nhận</a></p>  
+                      <p class="btn btn-success"><a style="color:white" href="{{ route('acceptAuction', ['auctionStatusId' => $auction[0]["auction_status"]["auction_status_id"]]) }}">アクセプタンス</a></p>  
                       <p class="float-right">
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
-                          Từ chối
+                          断る
                         </button>
                       </p>
                     </li>
@@ -73,7 +73,7 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#item" data-toggle="tab">Sản phẩm</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#item" data-toggle="tab">アイテムの情報</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -96,23 +96,21 @@
                             <div class="row mb-3">
                                 <div class="col-12 col-sm-12">
                                 <div class="col-12">
-                                    <img src="{{ $userSelling[0]["image1"] }}" class="product-image" alt="Product Image">
+                                    <img src="{{ $images[0] }}" class="product-image" alt="Product Image">
                                 </div>
                                 <div class="col-12 product-image-thumbs">
-                                    <div class="product-image-thumb active"><img src="{{ $userSelling[0]["image1"] }}" alt="Product Image"></div>
-                                    <div class="product-image-thumb" ><img src="{{ $userSelling[0]["image2"] }}" alt="Product Image"></div>
-                                    <div class="product-image-thumb" ><img src="{{ $userSelling[0]["image3"] }}" alt="Product Image"></div>
-                                    <div class="product-image-thumb" ><img src="{{ $userSelling[0]["image4"] }}" alt="Product Image"></div>
-                                    <div class="product-image-thumb" ><img src="{{ $userSelling[0]["image5"] }}" alt="Product Image"></div>
+                                  @foreach($images as $key => $image)
+                                    <div class="product-image-thumb"><img src="{{ $image }}" alt="Product Image"></div>
+                                  @endforeach
                                 </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-sm-12">
-                                <h3>Thông tin sản phẩm</h3>
+                                <h3>アイテムの情報</h3>
                                 <p>{{ $userSelling[0]["description"] }}</p>
                                 <hr>
-                                <h4>Thông tin kỹ thuật</h4>
+                                <h4>技術の情報</h4>
                                 <div class="col-12 col-sm-12">
                                   <ul class="list-group list-group-unbordered mb-3 col-sm-12">
                                     @foreach ($infors as $key => $infor)
@@ -142,7 +140,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Lý do từ chối</h4>
+              <h4 class="modal-title">断る理由</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -157,8 +155,8 @@
               </div>
               <!-- /.card-body -->
               <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                <button type="submit" class="btn btn-primary">Gửi</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+                <button type="submit" class="btn btn-primary">確認</button>
               </div>
               @csrf
             </form>

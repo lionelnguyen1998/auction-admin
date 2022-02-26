@@ -23,7 +23,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.users.list', [
-            'title' => 'Danh Sách Người Dùng',
+            'title' => 'ユーザー一覧',
             'users' => $this->userService->getUserList()
         ]);
     }
@@ -37,7 +37,7 @@ class UserController extends Controller
     public function show($userId)
     {
         return view('admin.users.view', [
-            'title' => 'Thông tin chi tiết', 
+            'title' => 'ユーザー詳細', 
             'user' => $this->userService->getUserInfo($userId)
         ]);
     }
@@ -46,7 +46,7 @@ class UserController extends Controller
     {
         $userId = auth()->user()->user_id;
         return view('admin.users.info', [
-            'title' => 'Thông tin admin',
+            'title' => '管理者情報',
             'user' => $this->userService->getAdminInfo($userId)
         ]);
     }

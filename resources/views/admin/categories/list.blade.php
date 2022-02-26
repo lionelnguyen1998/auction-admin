@@ -6,7 +6,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Danh sách danh mục sản phẩm</h1>
+            <h1>カテゴリー一覧</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -26,20 +26,21 @@
             <!-- /.card -->
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Danh sách danh mục sản phẩm</h3>
+                <h3 class="card-title">カテゴリー一覧</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">
-                  <button type="button" class="btn btn-block btn-success" style="margin-bottom:10px; width:150px">
-                    <a style="color:white" href="create">Add Category</a>
-                  </button>
+                  <a style="color:white" href="{{ route('createCategory') }}">
+                    <button type="button" class="btn btn-block btn-success" style="margin-bottom:10px; width:150px">
+                      追加
+                    </button>
+                  </a>
                   <thead>
                   <tr>
-                    <th style="width:50px">Category ID</th>
-                    <th>Icon</th>
-                    <th>Name</th>
-                    <th>Name (En)</th>
+                    <th>カテゴリーID</th>
+                    <th>名前</th>
+                    <th>名前（英語）</th>
                     <th style="width:90px">&nbsp;</th>
                   </tr>
                   </thead>
@@ -47,11 +48,8 @@
                     @foreach ($categories as $key => $category)
                         <tr>
                             <td>{{ $category["category_id"] }}</td>
-                            <td>
-                                <img alt="{{ $category["name"] }}" class="profile-user-img img-fluid img-circle" src="{{ $category["image"] }}">
-                            </td>
                             <td>{{ $category["name"] }}</td>
-                            <td>{{ $category["name_en"] }}</td>
+                            <td>{{ $category["name_en"] ?? '--'}}</td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="{{ route('viewCategory', ['categoryId' => $category["category_id"]]) }}">
                                     <i class="fas fa-eye"></i>
@@ -59,7 +57,7 @@
                                 <a href="{{ route('editCategory', ['categoryId' => $category["category_id"]]) }}" class="btn btn-info btn-sm">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="{{ route('deleteCategory', ['categoryId' => $category["category_id"]]) }}" class="btn btn-danger btn-sm">
+                                <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-default">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </td>
@@ -77,6 +75,7 @@
         <!-- /.row -->
       </div>
       <!-- /.container-fluid -->
+      @include('admin.modal')
     </section>
     <!-- /.content -->
 @endsection

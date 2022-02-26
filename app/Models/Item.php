@@ -38,6 +38,11 @@ class Item extends Model
         return $this->belongsTo(User::class, 'selling_user_id', 'user_id');
     }
 
+    public function auctions()
+    {
+        return $this->belongsTo(Auction::class, 'auction_id', 'auction_id');
+    }
+
     public function categories()
     {
         return $this->belongsTo(Category::class, 'category_id', 'category_id');
@@ -56,5 +61,10 @@ class Item extends Model
     public function series()
     {
         return $this->belongsTo(Series::class, 'series_id', 'series_id');
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'item_id', 'item_id');
     }
 }
