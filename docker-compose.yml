@@ -1,0 +1,52 @@
+version: '3'
+services:
+  app:
+    build: 
+      context: ./
+      dockerfile: php.Dockerfile
+    container_name: auction-app
+    working_dir: /var/www/html/app
+    ports:
+      - "9009:9000"
+    volumes:
+      - ../auction-app:/var/www/html/app
+  admin:
+    build: 
+      context: ./
+      dockerfile: php.Dockerfile
+    container_name: auction-admin
+    working_dir: /var/www/html/admin
+    ports:
+      - "9010:9000"
+    volumes:
+      - ./:/var/www/html/admin
+  
+  webserver:
+    image: nginx
+    container_name: auction-server
+    working_dir: /application
+    links:
+      - app:fpm
+    volumes:
+      - .:/application
+      - .:/var/www/html/admin
+      - ../auction-app:/var/www/html/app
+      - ./storage/logs/nginx/:/var/log/nginx
+      - ./docker/nginx:/etc/nginx/conf.d/
+    ports:
+      - "8080:80"
+      - "443:443"
+
+  mysql:
+    image: mysql:5.7
+    container_name: auction-mysql
+    working_dir: /application
+    volumes:
+      - .:/application
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=auction
+      - MYSQL_USER=auction
+      - MYSQL_PASSWORD=auction
+    ports:
+      - "3306:3306"
