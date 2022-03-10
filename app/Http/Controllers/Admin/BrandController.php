@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\BrandAdminService;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Brand;
+use App\Models\Item;
 
 class BrandController extends Controller
 {
@@ -31,43 +31,13 @@ class BrandController extends Controller
         ]);
     }
 
-    public function brandValidation($request) 
-    {
-        $rules = [
-            'name_en' => "nullable|max:255",
-            'brand_info' => "nullable"
-        ];
-
-        if (isset($request["brand_id"])) {
-            $brandId = $request["brand_id"];
-            $rules['name'] = "required|max:255|min:0|unique:brands,name,$brandId,brand_id,deleted_at,NULL";
-        } else {
-            $rules['name'] = "required|max:255|min:0|unique:brands,name";
-        }
-
-        $messages = [
-            'required' => '必須項目が未入力です。',
-            'max' => ':max文字以下入力してください。 ',
-            'unique' => '既に使用されています。',
-            'min' => ':attributeは少なくとも:minでなければなりません。'
-        ];
-
-        $attributes = [
-            'name' => 'brand'
-        ];
-
-        $validated = Validator::make($request, $rules, $messages, $attributes);
-
-        return $validated;
-    }
-
     public function store(Request $request) 
     {
         $name = $request->name;
         $nameEn = $request->name_en;
         $brandInfo = $request->brand_info;
 
-        $validated = $this->brandValidation($request->all());
+        $validated = $this->brandService->brandValidation($request->all());
 
         if ($validated->fails()) {
             return redirect(url()->previous())
@@ -81,7 +51,7 @@ class BrandController extends Controller
             'brand_info' => $brandInfo ?? null
         ]);
 
-        return redirect()->route('listBrands');
+        return redirect()->route('listBrands')->with('message', '追加しました！');
     }
 
     public function edit($brandId)
@@ -116,12 +86,20 @@ class BrandController extends Controller
             $brand->update();
         }
 
-        return redirect()->route('listBrands');
+        return redirect()->route('listBrands')->with('info', '編集しました！');
     }
 
     public function destroy($brandId) 
     {
-        $brand = Brand::findOrFail($brandId)->delete();
-        return redirect()->route('listBrands');
+        $countItem = Item::where('brand_id', '=', $brandId)
+            ->count('category_id');
+
+        if ($countItem == 0) {
+            $brand = Brand::findOrFail($brandId)->delete();
+        } else {
+            return redirect()->back()->with('warning', '削除できません！');
+        }
+
+        return redirect()->route('listBrands')->with('message', '削除しました！');
     }
 }

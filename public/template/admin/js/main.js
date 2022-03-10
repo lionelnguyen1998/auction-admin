@@ -35,7 +35,7 @@ $('#upload').change(function () {
         type: 'POST',
         dataType: 'JSON',
         data: form,
-        url: 'upload/services',
+        url: "{{ route('uploadFiles') }}",
         success: function (results) {
             if (results.error === false) {
                 $('#image_show').html('<a href="' + results.url + '" target="_blank">' +

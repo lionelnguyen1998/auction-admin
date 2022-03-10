@@ -26,6 +26,10 @@
 <link rel="stylesheet" href="/template/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" href="/template/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 <link rel="stylesheet" href="/template/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+
+<!-- Toastr -->
+<link rel="stylesheet" href="/template/admin/plugins/toastr/toastr.min.css">
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 @yield('header')

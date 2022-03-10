@@ -73,7 +73,7 @@ class UserController extends Controller
             'user_create' => auth()->user()->user_id,
         ]);
 
-        return redirect()->route('listUser');
+        return redirect()->route('listUser')->with('message','追加しました！');
     }
 
     public function edit($userId)
@@ -109,7 +109,7 @@ class UserController extends Controller
             $user->update();
         }
 
-        return redirect()->route('listUser');
+        return redirect()->route('listUser')->with('info','編集しました！');
     }
 
     public function info() 
@@ -129,6 +129,6 @@ class UserController extends Controller
     public function destroy($userId)
     {
         $user = User::where('user_id', $userId)->delete();
-        return redirect()->route('listUser');
+        return redirect()->route('listUser')->with('message','削除しました！');
     }
 }

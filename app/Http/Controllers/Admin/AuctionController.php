@@ -7,6 +7,7 @@ use App\Http\Services\AuctionAdminService;
 use App\Http\Services\ItemAdminService;
 use App\Models\Auction;
 use App\Models\Item;
+use App\Models\ItemValue;
 use App\Models\AuctionStatus;
 use App\Models\AuctionDeny;
 use Illuminate\Http\Request;
@@ -77,7 +78,6 @@ class AuctionController extends Controller
             ->get()
             ->pluck('item_id');
 
-            //dd($this->itemService->getImageLists($itemId));
         return view('admin.auctions.viewAuctionWait', [
             'title' => 'オークション詳細',
             'auction' => $this->auctionService->getDetailAuctions($auctionId),
@@ -105,27 +105,39 @@ class AuctionController extends Controller
     public function destroy($auctionId)
     {
         $auctions = Auction::find($auctionId)->delete();
-        return redirect()->route('listAuctions');
+        return redirect()->route('listAuctions')->with('message', '削除しました！');
     }
 
     //reject auctions
     public function reject(Request $request)
     {
         $auctionId = $request->auction_id;
+        $itemId = Item::where('auction_id', '=', $auctionId)
+            ->get()
+            ->pluck('item_id')
+            ->toArray();
+       
         $auctionStatusId = $request->auction_status_id;
         $reason = $request->reason;
-        $deny = AuctionDeny::create([
-            'auction_id' => $auctionId,
-            'reason' => $reason ?? ''
-        ]);
+
+        if ($reason == null) {
+            return redirect()->back()->with('warning', '理由を入力しませんでした！');
+        } else {
+            AuctionDeny::create([
+                'auction_id' => $auctionId,
+                'reason' => $reason
+            ]);
+        }
 
         $statusId = AuctionStatus::findOrFail($auctionStatusId);
         if ($statusId) {
             $statusId->status = 5;
             $statusId->update();
-            $auctionDelete = Auction::findOrFail($auctionId)->delete();
+            ItemValue::where('item_id', '=', $itemId[0])->delete();
+            Item::where('item_id', '=', $itemId[0])->delete();
+            Auction::findOrFail($auctionId)->delete();
         }
 
-        return redirect()->route('listAuctionsIsWait');
+        return redirect()->route('listAuctionsIsWait')->with('message', '削除しました！');
     }
 }

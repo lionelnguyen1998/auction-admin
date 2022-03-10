@@ -60,7 +60,7 @@ class SliderController extends Controller
             'type' => $request['type']
         ]);
 
-        return redirect()->route('listSliders');
+        return redirect()->route('listSliders')->with('message','追加しました！');
     }
 
     public function edit($sliderId)
@@ -78,7 +78,7 @@ class SliderController extends Controller
     public function delete($sliderId)
     {
         $delete = Slider::findOrFail($sliderId)->delete();
-        return redirect()->route('listSliders');
+        return redirect()->route('listSliders')->with('message','削除しました！');
     }
 
     public function update(Request $request)
@@ -101,6 +101,6 @@ class SliderController extends Controller
             $sliderUpdate->update();
         }
 
-        return redirect()->route('listSliders');
+        return redirect()->route('listSliders')->with('info','編集しました！');
     }
 }

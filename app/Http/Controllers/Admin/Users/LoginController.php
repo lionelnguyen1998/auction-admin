@@ -65,23 +65,22 @@ class LoginController extends Controller
             }
 
             return redirect()->route('admin'); 
-        } 
-        // elseif (Auth::attempt([
-        //     'email' => $email,
-        //     'password' => $password,
-        //     'role' => 2,
-        //     ])) {
-        //         Session::flash('error', 'アカウントは権限がありません');
-        //         return redirect()->back();
-        // } else {
+        } elseif (Auth::attempt([
+            'email' => $email,
+            'password' => $password,
+            'role' => 2,
+            ])) {
+                Session::flash('error', 'アカウントは権限がありません');
+                return redirect()->back();
+        } else {
             Session::flash('error', 'メールとパスワードは違いました');
             return redirect()->back();
-        // }
+        }
     }
 
     public function logout(Request $request)
     {
         $request->session()->flush();
-        return redirect()->route('loginAdmin');
+        return redirect()->route('login');
     }
 }

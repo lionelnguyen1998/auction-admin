@@ -61,7 +61,7 @@
                     @endif
                   </div>
                   <div class="form-group">
-                      <label>The loai</label>
+                      <label>タイプ</label>
                       <select class="form-control select2" style="width: 100%;" name="type">
                       @foreach (config('const.categories') as $key => $category)
                         <option selected="selected" value="{{ $key }}">{{ $category }}</option>

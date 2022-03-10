@@ -8,6 +8,7 @@ use App\Http\Services\ItemAdminService;
 use App\Http\Services\CategoryValueAdminService;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Item;
 use App\Models\CategoryValue;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
@@ -88,7 +89,7 @@ class CategoryController extends Controller
                 ]);
             }
         }
-        return redirect()->route('listCategories');
+        return redirect()->route('listCategories')->with('message','追加しました！');
     }
 
     public function edit($categoryId) 
@@ -145,7 +146,7 @@ class CategoryController extends Controller
             }
         }
 
-        return redirect()->route('listCategories');
+        return redirect()->route('listCategories')->with('info','編集しました！');
     }
 
     public function view($categoryId) 
@@ -161,7 +162,14 @@ class CategoryController extends Controller
 
     public function destroy($categoryId)
     {
-        $category = Category::find($categoryId)->delete();
-        return redirect()->route('listCategories');
+        $countItem = Item::where('category_id', '=', $categoryId)
+            ->count('category_id');
+      
+        if ($countItem == 0) {
+            Category::find($categoryId)->delete();
+        } else {
+            return redirect()->route('listCategories')->with('warning','削除できません！');
+        }
+        return redirect()->route('listCategories')->with('message','削除しました！');
     }
 }

@@ -13,12 +13,6 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\NewController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
-use App\Http\Controllers\UserLoginController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\BidController;
-use App\Http\Controllers\AuctionUserController;
-use App\Http\Controllers\UploadUserController;
-use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,18 +25,15 @@ use App\Http\Controllers\ChatController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 //admin login
-Route::get('users/login', [LoginController::class, 'index'])->name('loginAdmin');
-Route::get('users/logout', [LoginController::class, 'logout'])->name('logout');
-Route::post('users/login/store', [LoginController::class, 'store'])->name('storeAdmin');
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('login/store', [LoginController::class, 'store'])->name('storeAdmin');
 
 //admin
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('/', [MainController::class, 'index'])->name('admin');
     Route::get('main', [MainController::class, 'index'])->name('admin');
 
     //User
@@ -82,7 +73,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     //Upload
-    Route::post('upload/services', [UploadController::class, 'store'])->name('uploadFiles');
+    Route::post('admin/upload/services', [UploadController::class, 'store'])->name('uploadFiles');
 
     //Item
     Route::prefix('items')->group(function () {
@@ -117,7 +108,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
     //Slider
-    //News
     Route::prefix('sliders')->group(function () {
         Route::get('list', [SliderController::class, 'index'])->name('listSliders');
         Route::get('create', [SliderController::class, 'create'])->name('createSlider');
@@ -127,7 +117,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('delete/{sliderId}', [SliderController::class, 'delete'])->name('deleteSlider');
     });
 
-    //Bid
+    //Bid chưa làm nè
     Route::prefix('bids')->group(function () {
         Route::get('destroy/{bidId}', [BidController::class, 'destroy'])->name('deleteBid');
     });

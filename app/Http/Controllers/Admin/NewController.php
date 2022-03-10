@@ -52,7 +52,7 @@ class NewController extends Controller
             'title_en' => $titleEn ?? null
         ]);
 
-        return redirect()->route('listNews');
+        return redirect()->route('listNews')->with('message','追加しました！');
     }
 
     public function edit($newId)
@@ -66,7 +66,7 @@ class NewController extends Controller
     public function delete($newId)
     {
         $delete = News::findOrFail($newId)->delete();
-        return redirect()->route('listNews');
+        return redirect()->route('listNews')->with('message','削除しました！');
     }
 
     public function update(Request $request, $newId)
@@ -94,7 +94,7 @@ class NewController extends Controller
             $newUpdate->update();
         }
 
-        return redirect()->route('listNews');
+        return redirect()->route('listNews')->with('info','編集しました！');
     }
 
     public function view($newId)

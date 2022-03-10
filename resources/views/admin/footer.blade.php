@@ -34,6 +34,10 @@
     <script src="/template/admin/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- BS-Stepper -->
     <script src="/template/admin/plugins/bs-stepper/js/bs-stepper.min.js"></script>
+
+    <!-- Toastr -->
+    <script src="/template/admin/plugins/toastr/toastr.min.js"></script>
+
     <script>
         $(function () {
             $("#example1").DataTable({
@@ -54,5 +58,40 @@
         document.addEventListener('DOMContentLoaded', function () {
             window.stepper = new Stepper(document.querySelector('.bs-stepper'))
         })
+        @if(Session::has('message'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
+
+        @if(Session::has('error'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+
+        @if(Session::has('info'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+            toastr.info("{{ session('info') }}");
+        @endif
+
+        @if(Session::has('warning'))
+            toastr.options =
+            {
+                "closeButton" : true,
+                "progressBar" : true
+            }
+            toastr.warning("{{ session('warning') }}");
+        @endif
     </script>
 @yield('footer')
