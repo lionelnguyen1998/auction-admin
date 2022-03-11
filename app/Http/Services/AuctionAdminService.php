@@ -140,55 +140,6 @@ class AuctionAdminService implements AuctionAdminServiceInterface
         return $auctionInfo;
     }
 
-    //get auction by categoryId and typeCategory
-    public function getAuctionByCategory($typeId)
-    {
-        $categoryId = Category::where('type', $typeId)
-            ->get()
-            ->pluck('category_id')
-            ->toArray();
-
-        $auction = Auction::with('category', 'items', 'auctionStatus')
-            ->whereIn('category_id', $categoryId)
-            ->get()
-            ->toArray();
-
-        return $auction;
-    }
-
-    //validate create auction 
-    public function auctionValidation($request)
-    {
-        $rules = [
-            'category_id' => "required",
-            'title_ni' => "required|max:255|unique:auctions,title",
-            'title_en' => "nullable|max:255",
-            'start_date' => "required|date|after_or_equal:tomorrow",
-            'end_date' => "required|date|after:start_date"
-        ];
-
-        $messages = [
-            'required' => '必須項目が未入力です。',
-            'max' => ':max文字以下入力してください。 ',
-            'date' => 'データのフォーマットが正しくありません',
-            'after_or_equal' => '始まる時間が明日か行かなければなりません',
-            'after' => '始まる時間よりです。',
-            'unique' => 'duy nhat'
-        ];
-
-        $attributes = [
-            'category_id' => 'カテゴリー',
-            'title_ni' => 'title',
-            'title_en' => 'title_en',
-            'start_date' => 'start_date',
-            'end_date' => 'end_date'
-        ];
-
-        $validated = Validator::make($request, $rules, $messages, $attributes);
-
-        return $validated;
-    }
-
     public function deny()
     {
         $userId = auth()->user()->user_id;

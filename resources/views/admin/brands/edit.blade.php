@@ -9,8 +9,8 @@
           </div>
           <div class="col-sm-12">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">edit brand</li>
+              <li class="breadcrumb-item"><a href="{{ route('listBrands') }}">ブランド一覧</a></li>
+              <li class="breadcrumb-item active">ブランド編集</li>
             </ol>
           </div>
         </div>
@@ -25,10 +25,6 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">ブランドの編集</h3>
-              </div>
-              <!-- /.card-header -->
               <!-- form start -->
               <form action="{{ route('updatebrand') }}" method="POST">
                 <input type="hidden" name="brand_id" value="{{ $brand[0]['brand_id'] }}"/>

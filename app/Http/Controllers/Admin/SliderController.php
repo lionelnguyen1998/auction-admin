@@ -12,6 +12,7 @@ class SliderController extends Controller
     public function __construct()
     {
         $this->messageRequired = config('message.MSG_01');
+        $this->messageUnique = config('message.MSG_04');
     }
 
     public function index()
@@ -34,10 +35,12 @@ class SliderController extends Controller
     {
         $rules = [
             'thumb'=>'required',
+            'type' => 'unique:sliders,type',
         ];
 
         $messages = [
             'required' => $this->messageRequired,
+            'unique' => $this->messageUnique,
         ];
 
         $validated = Validator::make($request, $rules, $messages);

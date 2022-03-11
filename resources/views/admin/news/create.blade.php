@@ -9,8 +9,8 @@
           </div>
           <div class="col-sm-12">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">@if(isset($new)) edit new @else add news @endif</li>
+              <li class="breadcrumb-item"><a href="{{ route('listNews') }}">ニュース一覧</a></li>
+              <li class="breadcrumb-item active">@if(isset($new)) ニュース編集 @else ニュース追加 @endif</li>
             </ol>
           </div>
         </div>
@@ -25,10 +25,6 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">@if (isset($new)) ニュース編集 @else ニュース追加 @endif</h3>
-              </div>
-              <!-- /.card-header -->
               <!-- form start -->
               <form @if(isset($new)) action="{{ route('updateNew', ['newId' => $new["new_id"]]) }}" @else action="{{ route('insertNew') }}" @endif method="POST">
                 <div class="card-body" style="width:70%;margin-left:15%">

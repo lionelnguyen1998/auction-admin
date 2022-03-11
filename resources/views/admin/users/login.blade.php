@@ -7,7 +7,7 @@
 <body class="hold-transition login-page">
         <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>ログイン</b></a>
+            <b>ログイン</b>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -54,7 +54,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">登録</button>
+                            <button type="submit" class="btn btn-primary btn-block">ログイン</button>
                         </div>
                         <!-- /.col -->
                     </div>

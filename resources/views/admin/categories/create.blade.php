@@ -14,8 +14,8 @@
           </div>
           <div class="col-sm-12">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">add category</li>
+              <li class="breadcrumb-item"><a href="{{ route('listCategories') }}">カテゴリー一覧</a></li>
+              <li class="breadcrumb-item active">カテゴリー追加</li>
             </ol>
           </div>
         </div>
@@ -30,10 +30,6 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">カテゴリー追加</h3>
-              </div>
-              <!-- /.card-header -->
               <!-- form start -->
               <form action="{{ route('insertcategories') }}" method="POST">
                 <div class="card-body" style="width:70%;margin-left:15%">

@@ -14,8 +14,8 @@
           </div>
           <div class="col-sm-12">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">@if(isset($slider)) edit slider @else add slider @endif</li>
+              <li class="breadcrumb-item"><a href="{{ route('listSliders') }}">スライダー一覧</a></li>
+              <li class="breadcrumb-item active">@if(isset($slider)) スライダー編集 @else スライダー追加 @endif</li>
             </ol>
           </div>
         </div>
@@ -30,10 +30,6 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">@if (isset($slider)) スライダー編集 @else スライダー追加 @endif</h3>
-              </div>
-              <!-- /.card-header -->
               <!-- form start -->
               <form @if(isset($slider)) action="{{ route('updateSlider') }}" @else action="{{ route('insertSlider') }}" @endif method="POST">
                 <div class="card-body" style="width:70%;margin-left:15%">
@@ -49,31 +45,34 @@
                     </div>
                     <div id="image_show" style="margin-top:10px">
                         @if (isset($slider[0]['image']))
-                        <img src="{{ $slider[0]['image'] }}"  style="max-width:150px; max-height:150px"/>
+                          <img src="{{ $slider[0]['image'] }}"  style="max-width:150px; max-height:150px"/>
                         @endif
                     </div>
                     @if($errors->has('thumb'))
-                    <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('thumb')}}</label><br/>
+                      <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('thumb')}}</label><br/>
                     @endif
                 </div>
                 <div class="form-group">
                     <label>デーマ</label>
                     <select class="form-control select2" style="width: 100%;" name="type">
                     @if (isset($slider[0]['type']))
-                    @php
-                    $sliderConst = config('const.typeSlider');
-                    $index = $slider[0]['type'];
-                    @endphp
-                    <option selected="selected" hidden value="{{ $index }}">{{ $sliderConst[$index] }}</option>
-                    @foreach (config('const.typeSlider') as $key => $type)
-                        <option value="{{ $key }}">{{ $type }}</option>
-                    @endforeach
+                      @php
+                      $sliderConst = config('const.typeSlider');
+                      $index = $slider[0]['type'];
+                      @endphp
+                      <option selected="selected" hidden value="{{ $index }}">{{ $sliderConst[$index] }}</option>
+                      @foreach (config('const.typeSlider') as $key => $type)
+                          <option value="{{ $key }}">{{ $type }}</option>
+                      @endforeach
                     @else 
-                    @foreach (config('const.typeSlider') as $key => $type)
-                        <option selected="selected" value="{{ $key }}">{{ $type }}</option>
-                    @endforeach
+                      @foreach (config('const.typeSlider') as $key => $type)
+                          <option selected="selected" value="{{ $key }}">{{ $type }}</option>
+                      @endforeach
                     @endif
                     </select>
+                    @if($errors->has('type'))
+                      <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('type')}}</label><br/>
+                    @endif
                 </div>
                 </div>
                 <!-- /.card-body -->
