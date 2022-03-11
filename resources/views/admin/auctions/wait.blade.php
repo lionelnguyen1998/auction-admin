@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>オークション</h1>
+            <h1>オークション評価</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Duyệt đấu giá</li>
+              <li class="breadcrumb-item"><a href="{{ route('admin') }}">ホーム</a></li>
+              <li class="breadcrumb-item active">オークション評価</li>
             </ol>
           </div>
         </div>
@@ -25,9 +25,6 @@
           <div class="col-12">
             <!-- /.card -->
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">オークション評価一覧</h3>
-              </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="example1" class="table table-bordered table-striped">

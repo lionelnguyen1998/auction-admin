@@ -17,7 +17,6 @@ class CreateSliderTable extends Migration
             $table->increments('slider_id');
             $table->string('image');
             $table->tinyInteger('type');
-            $table->softDeletes();
             $table->timestamps();
         });
     }

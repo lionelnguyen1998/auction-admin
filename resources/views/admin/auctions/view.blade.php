@@ -9,7 +9,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('listAuctions') }}">オークション一覧</a></li>
               <li class="breadcrumb-item active">{{ $auction[0]["title"] }}</li>
             </ol>
           </div>
@@ -22,7 +22,6 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-3">
-
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">

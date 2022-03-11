@@ -12,12 +12,6 @@
           <div class="col-sm-12">
             <h1>カテゴリー価値を追加する</h1>
           </div>
-          <div class="col-sm-12">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">add category value</li>
-            </ol>
-          </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -30,10 +24,6 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">カテゴリー価値を追加する</h3>
-              </div>
-              <!-- /.card-header -->
               <!-- form start -->
               <form action="{{ route('storecategoryvalues') }}" method="POST">
                 <input type="hidden" id="category_id" name="category_id" value="{{ $categoryId }}"/>

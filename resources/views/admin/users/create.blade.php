@@ -14,8 +14,8 @@
           </div>
           <div class="col-sm-12">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">@if(isset($user)) edit @else add @endif</li>
+              <li class="breadcrumb-item"><a href="{{ route('listUser') }}">ユーザー一覧</a></li>
+              <li class="breadcrumb-item active">@if(isset($user)) ユーザー編集 @else ユーザー追加 @endif</li>
             </ol>
           </div>
         </div>
@@ -30,10 +30,6 @@
           <div class="col-md-12">
             <!-- general form elements -->
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">@if (isset($user)) ユーザー編集 @else ユーザー追加 @endif</h3>
-              </div>
-              <!-- /.card-header -->
               <!-- form start -->
                 <form @if(isset($user)) action="{{ route('updateUser') }}" @else action="{{ route('storeUser') }}" @endif method="POST">
                     <div class="card-body" style="width:70%;margin-left:15%">
