@@ -14,7 +14,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                     <a href="" class="nav-link">
-                    <i class="nav-icon fas fa-table"></i>
+                    <i class="nav-icon fas fa-gavel"></i>
                     <p>
                     オークション管理
                         <i class="right fas fa-angle-left"></i>
@@ -23,13 +23,13 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('listAuctions') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="nav-icon fas fa-check"></i>
                                 <p>オークション一覧</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('listAuctionsIsWait') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="nav-icon fas fa-check"></i>
                                 <p>オークション評価</p>
                             </a>
                         </li>
@@ -54,19 +54,19 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('listCategories') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="nav-icon fas fa-check"></i>
                                 <p>カテゴリー一覧</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('listItems') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="nav-icon fas fa-check"></i>
                                 <p>商品一覧</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('listBrands') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="nav-icon fas fa-check"></i>
                                 <p>ブランド一覧</p>
                             </a>
                         </li>
@@ -82,7 +82,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('listSliders') }}" class="nav-link">
-                    <i class="nav-icon fas fa-newspaper"></i>
+                    <i class="nav-icon fas fa-sliders-h"></i>
                     <p>
                         スライダー管理
                     </p>
