@@ -65,7 +65,6 @@ class UserAdminService implements UserAdminServiceInterface
         $rules = [
             'password' => 'required|max:255',
             'name' => 'required|max:255',
-            'nick_name' => 'required|max:255',
             'address' => 'max:255',
             'phone' => 'required|max:60',
             'avatar' => 'max:255'

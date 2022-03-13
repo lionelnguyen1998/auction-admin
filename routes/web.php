@@ -73,7 +73,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
     //Upload
-    Route::post('admin/upload/services', [UploadController::class, 'store'])->name('uploadFiles');
+    Route::post('/upload/services', [UploadController::class, 'store']);
+
 
     //Item
     Route::prefix('items')->group(function () {

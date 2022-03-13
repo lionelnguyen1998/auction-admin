@@ -87,7 +87,7 @@
                                 @endphp
                                 <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="User Image">
                                 <span class="username">
-                                    <p href="#">{{ $userSelling[0]["users"]["nick_name"] }}</p>
+                                    <p href="#">{{ $userSelling[0]["users"]["name"] }}</p>
                                 </span>
                                 <span class="description">{{ date("d-m-Y H:i", strtotime($userSelling[0]['updated_at'])) }}</span>
                             </div>
@@ -137,7 +137,7 @@
                       <div class="user-block">
                         <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="user image">
                         <span class="username">
-                          <p>{{ $bid['users']['nick_name'] }}</p>
+                          <p>{{ $bid['users']['name'] }}</p>
                         </span>
                         <span class="description">{{ date("d-m-Y H:i", strtotime($bid['updated_at'])) }}</span>
                       </div>
@@ -166,7 +166,7 @@
                       <div class="user-block">
                         <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="user image">
                         <span class="username">
-                          <p>{{ $comment['users']['nick_name'] }}</p>
+                          <p>{{ $comment['users']['name'] }}</p>
                         </span>
                         <span class="description">{{ date("d-m-Y H:i", strtotime($comment['updated_at'])) }}</span>
                       </div>

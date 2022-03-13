@@ -87,7 +87,7 @@
                                 @endphp
                                 <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="User Image">
                                 <span class="username">
-                                    <p href="#">{{ $userSelling[0]["users"]["nick_name"] }}</p>
+                                    <p href="#">{{ $userSelling[0]["users"]["name"] }}</p>
                                 </span>
                                 <span class="description">{{ date("d-m-Y H:i", strtotime($userSelling[0]['updated_at'])) }}</span>
                             </div>
@@ -122,7 +122,7 @@
                                   </ul>
                                 </div>
                                 </div>
-                             </div>
+                            </div>
                         </div>
                     <!-- /.post -->
                     </div>

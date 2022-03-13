@@ -42,10 +42,6 @@
               <label for="name">名前</label>
               <input type="text" id="name" class="form-control" value="{{ $user->name }}" disabled />
             </div>
-            <div class="form-group">
-              <label for="nick_name">ニックネーム</label>
-              <input type="text" id="nick_name" value="{{ $user->nick_name }}" disabled class="form-control" />
-            </div>
             @php
             $role = config('const.role');
             $index = $user->role;

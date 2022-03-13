@@ -63,7 +63,6 @@ class UserController extends Controller
 
         User::create([
             'name' => $request['name'],
-            'nick_name' => $request['nick_name'],
             'email' => $request['email'],
             'password' => $password,
             'phone' => $request['phone'],
@@ -99,7 +98,6 @@ class UserController extends Controller
         $user = User::findOrFail($userId);
         if ($user) {
             $user->name = $request['name'];
-            $user->nick_name = $request['nick_name'];
             $user->email = $request['email'];
             $user->password = Hash::make($request['password']);
             $user->phone = $request['phone'];

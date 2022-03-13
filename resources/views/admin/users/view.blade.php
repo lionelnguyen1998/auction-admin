@@ -35,10 +35,6 @@
                     <input type="text" class="form-control" id="name" value="{{ $user[0]['name'] }}" disabled>
                   </div>
                   <div class="form-group">
-                    <label for="nick_name">ニックネーム</label>
-                    <input type="text" class="form-control" id="nick_name" value="{{ $user[0]['nick_name'] }}" disabled>
-                  </div>
-                  <div class="form-group">
                     <label for="email">メール</label>
                     <input type="email" class="form-control" id="email" value="{{ $user[0]['email'] }}" disabled>
                   </div>
