@@ -14,7 +14,6 @@ class AddTitleOfNewsTable extends Migration
     public function up()
     {
         Schema::table('news', function (Blueprint $table) {
-            $table->string('title_en')->nullable()->after('user_id');
             $table->string('title')->after('user_id');
         });
     }
@@ -28,7 +27,6 @@ class AddTitleOfNewsTable extends Migration
     {
         Schema::table('news', function (Blueprint $table) {
             $table->dropColumn('title');
-            $table->dropColumn('title_en');
         });
     }
 }

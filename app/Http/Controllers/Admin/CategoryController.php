@@ -44,7 +44,6 @@ class CategoryController extends Controller
     {
         $icon = $request->thumb;
         $name = $request->name;
-        $nameEn = $request->name_en;
         $type = $request->type;
 
         $validated = $this->categoryService->categoryValidation($request->all());
@@ -58,7 +57,6 @@ class CategoryController extends Controller
         $category = Category::create([
             'image' => $icon,
             'name' => $name,
-            'name_en' => $nameEn ?? null,
             'type' => $type
         ]);
 
@@ -106,7 +104,6 @@ class CategoryController extends Controller
         $categoryId = $request->category_id;
         $image = $request->thumb;
         $name = $request->name;
-        $nameEn = $request->name_en;
         $type = $request->type;
 
         $validated = $this->categoryService->categoryValidation($request->all());
@@ -122,12 +119,11 @@ class CategoryController extends Controller
         if ($category) {
             $category->image = $image ?? null;
             $category->name = $name;
-            $category->name_en = $nameEn ?? null;
             $category->type = $type;
             $category->update();
         }
 
-        $categoryValueRequest = $request->except('name', 'name_en', 'thumb', '_token', 'category_id', 'type');
+        $categoryValueRequest = $request->except('name', 'thumb', '_token', 'category_id', 'type');
 
         $categoryValues = CategoryValue::where('category_id', $categoryId)
             ->get();

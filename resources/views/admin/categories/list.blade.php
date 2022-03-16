@@ -36,7 +36,6 @@
                   <tr>
                     <th>カテゴリーID</th>
                     <th>名前</th>
-                    <th>名前（英語）</th>
                     <th>タイプ</th>
                     <th style="width:90px">&nbsp;</th>
                   </tr>
@@ -50,7 +49,6 @@
                         <tr>
                             <td>{{ $category["category_id"] }}</td>
                             <td>{{ $category["name"] }}</td>
-                            <td>{{ $category["name_en"] ?? '--'}}</td>
                             <td>{{ $categoryParent[$index] }}</td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="{{ route('viewCategory', ['categoryId' => $category["category_id"]]) }}">

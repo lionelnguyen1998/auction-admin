@@ -7,6 +7,8 @@ use App\Http\Services\AuctionAdminService;
 use App\Http\Services\ItemAdminService;
 use App\Models\Auction;
 use App\Models\Item;
+use App\Models\Bid;
+use App\Models\Comment;
 use App\Models\ItemValue;
 use App\Models\AuctionStatus;
 use App\Models\AuctionDeny;
@@ -104,7 +106,17 @@ class AuctionController extends Controller
     //delete auctions
     public function destroy($auctionId)
     {
-        $auctions = Auction::find($auctionId)->delete();
+        $itemId = Item::where('auction_id', '=', $auctionId)
+            ->get()
+            ->pluck('item_id')
+            ->toArray();
+
+        ItemValue::where('item_id', '=', $itemId[0])->delete();
+        Item::where('item_id', '=', $itemId[0])->delete();
+        Bid::where('auction_id', '=', $auctionId)->delete();
+        Comment::where('auction_id', '=', $auctionId)->delete();
+        Auction::find($auctionId)->delete();
+
         return redirect()->route('listAuctions')->with('message', '削除しました！');
     }
 

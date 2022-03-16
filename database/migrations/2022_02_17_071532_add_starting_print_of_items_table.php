@@ -14,7 +14,7 @@ class AddStartingPrintOfItemsTable extends Migration
     public function up()
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->unsignedInteger('starting_price')->after('name_en');
+            $table->unsignedInteger('starting_price')->after('name');
         });
     }
 

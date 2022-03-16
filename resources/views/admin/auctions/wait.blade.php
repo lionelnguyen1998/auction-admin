@@ -33,7 +33,6 @@
                     <th>オークションID</th>
                     <th>カテゴリー</th>
                     <th>テーマ</th>
-                    <th>テーマ（英語）</th>
                     <th>始まる時間</th>
                     <th>終わる時間</th>
                     <th>スターテス</th>
@@ -50,7 +49,6 @@
                             <td>{{ $auction->auction_id }}</td>
                             <td>{{ $auction->category_id }}</td>
                             <td>{{ $auction->title }}</td>
-                            <td>{{ $auction->title_en }}</td>
                             <td>{{ $auction->start_date }}</td>
                             <td>{{ $auction->end_date }}</td>
                             <td>

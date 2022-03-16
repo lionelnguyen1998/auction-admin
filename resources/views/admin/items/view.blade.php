@@ -77,7 +77,7 @@
                             <div class="row mb-3">
                                 <div class="col-12 col-sm-12">
                                 <div class="col-12">
-                                  <img @if(is_null($images)) src="{{ $images[0] }}" @else src="adafs" @endif class="product-image" alt="Product Image">
+                                  <img @if(isset($images)) src="{{ $images[0] }}" @else src="adafs" @endif class="product-image" alt="Product Image">
                                 </div>
                                 <div class="col-12 product-image-thumbs">
                                   @foreach($images as $key => $image)

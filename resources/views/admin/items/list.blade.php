@@ -37,7 +37,6 @@
                     <th>ブランド</th>
                     <th>シリーズ</th>
                     <th>名前</th>
-                    <th>名前（英語）</th>
                     <th>&nbsp;</th>
                   </tr>
                   </thead>
@@ -52,7 +51,6 @@
                             <td>{{ $item["brands"]["name"] ?? '--' }}</td>
                             <td>{{ $item["series"] ?? '--' }}</td>
                             <td>{{ $item["name"] }}</td>
-                            <td>{{ $item["name_en"] ?? '--' }}</td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="{{ route('viewItem', ['itemId' => $item["item_id"]]) }}">
                                     <i class="fas fa-eye"></i>

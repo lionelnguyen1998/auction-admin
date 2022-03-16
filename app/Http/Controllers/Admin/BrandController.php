@@ -34,7 +34,6 @@ class BrandController extends Controller
     public function store(Request $request) 
     {
         $name = $request->name;
-        $nameEn = $request->name_en;
         $brandInfo = $request->brand_info;
 
         $validated = $this->brandService->brandValidation($request->all());
@@ -47,7 +46,6 @@ class BrandController extends Controller
         
         $brand = Brand::create([
             'name' => $name,
-            'name_en' => $nameEn ?? null,
             'brand_info' => $brandInfo ?? null
         ]);
 
@@ -65,11 +63,10 @@ class BrandController extends Controller
     public function update(Request $request) 
     {
         $name = $request->name;
-        $nameEn = $request->name_en;
         $brandInfo = $request->brand_info;
         $brandId = $request->brand_id;
 
-        $validated = $this->brandValidation($request->all());
+        $validated = $this->brandService->brandValidation($request->all());
 
         if ($validated->fails()) {
             return redirect(url()->previous())
@@ -81,7 +78,6 @@ class BrandController extends Controller
 
         if ($brand) {
             $brand->name = $name;
-            $brand->name_en = $nameEn ?? null;
             $brand->brand_info = $brandInfo ?? null;
             $brand->update();
         }

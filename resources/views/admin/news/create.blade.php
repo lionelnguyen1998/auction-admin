@@ -40,13 +40,6 @@
                     @endif
                   </div>
                   <div class="form-group">
-                    <label for="title_en">テーマ（英語）</label>
-                    <input type="text" class="form-control" id="title_en" name="title_en" placeholder="英語でテーマを入力してください" @if (isset($new)) value="{{$new["title_en"]}}" @else value="{{ old('title_en') }}" @endif>
-                    @if($errors->has('title'))
-                    <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('title_en')}}</label><br/>
-                    @endif
-                  </div>
-                  <div class="form-group">
                     <label for="content">ニュースの内容 <i class="fa fa-asterisk" aria-hidden="true" style="color:red"></i></label>
                     @if (isset($new))
                       <textarea id="summernote" name="content" value="{{ old('content') }}">

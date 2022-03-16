@@ -14,7 +14,7 @@ class AddDescriptionOfItemsTable extends Migration
     public function up()
     {
         Schema::table('items', function (Blueprint $table) {
-            $table->text('description')->nullable()->after('name_en');
+            $table->text('description')->nullable()->after('name');
         });
     }
 

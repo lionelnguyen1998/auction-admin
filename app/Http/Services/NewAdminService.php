@@ -27,7 +27,6 @@ class NewAdminService implements NewAdminServiceInterface
         $rules = [
             'content'=>'required',
             'title' => 'required|max:255',
-            'title_en' => 'nullable|max:255'
         ];
 
         $messages = [
@@ -53,7 +52,6 @@ class NewAdminService implements NewAdminServiceInterface
             'user_id' => $new->user_id,
             'content' => $new->content,
             'title' => $new->title,
-            'title_en' => $new->title_en,
         ];
 
         return $newInfo;
