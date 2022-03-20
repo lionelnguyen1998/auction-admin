@@ -17,7 +17,6 @@ class CreateFavoriesTable extends Migration
             $table->increments('favorite_id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('auction_id')->nullable();
-            $table->unsignedInteger('item_id')->nullable();
             $table->tinyInteger('is_liked');
         });
     }

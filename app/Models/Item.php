@@ -23,6 +23,7 @@ class Item extends Model
         'series',
         'name',
         'starting_price',
+        'selling_info',
     ];
 
     protected $dates = [

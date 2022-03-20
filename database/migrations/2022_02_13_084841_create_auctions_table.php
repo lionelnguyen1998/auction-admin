@@ -19,6 +19,8 @@ class CreateAuctionsTable extends Migration
             $table->string('title', 255);
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            $table->tinyInteger('status');
+            $table->text('reason')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

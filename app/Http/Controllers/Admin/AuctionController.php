@@ -7,11 +7,11 @@ use App\Http\Services\AuctionAdminService;
 use App\Http\Services\ItemAdminService;
 use App\Models\Auction;
 use App\Models\Item;
+use App\Models\Image;
 use App\Models\Bid;
 use App\Models\Comment;
 use App\Models\ItemValue;
-use App\Models\AuctionStatus;
-use App\Models\AuctionDeny;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -55,7 +55,7 @@ class AuctionController extends Controller
             'auction' => $this->auctionService->getDetailAuctions($auctionId),
             'maxPrice' => $this->auctionService->getMaxPrice($auctionId),
             'bids' => $this->auctionService->getBids($auctionId),
-            'userSelling' => $this->auctionService->getSellingUser($auctionId),
+            'userSelling' => $this->auctionService->getSellingUserItem($auctionId),
             'comments' => $this->auctionService->getComments($auctionId),
             'infors' => $this->auctionService->getInfor($auctionId),
             'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId),
@@ -69,7 +69,7 @@ class AuctionController extends Controller
     {
         return view('admin.auctions.wait', [
             'title' => 'オークション評価',
-            'auctions' => $this->auctionService->getListAuctionsWait()
+            'auctions' => $this->auctionService->getListAuctions()
         ]);
     }
 
@@ -80,25 +80,33 @@ class AuctionController extends Controller
             ->get()
             ->pluck('item_id');
 
-        return view('admin.auctions.viewAuctionWait', [
-            'title' => 'オークション詳細',
-            'auction' => $this->auctionService->getDetailAuctions($auctionId),
-            'userSelling' => $this->auctionService->getSellingUser($auctionId),
-            'infors' => $this->auctionService->getInfor($auctionId),
-            'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId),
-            'images' => $this->itemService->getImageLists($itemId)
-        ]);
+        if (isset($itemId[0])) {
+            return view('admin.auctions.viewAuctionWait', [
+                'title' => 'オークション詳細',
+                'auction' => $this->auctionService->getDetailAuctions($auctionId),
+                'userSelling' => $this->auctionService->getSellingUser($auctionId),
+                'infors' => $this->auctionService->getInfor($auctionId),
+                'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId),
+                'images' => $this->itemService->getImageLists($itemId)
+            ]);
+        } else {
+            return view('admin.auctions.viewAuctionWait', [
+                'title' => 'オークション詳細',
+                'auction' => $this->auctionService->getDetailAuctions($auctionId),
+                'userSelling' => $this->auctionService->getSellingUser($auctionId),
+            ]);
+        }
     }
 
     //accept auction
-    public function accept($auctionStatusId)
+    public function accept($auctionId)
     {
-        $auctionId = AuctionStatus::find($auctionStatusId)->auction_id;
-        $startDate = Auction::find($auctionId)->start_date;
-        $auctionStatus = AuctionStatus::find($auctionStatusId);
-        if ($auctionStatus) {
-            $auctionStatus->status = 2;
-            $auctionStatus->update();
+        $auction = Auction::findOrFail($auctionId);
+        $startDate = $auction->start_date;
+        $auctionStatus = $auction->status;
+        if ($auction) {
+            $auction->status = 2;
+            $auction->update();
         }
         return redirect()->route('listAuctions');
     }
@@ -110,11 +118,12 @@ class AuctionController extends Controller
             ->get()
             ->pluck('item_id')
             ->toArray();
-
+        
         ItemValue::where('item_id', '=', $itemId[0])->delete();
         Item::where('item_id', '=', $itemId[0])->delete();
         Bid::where('auction_id', '=', $auctionId)->delete();
         Comment::where('auction_id', '=', $auctionId)->delete();
+        Favorite::where('auction_id', '=', $auctionId)->delete();
         Auction::find($auctionId)->delete();
 
         return redirect()->route('listAuctions')->with('message', '削除しました！');
@@ -124,29 +133,33 @@ class AuctionController extends Controller
     public function reject(Request $request)
     {
         $auctionId = $request->auction_id;
+        $auction = Auction::findOrFail($auctionId);
         $itemId = Item::where('auction_id', '=', $auctionId)
             ->get()
             ->pluck('item_id')
             ->toArray();
        
-        $auctionStatusId = $request->auction_status_id;
         $reason = $request->reason;
 
         if ($reason == null) {
             return redirect()->back()->with('warning', '理由を入力しませんでした！');
         } else {
-            AuctionDeny::create([
-                'auction_id' => $auctionId,
-                'reason' => $reason
-            ]);
+            $auction->reason = $reason;
+            $auction->update();
         }
 
-        $statusId = AuctionStatus::findOrFail($auctionStatusId);
-        if ($statusId) {
-            $statusId->status = 5;
-            $statusId->update();
-            ItemValue::where('item_id', '=', $itemId[0])->delete();
-            Item::where('item_id', '=', $itemId[0])->delete();
+        $status = $auction->status;
+        
+        if ($auction) {
+            $auction->status = 5;
+            $auction->update();
+
+            if (isset($itemId[0])) {
+                ItemValue::where('item_id', '=', $itemId[0])->delete();
+                Image::where('item_id', '=', $itemId[0])->delete();
+                Item::where('item_id', '=', $itemId[0])->delete();
+            }
+
             Auction::findOrFail($auctionId)->delete();
         }
 

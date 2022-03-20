@@ -49,14 +49,16 @@
                   <li class="list-group-item">
                     @php
                         $status = config('const.status');
-                        $index = $auction[0]['auction_status']['status'];
+                        $index = $auction[0]['status'];
                     @endphp
                     @if ($index == 1)
                         <p class="btn btn-success" disabled>{{ $status[$index] }}</p>
                     @elseif ($index == 2)
                         <p class="btn btn-warning" disabled>{{ $status[$index] }}</p>
-                    @else
+                    @elseif ($index == 3)
                         <p class="btn btn-danger" disabled>{{ $status[$index] }}</p>
+                    @else
+                        <p class="btn btn-info" disabled>{{ $status[$index] }}</p>
                     @endif
                   </li>
                 </ul>
@@ -85,7 +87,7 @@
                                 @php
                                     $avatar = $userSelling[0]["users"]["avatar"]
                                 @endphp
-                                <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="User Image">
+                                <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="avatar">
                                 <span class="username">
                                     <p href="#">{{ $userSelling[0]["users"]["name"] }}</p>
                                 </span>
@@ -95,7 +97,7 @@
                             <div class="row mb-3">
                                 <div class="col-12 col-sm-12">
                                   <div class="col-12">
-                                      <img @if(isset($images)) src="{{ $images[0] }}" @else src="adafs" @endif class="product-image" alt="Product Image">
+                                      <img @if(isset($images[0])) src="{{ $images[0] }}" @else src="adafs" @endif class="product-image" alt="Product Image">
                                   </div>
                                   <div class="col-12 product-image-thumbs">
                                     @if (isset($images))
@@ -135,7 +137,7 @@
                     @endphp
                     <div class="post">
                       <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="user image">
+                        <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="avatar">
                         <span class="username">
                           <p>{{ $bid['users']['name'] }}</p>
                         </span>
@@ -164,7 +166,7 @@
                     @endphp
                     <div class="post">
                       <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="user image">
+                        <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="avatar">
                         <span class="username">
                           <p>{{ $comment['users']['name'] }}</p>
                         </span>

@@ -15,8 +15,8 @@ class CreateUserReadNewsTable extends Migration
     {
         Schema::create('user_read_news', function (Blueprint $table) {
             $table->increments('user_read_new_id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('new_id');
+            $table->unsignedInteger('new_id')->nullable();
+            $table->unsignedInteger('item_id')->nullable();
             $table->tinyInteger('is_read');
         });
     }

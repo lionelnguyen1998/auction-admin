@@ -23,6 +23,8 @@ class Auction extends Model
         'title',
         'start_date',
         'end_date',
+        'status',
+        'reason',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -34,9 +36,9 @@ class Auction extends Model
         'deleted_at',
     ];
 
-    public function auctionStatus()
+    public function users()
     {
-        return $this->hasOne(AuctionStatus::class, 'auction_id', 'auction_id');
+        return $this->belongsTo(User::class, 'selling_user_id', 'user_id');
     }
 
     public function category()
@@ -61,34 +63,24 @@ class Auction extends Model
 
     public function updateStatus($auctionId)
     {
-        $auction = DB::table('auctions')
-            ->join('auctions_status', 'auctions_status.auction_id', '=', 'auctions.auction_id')
-            ->whereIn('auctions.auction_id', $auctionId)
-            ->select('auctions.auction_id', 'auctions_status.status', 'auctions.start_date', 'auctions_status.auction_status_id', 'auctions.end_date')
-            ->get()
-            ->toArray();
+        $auctions = Auction::findOrFail($auctionId);
         
-        foreach ($auction as $key => $value) {
-            $auctionStatus = AuctionStatus::findOrFail($value->auction_status_id);
-            if ($auctionStatus && ($value->status != 4)) {
+        foreach ($auctions as $key => $value) {
+            $auction = Auction::findOrFail($value->auction_id);
+            if ($auction && ($value->status != 4) && ($value->status != 6)) {
                 if ($value->start_date <= now() && $value->end_date > now()) {
-                    $auctionStatus->status = 1;
-                    $auctionStatus->update();
+                    $auction->status = 1;
+                    $auction->update();
                 } elseif ($value->end_date <= now()) {
-                    $auctionStatus->status = 3;
-                    $auctionStatus->update();
+                    $auction->status = 3;
+                    $auction->update();
                 } else {
-                    $auctionStatus->status = 2;
-                    $auctionStatus->update();
+                    $auction->status = 2;
+                    $auction->update();
                 }
             }
         }
         
         return true;
-    }
-
-    public function auctionDeny()
-    {
-        return $this->hasOne(AuctionDeny::class, 'auction_id', 'auction_id');
     }
 }

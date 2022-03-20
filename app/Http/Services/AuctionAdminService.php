@@ -9,7 +9,6 @@ use App\Models\Item;
 use App\Models\Category;
 use App\Models\CategoryValue;
 use App\Models\ItemValue;
-use App\Models\AuctionStatus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,25 +16,16 @@ class AuctionAdminService implements AuctionAdminServiceInterface
 {
     public function getListAuctions()
     {
-        // $auctionId = Auction::get()
-        //     ->pluck('auction_id')
-        //     ->toArray();
-        // $updateStatus = Auction::updateStatus($auctionId);
-        // //dd($status);
-        // //dd($status);
-
-        $auctions = Auction::with('category', 'auctionStatus')
-            //->whereIn('auction_id', $auctionId)
+        $auctions = Auction::with('category', 'users')
             ->get()
             ->toArray();
-            //dd($auctions);
 
         return $auctions;
     }
 
     public function getDetailAuctions($auctionId)
     {
-        $auctions = Auction::with('category', 'auctionStatus', 'items', 'comments')
+        $auctions = Auction::with('category', 'items', 'comments')
             ->where('auction_id', $auctionId)
             ->get()
             ->toArray();
@@ -43,6 +33,15 @@ class AuctionAdminService implements AuctionAdminServiceInterface
     }
 
     public function getSellingUser($auctionId)
+    {
+        $userSelling = Auction::with('users')
+            ->where('auction_id', $auctionId)
+            ->get()
+            ->toArray();
+        return $userSelling;
+    }
+
+    public function getSellingUserItem($auctionId)
     {
         $userSelling = Item::with('users')
             ->where('auction_id', $auctionId)
@@ -86,6 +85,7 @@ class AuctionAdminService implements AuctionAdminServiceInterface
             ->where('category_id', $categoryId)
             ->get()
             ->pluck('item_id');    
+     
         $itemInfor = ItemValue::where('item_id', $itemId)
             ->get()
             ->pluck('value', 'category_value_id')
@@ -106,28 +106,16 @@ class AuctionAdminService implements AuctionAdminServiceInterface
         return $categoryValue;
     }
 
-    //list auctions chưa được duyệt
-    public function getListAuctionsWait()
-    {
-        $auctions = DB::table('auctions')
-            ->join('auctions_status', 'auctions.auction_id', '=', 'auctions_status.auction_id')
-            ->whereIn('auctions_status.status', [4, 5])
-            ->whereNull('auctions.deleted_at')
-            ->get()
-            ->toArray();
-        return $auctions;
-    }
-
     //general auction
     public function getGeneralInfo()
     {
         $countAuction = Auction::count('auction_id');
 
-        $status1 = AuctionStatus::where('status', 1)
+        $status1 = Auction::where('status', 1)
             ->count('auction_id');
-        $status2 = AuctionStatus::where('status', 2)
+        $status2 = Auction::where('status', 2)
             ->count('auction_id');
-        $status4 = AuctionStatus::where('status', 4)
+        $status4 = Auction::where('status', 4)
             ->count('auction_id');
 
         $auctionInfo = [
@@ -138,17 +126,5 @@ class AuctionAdminService implements AuctionAdminServiceInterface
         ];
 
         return $auctionInfo;
-    }
-
-    public function deny()
-    {
-        $userId = auth()->user()->user_id;
-        $auction = Auction::withTrashed()
-            ->with('auctionDeny')
-            ->where('selling_user_id', $userId)
-            ->get()
-            ->toArray();
-        
-        return $auction;
     }
 }

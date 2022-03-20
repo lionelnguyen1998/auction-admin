@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('view/{auctionId}', [AuctionController::class, 'show'])->name('viewAuction');
         Route::get('wait', [AuctionController::class, 'list'])->name('listAuctionsIsWait');
         Route::get('viewAuctionWait/{auctionId}', [AuctionController::class, 'viewAuctionWait'])->name('viewAuctionIsWait');
-        Route::get('accept/{auctionStatusId}', [AuctionController::class, 'accept'])->name('acceptAuction');
+        Route::get('accept/{auctionId}', [AuctionController::class, 'accept'])->name('acceptAuction');
         Route::get('destroy/{auctionId}', [AuctionController::class, 'destroy'])->name('deleteAuction');
         Route::post('reject', [AuctionController::class, 'reject'])->name('auctionreject');
     });

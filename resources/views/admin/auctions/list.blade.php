@@ -31,6 +31,7 @@
                   <thead>
                   <tr>
                     <th>オークション　ID</th>
+                    <th>作る人</th>
                     <th>カテゴリー</th>
                     <th>テーマ</th>
                     <th>始まる時間</th>
@@ -43,15 +44,16 @@
                     @foreach ($auctions as $key => $auction)
                     @php
                     $status = config('const.status');
-                    $index = $auction['auction_status']['status'];
+                    $index = $auction['status'];
                     @endphp
                       @if ($index != 4 && $index != 5)
                         <tr>
-                            <td>{{ $auction["auction_id"] }}</td>
-                            <td>{{ $auction["category"]["name"] }}</td>
-                            <td>{{ $auction["title"]}}</td>
-                            <td>{{ $auction["start_date"] }}</td>
-                            <td>{{ $auction["end_date"] }}</td>
+                            <td>{{ $auction['auction_id'] }}</td>
+                            <td>{{ $auction['users']['name'] }}</td>
+                            <td>{{ $auction['category']['name'] }}</td>
+                            <td>{{ $auction['title']}}</td>
+                            <td>{{ $auction['start_date'] }}</td>
+                            <td>{{ $auction['end_date'] }}</td>
                             
                               @if ($index == 1)
                               <td>
@@ -61,17 +63,21 @@
                               <td>
                                 <p class="btn btn-warning">{{ $status[$index] }}</p>
                               </td>
-                              @else
+                              @elseif ($index == 3)
                               <td>
                                 <p class="btn btn-danger">{{ $status[$index] }}</p>
+                              </td>
+                              @else
+                              <td>
+                                <p class="btn btn-info">{{ $status[$index] }}</p>
                               </td>
                               @endif
                            
                             <td>
-                                <a class="btn btn-primary btn-sm" href="{{ route('viewAuction', ['auctionId' => $auction["auction_id"]]) }}">
+                                <a class="btn btn-primary btn-sm" href="{{ route('viewAuction', ['auctionId' => $auction['auction_id']]) }}">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                @if ($index == 3)
+                                @if ($index == 3 || $index == 6)
                                 <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-{{ $key }}">
                                     <i class="fas fa-trash"></i>
                                 </a>
@@ -89,7 +95,7 @@
                                   <span aria-hidden="true"></span>&times;</span>
                                   </button>
                               </div>
-                              <form action="{{ route('deleteAuction', ['auctionId' => $auction["auction_id"]]) }}" method="GET">
+                              <form action="{{ route('deleteAuction', ['auctionId' => $auction['auction_id']]) }}" method="GET">
                                   <!-- /.card-body -->
                                   <div class="modal-footer justify-content-between">
                                   <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
