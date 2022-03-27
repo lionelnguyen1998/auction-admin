@@ -79,6 +79,12 @@ class Auction extends Model
                     $auction->update();
                 }
             }
+
+            if (($value->status == 4) && ($value->end_date < now())) {
+                $auction->status = 3;
+                $auction->reason = 'Da qua thoi gian';
+                $auction->update();
+            }
         }
         
         return true;

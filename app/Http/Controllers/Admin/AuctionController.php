@@ -50,6 +50,8 @@ class AuctionController extends Controller
             ->get()
             ->pluck('item_id');
 
+        $buy = $this->auctionService->getBuyInfo($auctionId);
+
         return view('admin.auctions.view', [
             'title' => 'オークション詳細',
             'auction' => $this->auctionService->getDetailAuctions($auctionId),
@@ -59,7 +61,8 @@ class AuctionController extends Controller
             'comments' => $this->auctionService->getComments($auctionId),
             'infors' => $this->auctionService->getInfor($auctionId),
             'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId),
-            'images' => $this->itemService->getImageLists($itemId)
+            'images' => $this->itemService->getImageLists($itemId),
+            'buyInfo' => $buy ?? null,
         ]);
     }
 
@@ -84,7 +87,7 @@ class AuctionController extends Controller
             return view('admin.auctions.viewAuctionWait', [
                 'title' => 'オークション詳細',
                 'auction' => $this->auctionService->getDetailAuctions($auctionId),
-                'userSelling' => $this->auctionService->getSellingUser($auctionId),
+                'userSelling' => $this->auctionService->getSellingUserItem($auctionId),
                 'infors' => $this->auctionService->getInfor($auctionId),
                 'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId),
                 'images' => $this->itemService->getImageLists($itemId)
@@ -93,7 +96,7 @@ class AuctionController extends Controller
             return view('admin.auctions.viewAuctionWait', [
                 'title' => 'オークション詳細',
                 'auction' => $this->auctionService->getDetailAuctions($auctionId),
-                'userSelling' => $this->auctionService->getSellingUser($auctionId),
+                'userSelling' => $this->auctionService->getSellingUserItem($auctionId),
             ]);
         }
     }

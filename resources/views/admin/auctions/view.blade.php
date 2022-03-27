@@ -75,6 +75,9 @@
                   <li class="nav-item"><a class="nav-link active" href="#item" data-toggle="tab">アイテムの情報</a></li>
                   <li class="nav-item"><a class="nav-link" href="#bid" data-toggle="tab">値段</a></li>
                   <li class="nav-item"><a class="nav-link" href="#comment" data-toggle="tab">コメントする</a></li>
+                  @if ($index == 6)
+                    <li class="nav-item"><a class="nav-link" href="#buy" data-toggle="tab">Đấu giá thành công</a></li>
+                  @endif
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -186,6 +189,41 @@
                     @endforeach
                     <!-- /.post -->
                   </div>
+                  @if ($index == 6)
+                    <div class="tab-pane" id="buy">
+                    <div class="card-body">
+                <strong><i class="fas fa-book mr-1"></i> Education</strong>
+
+                <p class="text-muted">
+                  B.S. in Computer Science from the University of Tennessee at Knoxville
+                </p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+
+                <p class="text-muted">Malibu, California</p>
+
+                <hr>
+
+                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+
+                <p class="text-muted">
+                  <span class="tag tag-danger">UI Design</span>
+                  <span class="tag tag-success">Coding</span>
+                  <span class="tag tag-info">Javascript</span>
+                  <span class="tag tag-warning">PHP</span>
+                  <span class="tag tag-primary">Node.js</span>
+                </p>
+
+                <hr>
+
+                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+              </div>
+                    </div>
+                  @endif
                 </div>
                 <!-- /.tab-content -->
               </div><!-- /.card-body -->

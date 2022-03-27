@@ -97,7 +97,7 @@
                                 <span class="description">{{ date("d-m-Y H:i", strtotime($userSelling[0]['updated_at'])) }}</span>
                             </div>
                             
-                            @if (isset($infos))
+                            @if (isset($infors))
                               <div class="row mb-3">
                                   <div class="col-12 col-sm-12">
                                     <div class="col-12">

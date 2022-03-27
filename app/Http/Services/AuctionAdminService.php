@@ -6,6 +6,7 @@ use App\Models\Auction;
 use App\Models\Bid;
 use App\Models\Comment;
 use App\Models\Item;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\CategoryValue;
 use App\Models\ItemValue;
@@ -126,5 +127,54 @@ class AuctionAdminService implements AuctionAdminServiceInterface
         ];
 
         return $auctionInfo;
+    }
+
+    // thông tin của phiên đấu giá thành công
+    public function getBuyInfo($auctionId)
+    {
+        $maxPrice = $this->getMaxPrice($auctionId);
+        $item = Item::where('auction_id', $auctionId)
+            ->get()
+            ->firstOrFail();
+
+        $auctionInfo = Auction::findOrFail($auctionId)
+            ->where('auction_id', $auctionId)
+            ->select('title', 'start_date', 'end_date')
+            ->get();
+
+        $itemInfo = Item::with('userBuying')
+            ->where('auction_id', $auctionId)
+            ->where('buying_user_id', auth()->user()->user_id)
+            ->get()
+            ->firstOrFail();
+            
+        $brand = Brand::where('brand_id', $item->brand_id)
+            ->get()
+            ->pluck('name')
+            ->firstOrFail();
+
+        return [
+            'item_info' => [
+                'name' => $itemInfo->name,
+                'selling_user' => [
+                    'name' => auth()->user()->name,
+                    'email' => auth()->user()->email,
+                    'adress' => auth()->user()->address,
+                    'phone' => auth()->user()->phone
+                ],
+                'buying_user' => [
+                    'name' => $itemInfo->userBuying->name,
+                    'email' => $itemInfo->userBuying->email,
+                    'address' => $itemInfo->userBuying->email,
+                    'phone' => $itemInfo->userBuying->phone
+                ],
+                'brand' => $brand,
+                'series' => $itemInfo->series,
+                'starting_price' => $itemInfo->starting_price,
+                'max_price' => $maxPrice,
+                'selling_info' => $itemInfo->selling_info,
+            ],
+            'auction_info' => $auctionInfo
+        ];
     }
 }
