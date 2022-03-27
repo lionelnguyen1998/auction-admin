@@ -49,14 +49,16 @@
                   <li class="list-group-item">
                     @php
                         $status = config('const.status');
-                        $index = $auction[0]['auction_status']['status'];
+                        $index = $auction[0]['status'];
                     @endphp
                     @if ($index == 1)
                         <p class="btn btn-success" disabled>{{ $status[$index] }}</p>
                     @elseif ($index == 2)
                         <p class="btn btn-warning" disabled>{{ $status[$index] }}</p>
-                    @else
+                    @elseif ($index == 3)
                         <p class="btn btn-danger" disabled>{{ $status[$index] }}</p>
+                    @else
+                        <p class="btn btn-info" disabled>{{ $status[$index] }}</p>
                     @endif
                   </li>
                 </ul>
@@ -73,6 +75,9 @@
                   <li class="nav-item"><a class="nav-link active" href="#item" data-toggle="tab">アイテムの情報</a></li>
                   <li class="nav-item"><a class="nav-link" href="#bid" data-toggle="tab">値段</a></li>
                   <li class="nav-item"><a class="nav-link" href="#comment" data-toggle="tab">コメントする</a></li>
+                  @if ($index == 6)
+                    <li class="nav-item"><a class="nav-link" href="#buy" data-toggle="tab">Đấu giá thành công</a></li>
+                  @endif
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -85,9 +90,9 @@
                                 @php
                                     $avatar = $userSelling[0]["users"]["avatar"]
                                 @endphp
-                                <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="User Image">
+                                <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="avatar">
                                 <span class="username">
-                                    <p href="#">{{ $userSelling[0]["users"]["nick_name"] }}</p>
+                                    <p href="#">{{ $userSelling[0]["users"]["name"] }}</p>
                                 </span>
                                 <span class="description">{{ date("d-m-Y H:i", strtotime($userSelling[0]['updated_at'])) }}</span>
                             </div>
@@ -95,10 +100,10 @@
                             <div class="row mb-3">
                                 <div class="col-12 col-sm-12">
                                   <div class="col-12">
-                                      <img @if(is_null($images)) src="{{ $images[0] }}" @else src="adafs" @endif class="product-image" alt="Product Image">
+                                      <img @if(isset($images[0])) src="{{ $images[0] }}" @else src="adafs" @endif class="product-image" alt="Product Image">
                                   </div>
                                   <div class="col-12 product-image-thumbs">
-                                    @if (is_null($images))
+                                    @if (isset($images))
                                       @foreach($images as $key => $image)
                                         <div class="product-image-thumb"><img src="{{ $image }}" alt="Product Image"></div>
                                       @endforeach
@@ -135,9 +140,9 @@
                     @endphp
                     <div class="post">
                       <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="user image">
+                        <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="avatar">
                         <span class="username">
-                          <p>{{ $bid['users']['nick_name'] }}</p>
+                          <p>{{ $bid['users']['name'] }}</p>
                         </span>
                         <span class="description">{{ date("d-m-Y H:i", strtotime($bid['updated_at'])) }}</span>
                       </div>
@@ -164,9 +169,9 @@
                     @endphp
                     <div class="post">
                       <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="user image">
+                        <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="avatar">
                         <span class="username">
-                          <p>{{ $comment['users']['nick_name'] }}</p>
+                          <p>{{ $comment['users']['name'] }}</p>
                         </span>
                         <span class="description">{{ date("d-m-Y H:i", strtotime($comment['updated_at'])) }}</span>
                       </div>
@@ -184,6 +189,41 @@
                     @endforeach
                     <!-- /.post -->
                   </div>
+                  @if ($index == 6)
+                    <div class="tab-pane" id="buy">
+                    <div class="card-body">
+                <strong><i class="fas fa-book mr-1"></i> Education</strong>
+
+                <p class="text-muted">
+                  B.S. in Computer Science from the University of Tennessee at Knoxville
+                </p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+
+                <p class="text-muted">Malibu, California</p>
+
+                <hr>
+
+                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+
+                <p class="text-muted">
+                  <span class="tag tag-danger">UI Design</span>
+                  <span class="tag tag-success">Coding</span>
+                  <span class="tag tag-info">Javascript</span>
+                  <span class="tag tag-warning">PHP</span>
+                  <span class="tag tag-primary">Node.js</span>
+                </p>
+
+                <hr>
+
+                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+              </div>
+                    </div>
+                  @endif
                 </div>
                 <!-- /.tab-content -->
               </div><!-- /.card-body -->

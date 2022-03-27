@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Services\UserAdminService;
 use App\Models\User;
+use App\Models\Auction;
+use App\Models\Bid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -63,7 +65,6 @@ class UserController extends Controller
 
         User::create([
             'name' => $request['name'],
-            'nick_name' => $request['nick_name'],
             'email' => $request['email'],
             'password' => $password,
             'phone' => $request['phone'],
@@ -99,7 +100,6 @@ class UserController extends Controller
         $user = User::findOrFail($userId);
         if ($user) {
             $user->name = $request['name'];
-            $user->nick_name = $request['nick_name'];
             $user->email = $request['email'];
             $user->password = Hash::make($request['password']);
             $user->phone = $request['phone'];
@@ -128,7 +128,19 @@ class UserController extends Controller
      */
     public function destroy($userId)
     {
-        $user = User::where('user_id', $userId)->delete();
-        return redirect()->route('listUser')->with('message','削除しました！');
+        $userSelling = Auction::where('selling_user_id',  $userId)
+            ->get()
+            ->toArray();
+
+        $userBid = Bid::where('user_id', $userId)
+            ->get()
+            ->toArray();
+
+        if ($userSelling || $userBid) {
+            return redirect()->back()->with('warning', 'アカウントがアクテイブしています');
+        } else {
+            $user = User::where('user_id', $userId)->delete();
+            return redirect()->route('listUser')->with('message','削除しました！');
+        }
     }
 }

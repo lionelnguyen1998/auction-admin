@@ -35,8 +35,14 @@ class SliderController extends Controller
     {
         $rules = [
             'thumb'=>'required',
-            'type' => 'unique:sliders,type',
         ];
+
+        if (isset($request["slider_id"])) {
+            $sliderId = $request["slider_id"];
+            $rules['type'] = "unique:sliders,type,$sliderId,slider_id";
+        } else {
+            $rules['type'] = "unique:sliders,type";
+        }
 
         $messages = [
             'required' => $this->messageRequired,

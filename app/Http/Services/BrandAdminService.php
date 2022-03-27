@@ -25,7 +25,6 @@ class BrandAdminService implements BrandAdminServiceInterface
     public function brandValidation($request) 
     {
         $rules = [
-            'name_en' => "nullable|max:255",
             'brand_info' => "nullable"
         ];
 

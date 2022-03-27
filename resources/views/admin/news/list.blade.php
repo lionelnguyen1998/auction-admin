@@ -38,7 +38,6 @@
                     <th>ニュースID</th>
                     <th>ユーザー</th>
                     <th>テーマ</th>
-                    <th>テーマ（英語）</th>
                     <th>内容</th>
                     <th>発行日</th>
                     <th>&nbsp;</th>
@@ -50,7 +49,6 @@
                             <td>{{ $new["new_id"] }}</td>
                             <td>{{ $new["users"]["name"] }}</td>
                             <td>{{ $new["title"] }}</td>
-                            <td>{{ $new["title_en"] ?? '--' }}</td>
                             <td>{{ substr(strip_tags($new['content']), 0, 40) . '...' }}</td>
                             <td>{{ date("d-m-Y H:i", strtotime($new["updated_at"]))}}</td>
                             <td>

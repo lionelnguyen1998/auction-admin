@@ -31,9 +31,9 @@
                   <thead>
                   <tr>
                     <th>オークションID</th>
+                    <th>作る人</th>
                     <th>カテゴリー</th>
                     <th>テーマ</th>
-                    <th>テーマ（英語）</th>
                     <th>始まる時間</th>
                     <th>終わる時間</th>
                     <th>スターテス</th>
@@ -44,24 +44,26 @@
                     @foreach ($auctions as $key => $auction)
                     @php
                     $status = config('const.status');
-                    $index = $auction->status;
+                    $index = $auction['status'];
                     @endphp
+                      @if ($index == 4)
                         <tr>
-                            <td>{{ $auction->auction_id }}</td>
-                            <td>{{ $auction->category_id }}</td>
-                            <td>{{ $auction->title }}</td>
-                            <td>{{ $auction->title_en }}</td>
-                            <td>{{ $auction->start_date }}</td>
-                            <td>{{ $auction->end_date }}</td>
+                            <td>{{ $auction['auction_id'] }}</td>
+                            <td>{{ $auction['users']['name'] }}</td>
+                            <td>{{ $auction['category']['name'] }}</td>
+                            <td>{{ $auction['title'] }}</td>
+                            <td>{{ $auction['start_date'] }}</td>
+                            <td>{{ $auction['end_date'] }}</td>
                             <td>
                               <p class="btn btn-info">{{ $status[$index] }}</p>
                             </td>
                             <td>
-                                <a class="btn btn-primary btn-sm" href="{{ route('viewAuctionIsWait', ['auctionId' => $auction->auction_id]) }}">
+                                <a class="btn btn-primary btn-sm" href="{{ route('viewAuctionIsWait', ['auctionId' => $auction['auction_id']]) }}">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </td>
                         </tr>
+                      @endif
                     @endforeach
                   </tfoot>
                 </table>

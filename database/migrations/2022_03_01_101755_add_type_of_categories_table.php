@@ -14,7 +14,7 @@ class AddTypeOfCategoriesTable extends Migration
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->string('type')->default(5)->after('name_en');
+            $table->string('type')->default(5)->after('name');
         });
     }
 

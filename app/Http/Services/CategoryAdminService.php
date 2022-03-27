@@ -22,7 +22,6 @@ class CategoryAdminService implements CategoryAdminServiceInterface
     public function categoryValidation($request) 
     {
         $rules = [
-            'name_en' => "nullable|max:255",
             'icon' => "nullable|max:255",
             'count_number' => 'integer|min:1|max:10'
         ];

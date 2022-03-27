@@ -53,13 +53,6 @@
                     <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('name')}}</label><br/>
                     @endif
                   </div>
-                  <div class="form-group">
-                    <label for="name_en">名前（英語）</label>
-                    <input type="text" class="form-control" id="name_en" name="name_en" placeholder="英語で名前を入力してください" value="{{ old('name_en') ?? $category['name_en'] }}">
-                    @if($errors->has('name_en'))
-                    <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('name_en')}}</label><br/>
-                    @endif
-                  </div>
 
                   <div class="form-group">
                     @php

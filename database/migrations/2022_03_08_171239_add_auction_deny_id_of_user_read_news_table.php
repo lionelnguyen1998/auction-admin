@@ -14,7 +14,7 @@ class AddAuctionDenyIdOfUserReadNewsTable extends Migration
     public function up()
     {
         Schema::table('user_read_news', function (Blueprint $table) {
-            $table->unsignedInteger('auction_deny_id')->nullable()->after('new_id');
+            $table->unsignedInteger('auction_id')->nullable()->after('new_id');
         });
     }
 
@@ -26,7 +26,7 @@ class AddAuctionDenyIdOfUserReadNewsTable extends Migration
     public function down()
     {
         Schema::table('user_read_news', function (Blueprint $table) {
-            $table->dropColumn('auction_deny_id');
+            $table->dropColumn('auction_id');
         });
     }
 }

@@ -35,7 +35,6 @@ class NewController extends Controller
         $content = $request->content;
         $userId = auth()->user()->user_id;
         $title = $request->title;
-        $titleEn = $request->title_en;
 
         $validated = $this->newService->newValidation($request->all());
 
@@ -49,7 +48,6 @@ class NewController extends Controller
             'user_id' => $userId,
             'content' => $content,
             'title' => $title,
-            'title_en' => $titleEn ?? null
         ]);
 
         return redirect()->route('listNews')->with('message','追加しました！');
@@ -73,7 +71,6 @@ class NewController extends Controller
     {
         $userId = $request->user_id;
         $title = $request->title;
-        $titleEn = $request->title_en;
         $content = $request->content;
 
         $validated = $this->newService->newValidation($request->all());
@@ -89,7 +86,6 @@ class NewController extends Controller
         if ($newUpdate) {
             $newUpdate->user_id = $userId;
             $newUpdate->title = $title;
-            $newUpdate->title_en = $titleEn ?? null;
             $newUpdate->content = $content;
             $newUpdate->update();
         }

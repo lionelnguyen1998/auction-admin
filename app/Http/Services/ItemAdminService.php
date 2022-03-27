@@ -17,7 +17,7 @@ class ItemAdminService implements ItemAdminServiceInterface
 
     public function getListItems($categoryId) 
     {
-        $listItems = Item::with('series', 'brands')
+        $listItems = Item::with('brands', 'auctions')
             ->where('category_id', $categoryId)
             ->get()
             ->toArray();
@@ -27,7 +27,7 @@ class ItemAdminService implements ItemAdminServiceInterface
 
     public function getAllItems()
     {
-        return Item::with('brands', 'categories')
+        return Item::with('users', 'brands', 'categories', 'auctions')
             ->get()
             ->toArray();
     }

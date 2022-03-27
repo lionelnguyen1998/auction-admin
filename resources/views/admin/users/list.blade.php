@@ -38,7 +38,6 @@
                     <th style="width:50px">ユーザーID</th>
                     <th>役割</th>
                     <th>名前</th>
-                    <th>ニックネーム</th>
                     <th>メール</th>
                     <th>住所</th>
                     <th>電話</th>
@@ -55,7 +54,6 @@
                             <td>{{ $user->user_id }}</td>
                             <td>{{ $role[$index] }}</td>
                             <td>{{ $user->name }}</td>
-                            <td>{{ $user->nick_name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->address ?? '--' }}</td>
                             <td>{{ $user->phone }}</td>

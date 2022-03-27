@@ -22,9 +22,8 @@ class Item extends Model
         'brand_id',
         'series',
         'name',
-        'name_en',
         'starting_price',
-        'comment'
+        'selling_info',
     ];
 
     protected $dates = [

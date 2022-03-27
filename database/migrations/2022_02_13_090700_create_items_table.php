@@ -22,8 +22,6 @@ class CreateItemsTable extends Migration
             $table->unsignedInteger('brand_id')->nullable();
             $table->string('series', 10)->nullable();
             $table->string('name', 255);
-            $table->string('name_en', 255)->nullable();
-            $table->text('comment')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

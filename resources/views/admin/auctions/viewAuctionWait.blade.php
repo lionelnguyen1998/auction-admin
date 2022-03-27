@@ -41,11 +41,16 @@
                     <b>終わる時間</b> <p class="float-right">{{ $auction[0]["end_date"] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>始値</b> <p class="float-right">{{ $auction[0]["items"][0]["starting_price"] }}</p>
+                    <b>始値</b> 
+                    @if (isset($auction[0]["items"][0]))
+                      <p class="float-right">{{ $auction[0]["items"][0]["starting_price"] }}</p>
+                    @else
+                      <p class="float-right"></p>
+                    @endif
                   </li>
                   @php
                     $status = config('const.status');
-                    $index = $auction[0]['auction_status']['status'];
+                    $index = $auction[0]['status'];
                   @endphp
                   @if ($index == 4)
                     <li class="list-group-item">
@@ -87,42 +92,48 @@
                                 @endphp
                                 <img class="img-circle img-bordered-sm" src="{{ $avatar }}" alt="User Image">
                                 <span class="username">
-                                    <p href="#">{{ $userSelling[0]["users"]["nick_name"] }}</p>
+                                    <p href="#">{{ $userSelling[0]["users"]["name"] }}</p>
                                 </span>
                                 <span class="description">{{ date("d-m-Y H:i", strtotime($userSelling[0]['updated_at'])) }}</span>
                             </div>
-                            <!-- /.user-block -->
-                            <div class="row mb-3">
-                                <div class="col-12 col-sm-12">
-                                  <div class="col-12">
-                                      <img @if(isset($images)) src="{{ $images[0] }}" @else src="" @endif class="product-image" alt="Product Image" style="max-height: 400px">
+                            
+                            @if (isset($infors))
+                              <div class="row mb-3">
+                                  <div class="col-12 col-sm-12">
+                                    <div class="col-12">
+                                        <img @if(isset($images[0])) src="{{ $images[0] }}" @else src="" @endif class="product-image" alt="Product Image" style="max-height: 400px">
+                                    </div>
+                                    <div class="col-12 product-image-thumbs">
+                                      @if (isset($images))
+                                        @foreach($images as $key => $image)
+                                          <div class="product-image-thumb"><img src="{{ $image }}" alt="Product Image"></div>
+                                        @endforeach
+                                      @endif
+                                    </div>
                                   </div>
-                                  <div class="col-12 product-image-thumbs">
-                                    @if (isset($images))
-                                      @foreach($images as $key => $image)
-                                        <div class="product-image-thumb"><img src="{{ $image }}" alt="Product Image"></div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-12 col-sm-12">
+                                  <h3>アイテムの情報</h3>
+                                  <p>{{ $userSelling[0]["description"] }}</p>
+                                  <hr>
+                                  <h4>技術の情報</h4>
+                                  <div class="col-12 col-sm-12">
+                                    <ul class="list-group list-group-unbordered mb-3 col-sm-12">
+                                      @foreach ($infors as $key => $infor)
+                                        <li class="list-group-item">
+                                          <b>{{ $categoryValueName[$key] }}</b> <p class="float-right">{{ $infor }}</p>
+                                        </li>
                                       @endforeach
-                                    @endif
+                                    </ul>
                                   </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-12">
-                                <h3>アイテムの情報</h3>
-                                <p>{{ $userSelling[0]["description"] }}</p>
-                                <hr>
-                                <h4>技術の情報</h4>
-                                <div class="col-12 col-sm-12">
-                                  <ul class="list-group list-group-unbordered mb-3 col-sm-12">
-                                    @foreach ($infors as $key => $infor)
-                                      <li class="list-group-item">
-                                        <b>{{ $categoryValueName[$key] }}</b> <p class="float-right">{{ $infor }}</p>
-                                      </li>
-                                    @endforeach
-                                  </ul>
-                                </div>
-                                </div>
-                             </div>
+                                  </div>
+                              </div>
+                            @else 
+                              <div class="row mb-3">
+                                  <p>アイテムの情報がありません</p>
+                              </div>
+                            @endif
                         </div>
                     <!-- /.post -->
                     </div>
@@ -148,7 +159,6 @@
             </div>
             <form action="{{ route('auctionreject') }}" method="POST">
               <input type="hidden" name="auction_id" value="{{ $auction[0]["auction_id"] }}">
-              <input type="hidden" name="auction_status_id" value="{{ $auction[0]["auction_status"]["auction_status_id"] }}">
               <div class="card-body">
                 <div class="modal-body">
                   <textarea class="form-control" aria-label="With textarea" name="reason" id="reason"></textarea>
@@ -180,7 +190,7 @@
             <form>
               <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                <a href="{{ route('acceptAuction', ['auctionStatusId' => $auction[0]["auction_status"]["auction_status_id"]]) }}" class="btn btn-primary">確認</a>
+                <a href="{{ route('acceptAuction', ['auctionId' => $auction[0]["auction_id"]]) }}" class="btn btn-primary">確認</a>
               </div>
               @csrf
             </form>

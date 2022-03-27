@@ -17,10 +17,10 @@ class CreateAuctionsTable extends Migration
             $table->increments('auction_id');
             $table->unsignedInteger('category_id');
             $table->string('title', 255);
-            $table->string('title_en', 255)->nullable();
-            $table->text('description', 255)->nullable();
             $table->dateTime('start_date');
             $table->dateTime('end_date');
+            $table->tinyInteger('status');
+            $table->text('reason')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

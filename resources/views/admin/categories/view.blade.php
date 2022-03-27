@@ -69,27 +69,21 @@
                                 <tr>
                                     <th style="width:50px">アイテムID</th>
                                     <th>オークションID</th>
-                                    <th>販売者ID</th>
-                                    <th>購入者ID</th>
                                     <th>ブランド</th>
                                     <th>シリーズ</th>
                                     <th>名前</th>
-                                    <th>名前（英語）</th>
                                     <th>始値</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($items as $key => $item)
                                         <tr>
-                                            <td>{{ $item["item_id"] }}</td>
-                                            <td>{{ $item["auction_id"] }}</td>
-                                            <td>{{ $item["selling_user_id"] }}</td>
-                                            <td>{{ $item["buying_user_id"] ?? '--' }}</td>
-                                            <td>{{ $item["brands"]["name"] ?? '--' }}</td>
-                                            <td>{{ $item["series"]["name"] ?? '--' }}</td>
-                                            <td>{{ $item["name"] }}</td>
-                                            <td>{{ $item["name_en"] ?? '--' }}</td>
-                                            <td>{{ $item["starting_price"] ?? '--' }}</td>
+                                            <td>{{ $item['item_id'] }}</td>
+                                            <td>{{ $item['auctions']['title'] }}</td>
+                                            <td>{{ $item['brands']['name'] ?? '--' }}</td>
+                                            <td>{{ $item['series'] ?? '--' }}</td>
+                                            <td>{{ $item['name'] }}</td>
+                                            <td>{{ $item['starting_price'] ?? '--' }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

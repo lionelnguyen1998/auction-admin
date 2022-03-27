@@ -46,13 +46,6 @@
                                         <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('name')}}</label><br/>
                                     @endif
                                 </div>
-                                <div class="col">
-                                    <label for="nick_name"><b>ニックネーム  </b><i class="fa fa-asterisk" aria-hidden="true" style="color: red"></i></label>
-                                    <input type="text" class="form-control size-119" name="nick_name" @if (isset($user)) value="{{$user["nick_name"]}}" @else value="{{ old('nick_name') }}" @endif placeholder="ニックネームを入力してください" />
-                                    @if($errors->has('nick_name'))
-                                        <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('nick_name')}}</label><br/>
-                                    @endif
-                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -66,7 +59,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="password"><b>パスワード  </b><i class="fa fa-asterisk" aria-hidden="true" style="color: red"></i></label>
-                                    <input type="password" class="form-control size-119" name="password" @if (isset($user)) value="{{ substr(strip_tags($user['password']), 0, 8) }}" @endif placeholder="パスワードを入力してください"/>
+                                    <input type="password" class="form-control size-119" name="password" placeholder="パスワードを入力してください"/>
                                     @if($errors->has('password'))
                                         <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('password')}}</label><br/>
                                     @endif

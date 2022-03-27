@@ -37,7 +37,6 @@
                   <tr>
                     <th>ブランドID</th>
                     <th>名前</th>
-                    <th>名前（英語）</th>
                     <th style="width:70px">&nbsp;</th>
                   </tr>
                   </thead>
@@ -46,7 +45,6 @@
                         <tr>
                             <td>{{ $brand["brand_id"] }}</td>
                             <td>{{ $brand["name"] }}</td>
-                            <td>{{ $brand["name_en"] ?? '--' }}</td>
                             <td>
                                 <a href="{{ route('editBrand', ['brandId' => $brand["brand_id"]]) }}" class="btn btn-info btn-sm">
                                     <i class="fas fa-edit"></i>

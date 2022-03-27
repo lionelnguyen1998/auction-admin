@@ -32,29 +32,23 @@
                     <th style="width:50px">アイテムID</th>
                     <th>カテゴリー</th>
                     <th>オークション</th>
-                    <th>販売者</th>
-                    <th>購入者</th>
                     <th>ブランド</th>
                     <th>シリーズ</th>
                     <th>名前</th>
-                    <th>名前（英語）</th>
                     <th>&nbsp;</th>
                   </tr>
                   </thead>
                   <tbody>
                     @foreach ($items as $key => $item)
                         <tr>
-                            <td>{{ $item["item_id"] }}</td>
-                            <td>{{ $item["categories"]["name"] }}</td>
-                            <td>{{ $item["auction_id"] }}</td>
-                            <td>{{ $item["selling_user_id"] ?? '--' }}</td>
-                            <td>{{ $item["buying_user_id"] ?? '--' }}</td>
-                            <td>{{ $item["brands"]["name"] ?? '--' }}</td>
-                            <td>{{ $item["series"] ?? '--' }}</td>
-                            <td>{{ $item["name"] }}</td>
-                            <td>{{ $item["name_en"] ?? '--' }}</td>
+                            <td>{{ $item['item_id'] }}</td>
+                            <td>{{ $item['categories']['name'] }}</td>
+                            <td>{{ $item['auctions']['title'] }}</td>
+                            <td>{{ $item['brands']['name'] ?? '--' }}</td>
+                            <td>{{ $item['series'] ?? '--' }}</td>
+                            <td>{{ $item['name'] }}</td>
                             <td>
-                                <a class="btn btn-primary btn-sm" href="{{ route('viewItem', ['itemId' => $item["item_id"]]) }}">
+                                <a class="btn btn-primary btn-sm" href="{{ route('viewItem', ['itemId' => $item['item_id']]) }}">
                                     <i class="fas fa-eye"></i>
                                 </a>
                             </td>
