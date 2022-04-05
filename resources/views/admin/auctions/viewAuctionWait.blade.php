@@ -94,7 +94,7 @@
                                 <span class="username">
                                     <p href="#">{{ $userSelling[0]["users"]["name"] }}</p>
                                 </span>
-                                <span class="description">{{ date("d-m-Y H:i", strtotime($userSelling[0]['updated_at'])) }}</span>
+                                <span class="description">{{ date("d-m-Y H:i", strtotime( $auction[0]['updated_at'] )) }}</span>
                             </div>
                             
                             @if (isset($infors))
@@ -115,7 +115,10 @@
                               <div class="row">
                                   <div class="col-12 col-sm-12">
                                   <h3>アイテムの情報</h3>
-                                  <p>{{ $userSelling[0]["description"] }}</p>
+                                  <p>Tên sản phẩm: {{ $item[0]["name"] }}</p>
+                                  <p>Thương hiệu: {{ $item[0]["brands"]["name"] }}</p>
+                                  <p>Số series: {{ $item[0]["series"] ?? '--' }}</p>
+                                  <p>Thông tin khác: {{ $item[0]["description"] }}</p>
                                   <hr>
                                   <h4>技術の情報</h4>
                                   <div class="col-12 col-sm-12">
