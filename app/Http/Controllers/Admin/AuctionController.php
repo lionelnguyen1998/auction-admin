@@ -50,8 +50,10 @@ class AuctionController extends Controller
             ->get()
             ->pluck('item_id');
 
-        $buy = $this->auctionService->getBuyInfo($auctionId);
-
+        $status = Auction::findOrFail($auctionId)->status;
+        if ($status == 6) {
+            $buy = $this->auctionService->getBuyInfo($auctionId);
+        }
         return view('admin.auctions.view', [
             'title' => 'オークション詳細',
             'auction' => $this->auctionService->getDetailAuctions($auctionId),
@@ -60,6 +62,7 @@ class AuctionController extends Controller
             'userSelling' => $this->auctionService->getSellingUserItem($auctionId),
             'comments' => $this->auctionService->getComments($auctionId),
             'infors' => $this->auctionService->getInfor($auctionId),
+            'item' => $this->itemService->getItem($itemId),
             'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId),
             'images' => $this->itemService->getImageLists($itemId),
             'buyInfo' => $buy ?? null,
@@ -87,8 +90,9 @@ class AuctionController extends Controller
             return view('admin.auctions.viewAuctionWait', [
                 'title' => 'オークション詳細',
                 'auction' => $this->auctionService->getDetailAuctions($auctionId),
-                'userSelling' => $this->auctionService->getSellingUserItem($auctionId),
+                'userSelling' => $this->auctionService->getSellingUser($auctionId),
                 'infors' => $this->auctionService->getInfor($auctionId),
+                'item' => $this->itemService->getItem($itemId),
                 'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId),
                 'images' => $this->itemService->getImageLists($itemId)
             ]);
@@ -96,7 +100,7 @@ class AuctionController extends Controller
             return view('admin.auctions.viewAuctionWait', [
                 'title' => 'オークション詳細',
                 'auction' => $this->auctionService->getDetailAuctions($auctionId),
-                'userSelling' => $this->auctionService->getSellingUserItem($auctionId),
+                'userSelling' => $this->auctionService->getSellingUser($auctionId),
             ]);
         }
     }

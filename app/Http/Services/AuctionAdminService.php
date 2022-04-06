@@ -136,12 +136,6 @@ class AuctionAdminService implements AuctionAdminServiceInterface
         $item = Item::where('auction_id', $auctionId)
             ->get()
             ->firstOrFail();
-
-        $auctionInfo = Auction::findOrFail($auctionId)
-            ->where('auction_id', $auctionId)
-            ->select('title', 'start_date', 'end_date')
-            ->get();
-
         $itemInfo = Item::with('userBuying')
             ->where('auction_id', $auctionId)
             ->where('buying_user_id', auth()->user()->user_id)
@@ -165,7 +159,7 @@ class AuctionAdminService implements AuctionAdminServiceInterface
                 'buying_user' => [
                     'name' => $itemInfo->userBuying->name,
                     'email' => $itemInfo->userBuying->email,
-                    'address' => $itemInfo->userBuying->email,
+                    'address' => $itemInfo->userBuying->address,
                     'phone' => $itemInfo->userBuying->phone
                 ],
                 'brand' => $brand,
@@ -173,8 +167,7 @@ class AuctionAdminService implements AuctionAdminServiceInterface
                 'starting_price' => $itemInfo->starting_price,
                 'max_price' => $maxPrice,
                 'selling_info' => $itemInfo->selling_info,
-            ],
-            'auction_info' => $auctionInfo
+            ]
         ];
     }
 }

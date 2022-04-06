@@ -114,7 +114,10 @@
                             <div class="row">
                                 <div class="col-12 col-sm-12">
                                 <h3>アイテムの情報</h3>
-                                <p>{{ $userSelling[0]["description"] }}</p>
+                                <p>Tên sản phẩm: {{ $item[0]["name"] }}</p>
+                                <p>Thương hiệu: {{ $item[0]["brands"]["name"] }}</p>
+                                <p>Số series: {{ $item[0]["series"] ?? '--' }}</p>
+                                <p>Thông tin khác: {{ $item[0]["description"] }}</p>
                                 <hr>
                                 <h4>技術の情報</h4>
                                 <div class="col-12 col-sm-12">
@@ -191,37 +194,22 @@
                   </div>
                   @if ($index == 6)
                     <div class="tab-pane" id="buy">
-                    <div class="card-body">
-                <strong><i class="fas fa-book mr-1"></i> Education</strong>
+                      <div class="card-body">
+                        <strong><i class="fas fa-book mr-1"></i> Thông tin người mua</strong>
 
-                <p class="text-muted">
-                  B.S. in Computer Science from the University of Tennessee at Knoxville
-                </p>
+                        <p class="text-muted">
+                        <b>Tên : </b> {{ $buyInfo['item_info']['buying_user']['name'] }}
+                        </p>
+                        <p class="text-muted"><b>Số điện thoại : </b> {{ $buyInfo['item_info']['buying_user']['phone'] }}</p>
+                        <p class="text-muted"><b>Địa chỉ : </b> {{ $buyInfo['item_info']['buying_user']['address'] }}</p>
+                        <p class="text-muted"><b>Email : </b> {{ $buyInfo['item_info']['buying_user']['email'] }}</p>
 
-                <hr>
+                        <hr>
+                        <strong><i class="far fa-file-alt mr-1"></i> Thông tin sản phẩm</strong>
 
-                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-
-                <p class="text-muted">Malibu, California</p>
-
-                <hr>
-
-                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
-                <p class="text-muted">
-                  <span class="tag tag-danger">UI Design</span>
-                  <span class="tag tag-success">Coding</span>
-                  <span class="tag tag-info">Javascript</span>
-                  <span class="tag tag-warning">PHP</span>
-                  <span class="tag tag-primary">Node.js</span>
-                </p>
-
-                <hr>
-
-                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
-              </div>
+                        <p class="text-muted"><b>Giá bán : </b>{{ $buyInfo['item_info']["max_price"] }}</p>
+                        <p class="text-muted"><b>Thông tin khác : </b>{{ $buyInfo['item_info']["selling_info"] }}</p>
+                      </div>
                     </div>
                   @endif
                 </div>
