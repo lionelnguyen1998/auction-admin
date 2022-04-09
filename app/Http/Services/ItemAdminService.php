@@ -38,7 +38,7 @@ class ItemAdminService implements ItemAdminServiceInterface
             ->where('item_id', $itemId)
             ->get()
             ->toArray();
-        
+            
         return $item;
     }
 

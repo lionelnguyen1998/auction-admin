@@ -57,13 +57,6 @@
                       @endforeach
                       </select>
                   </div>
-                  <div class="form-group">
-                    <label for="count_number">カテゴリー価値の数</label>
-                    <input type="text" class="form-control" id="count_number" name="count_number" placeholder="カテゴリー価値の数を入力してください" value="{{ old('count_number') }}">
-                    @if($errors->has('count_number'))
-                    <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('count_number')}}</label><br/>
-                    @endif
-                  </div>
 
                 </div>
                 <!-- /.card-body -->

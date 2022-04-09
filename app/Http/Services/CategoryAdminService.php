@@ -23,7 +23,6 @@ class CategoryAdminService implements CategoryAdminServiceInterface
     {
         $rules = [
             'icon' => "nullable|max:255",
-            'count_number' => 'integer|min:1|max:10'
         ];
 
         if (isset($request["category_id"])) {

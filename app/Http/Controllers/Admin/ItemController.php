@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Services\ItemAdminService;
 use App\Http\Services\AuctionAdminService;
 use App\Models\Item;
-use App\Models\ItemValue;
 use App\Models\Image;
 use App\Models\Brand;
 use Illuminate\Http\Request;
@@ -35,8 +34,6 @@ class ItemController extends Controller
             'title' => 'アイテムの詳細',
             'item' => $this->itemService->getItem($itemId),
             'images' => $this->itemService->getImageLists($itemId),
-            'infors' => $this->auctionService->getInfor($auctionId),
-            'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId),
         ]);
     }
 }

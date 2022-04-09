@@ -5,23 +5,20 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Services\CategoryAdminService;
 use App\Http\Services\ItemAdminService;
-use App\Http\Services\CategoryValueAdminService;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Item;
-use App\Models\CategoryValue;
 use Illuminate\Support\Facades\Session;
 use Carbon\Carbon;
 
 class CategoryController extends Controller
 {
-    protected $auctionService, $itemService, $categoyValueService;
+    protected $auctionService, $itemService;
 
-    public function __construct(CategoryAdminService $categoryService, ItemAdminService $itemService, CategoryValueAdminService $categoyValueService)
+    public function __construct(CategoryAdminService $categoryService, ItemAdminService $itemService)
     {
         $this->categoryService = $categoryService;
         $this->itemService = $itemService;
-        $this->categoyValueService = $categoyValueService;
     }
 
     //list category
@@ -63,7 +60,7 @@ class CategoryController extends Controller
         $categoryId = $category->category_id;
         $countAttribute = $request->count_number;
 
-        return redirect()->route('insertCategoryValue', ['count_number' => $countAttribute, 'category_id' => $categoryId]);
+        return redirect()->route('listCategories')->with('message','追加しました！');
     }
 
     public function insertCategory($countAttribute, $categoryId)
@@ -75,27 +72,11 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function storeCategoryValue(Request $request)
-    {
-        $categoryId = $request->category_id;
-        $categoryValue = $request->except('category_id', '_token');
-        foreach ($categoryValue as $key => $value) {
-            if ($value != null) {
-                CategoryValue::create([
-                    'category_id' => $categoryId,
-                    'name' => $value
-                ]);
-            }
-        }
-        return redirect()->route('listCategories')->with('message','追加しました！');
-    }
-
     public function edit($categoryId) 
     {
         return view('admin.categories.edit',[
             'title' => 'カテゴリー編集',
             'category' => $this->categoryService->getCategory($categoryId),
-            'categoryValues' => $this->categoyValueService->getListValues($categoryId)
         ]);
     }
 
@@ -123,25 +104,6 @@ class CategoryController extends Controller
             $category->update();
         }
 
-        $categoryValueRequest = $request->except('name', 'thumb', '_token', 'category_id', 'type');
-
-        $categoryValues = CategoryValue::where('category_id', $categoryId)
-            ->get();
-
-        foreach ($categoryValues as $key => $categoryValue) 
-        {
-            foreach ($categoryValueRequest as $k => $v) {
-                if ($key == $k) {
-                    if ($v != null) {
-                        $categoryValue->name = $v;
-                        $categoryValue->update();
-                    } else {
-                        $categoryValue->delete();
-                    }
-                }
-            }
-        }
-
         return redirect()->route('listCategories')->with('info','編集しました！');
     }
 
@@ -152,7 +114,6 @@ class CategoryController extends Controller
             'category' => $this->categoryService->getCategory($categoryId),
             'countItems' => $this->itemService->getCountItems($categoryId),
             'items' => $this->itemService->getListItems($categoryId),
-            'categoryValues' => $this->categoyValueService->getListValues($categoryId)
         ]);
     }
 
