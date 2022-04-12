@@ -67,15 +67,6 @@
                       @endforeach
                       </select>
                   </div>
-
-                  <label for="name">技術の情報</label>
-                  <!-- Minimal style -->
-                  @foreach ($categoryValues as $key => $categoryValue)
-                    <div class="form-group">
-                      <label for="{{$key}}"></label>
-                      <input type="text" class="form-control" id="{{$key}}" name="{{$key}}" value="{{ $categoryValue['name'] }}" placeholder="入力してください">
-                    </div>
-                  @endforeach
                 </div>
                 <!-- /.card-body -->
 

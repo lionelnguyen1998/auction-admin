@@ -119,16 +119,6 @@
                                 <p>Số series: {{ $item[0]["series"] ?? '--' }}</p>
                                 <p>Thông tin khác: {{ $item[0]["description"] }}</p>
                                 <hr>
-                                <h4>技術の情報</h4>
-                                <div class="col-12 col-sm-12">
-                                  <ul class="list-group list-group-unbordered mb-3 col-sm-12">
-                                    @foreach ($infors as $key => $infor)
-                                      <li class="list-group-item">
-                                        <b>{{ $categoryValueName[$key] }}</b> <p class="float-right">{{ $infor }}</p>
-                                      </li>
-                                    @endforeach
-                                  </ul>
-                                </div>
                                 </div>
                              </div>
                         </div>

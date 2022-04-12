@@ -82,29 +82,13 @@ class AuctionAdminService implements AuctionAdminServiceInterface
     {
         $categoryId = Auction::findOrFail($auctionId)->category_id;
 
-        $itemId = Item::where('auction_id', $auctionId)
-            ->where('category_id', $categoryId)
+        $item = Item::where('auction_id', $auctionId)
             ->get()
-            ->pluck('item_id');    
-     
-        $itemInfor = ItemValue::where('item_id', $itemId)
-            ->get()
-            ->pluck('value', 'category_value_id')
-            ->toArray();
+            ->firstOrFail();
 
-        return $itemInfor;
-    }
+            dd($item);
 
-    public function getCategoryValueName($auctionId)
-    {
-        $categoryId = Auction::findOrFail($auctionId)->category_id;
-
-        $categoryValue = CategoryValue::where('category_id', $categoryId)
-            ->get()
-            ->pluck('name', 'category_value_id')
-            ->toArray();
-
-        return $categoryValue;
+        return $item;
     }
 
     //general auction

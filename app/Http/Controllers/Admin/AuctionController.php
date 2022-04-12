@@ -61,9 +61,7 @@ class AuctionController extends Controller
             'bids' => $this->auctionService->getBids($auctionId),
             'userSelling' => $this->auctionService->getSellingUserItem($auctionId),
             'comments' => $this->auctionService->getComments($auctionId),
-            'infors' => $this->auctionService->getInfor($auctionId),
             'item' => $this->itemService->getItem($itemId),
-            'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId),
             'images' => $this->itemService->getImageLists($itemId),
             'buyInfo' => $buy ?? null,
         ]);
@@ -91,10 +89,8 @@ class AuctionController extends Controller
                 'title' => 'オークション詳細',
                 'auction' => $this->auctionService->getDetailAuctions($auctionId),
                 'userSelling' => $this->auctionService->getSellingUser($auctionId),
-                'infors' => $this->auctionService->getInfor($auctionId),
                 'item' => $this->itemService->getItem($itemId),
-                'categoryValueName' => $this->auctionService->getCategoryValueName($auctionId),
-                'images' => $this->itemService->getImageLists($itemId)
+                'images' => $this->itemService->getImageLists($itemId),
             ]);
         } else {
             return view('admin.auctions.viewAuctionWait', [
@@ -125,8 +121,7 @@ class AuctionController extends Controller
             ->get()
             ->pluck('item_id')
             ->toArray();
-        
-        ItemValue::where('item_id', '=', $itemId[0])->delete();
+
         Item::where('item_id', '=', $itemId[0])->delete();
         Bid::where('auction_id', '=', $auctionId)->delete();
         Comment::where('auction_id', '=', $auctionId)->delete();
@@ -162,7 +157,6 @@ class AuctionController extends Controller
             $auction->update();
 
             if (isset($itemId[0])) {
-                ItemValue::where('item_id', '=', $itemId[0])->delete();
                 Image::where('item_id', '=', $itemId[0])->delete();
                 Item::where('item_id', '=', $itemId[0])->delete();
             }
