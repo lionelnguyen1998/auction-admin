@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\NewController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
+use App\Http\Controllers\Admin\BidController;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,7 +119,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('delete/{sliderId}', [SliderController::class, 'delete'])->name('deleteSlider');
     });
 
-    //Bid chưa làm nè
+    //Bid
     Route::prefix('bids')->group(function () {
         Route::get('destroy/{bidId}', [BidController::class, 'destroy'])->name('deleteBid');
     });

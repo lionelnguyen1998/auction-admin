@@ -101,7 +101,7 @@
                               <div class="row mb-3">
                                   <div class="col-12 col-sm-12">
                                     <div class="col-12">
-                                        <img @if(isset($images[0])) src="{{ $images[0] }}" @else src="" @endif class="product-image" alt="Product Image" style="max-height: 400px">
+                                        <img @if(isset($images[0])) src="{{ $images[0] }}" @else src="" @endif class="product-image" alt="Product Image" style="width: 60%; margin-left: 22%">
                                     </div>
                                     <div class="col-12 product-image-thumbs">
                                       @if (isset($images))
