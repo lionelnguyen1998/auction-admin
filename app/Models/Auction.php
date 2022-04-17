@@ -79,11 +79,23 @@ class Auction extends Model
                     $auction->update();
                 }
             }
-
+                
             if (($value->status == 4) && ($value->end_date < now())) {
-                $auction->status = 3;
+                $auction->status = 5;
                 $auction->reason = 'Da qua thoi gian';
                 $auction->update();
+
+                $itemId = Item::where('auction_id', '=', $value->auction_id)
+                    ->get()
+                    ->pluck('item_id')
+                    ->toArray();
+
+                if (isset($itemId[0])) {
+                    Image::where('item_id', '=', $itemId[0])->delete();
+                    Item::where('item_id', '=', $itemId[0])->delete();
+                }
+    
+                Auction::findOrFail($value->auction_id)->delete();
             }
         }
         

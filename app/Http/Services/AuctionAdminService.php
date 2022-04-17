@@ -62,6 +62,7 @@ class AuctionAdminService implements AuctionAdminServiceInterface
     {
         $bids = Bid::with('users')
             ->where('auction_id', $auctionId)
+            ->orderBy('price', 'DESC')
             ->orderBy('updated_at', 'desc')
             ->get()
             ->toArray();
@@ -120,12 +121,25 @@ class AuctionAdminService implements AuctionAdminServiceInterface
         $item = Item::where('auction_id', $auctionId)
             ->get()
             ->firstOrFail();
+
+        $userBuyingId = Item::where('auction_id', $auctionId)
+            ->pluck('buying_user_id')
+            ->first();
+
+        $userSelingId = Auction::findOrFail($auctionId)->selling_user_id;
+
         $itemInfo = Item::with('userBuying')
             ->where('auction_id', $auctionId)
-            ->where('buying_user_id', auth()->user()->user_id)
+            ->where('buying_user_id', $userBuyingId)
             ->get()
-            ->firstOrFail();
+            ->first();
             
+        $sellingInfo = Auction::with('users')
+            ->where('auction_id', $auctionId)
+            ->where('selling_user_id', $userSelingId)
+            ->get()
+            ->first();
+
         $brand = Brand::where('brand_id', $item->brand_id)
             ->get()
             ->pluck('name')
@@ -135,10 +149,10 @@ class AuctionAdminService implements AuctionAdminServiceInterface
             'item_info' => [
                 'name' => $itemInfo->name,
                 'selling_user' => [
-                    'name' => auth()->user()->name,
-                    'email' => auth()->user()->email,
-                    'adress' => auth()->user()->address,
-                    'phone' => auth()->user()->phone
+                    'name' => $sellingInfo->users->name,
+                    'email' => $sellingInfo->users->email,
+                    'adress' => $sellingInfo->users->adress,
+                    'phone' => $sellingInfo->users->phone
                 ],
                 'buying_user' => [
                     'name' => $itemInfo->userBuying->name,
