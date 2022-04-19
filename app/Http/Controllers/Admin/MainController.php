@@ -17,10 +17,7 @@ class MainController extends Controller
 
     public function index() 
     {
-        $auctionId = Auction::get()
-            ->pluck('auction_id')
-            ->toArray();
-        $updateStatus = Auction::updateStatus($auctionId);
+        $updateStatus = Auction::updateStatus();
 
         return view('admin.home', [
             'title' => 'ホームページ',
