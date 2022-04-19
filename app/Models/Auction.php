@@ -61,9 +61,10 @@ class Auction extends Model
         return $this->hasMany(Comment::class, 'auction_id', 'auction_id');
     }
 
-    public function updateStatus($auctionId)
+    public function updateStatus()
     {
-        $auctions = Auction::findOrFail($auctionId);
+        $auctions = Auction::where('auction_id', '<>', 3)
+            ->get();
         
         foreach ($auctions as $key => $value) {
             $auction = Auction::findOrFail($value->auction_id);
@@ -82,7 +83,7 @@ class Auction extends Model
                 
             if (($value->status == 4) && ($value->end_date < now())) {
                 $auction->status = 5;
-                $auction->reason = 'Da qua thoi gian';
+                $auction->reason = 'Đã quá thời gian duyệt';
                 $auction->update();
 
                 $itemId = Item::where('auction_id', '=', $value->auction_id)
