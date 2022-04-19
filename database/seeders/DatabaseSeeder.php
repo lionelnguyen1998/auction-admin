@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Nguyen Thi Tra',
             'email' => 'tra@gmail.com',
-            'password' => '123456',
+            'password' => Hash::make('123456'),
             'address' => 'Nghi Loc Nghe An',
             'phone' => '03327418888',
             'role' => '1',
