@@ -16,7 +16,7 @@ class UploadService implements UploadServiceInterface
                     'public/' . $pathFull, $name
                 );
 
-                $url = 'http://admin.localhost:443';
+                $url = 'http://auction-admin-2.herokuapp.com';
                 
                 return $url . '/storage/' . $pathFull . '/' . $name;
             } catch (\Exception $error) {
