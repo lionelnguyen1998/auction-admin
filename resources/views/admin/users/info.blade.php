@@ -51,7 +51,7 @@
               <input type="text" id="role" disabled value="{{ $role[$index] }}" class="form-control" />
             </div>
             <div class="form-group">
-              <button class="btn btn-primary"><a href="admin/users/edit_account" style="color:white">編集</a></button>
+              <button class="btn btn-primary"><a href="{{ route('editUser', ['userId' => auth()->user()->user_id]) }}" style="color:white">編集</a></button>
             </div>
           </div>
         </div>
