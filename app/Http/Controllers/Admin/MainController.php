@@ -17,6 +17,8 @@ class MainController extends Controller
 
     public function index() 
     {
+        Auction::updateStatus();
+        
         return view('admin.home', [
             'title' => 'ホームページ',
             'general' => $this->auctionService->getGeneralInfo()
