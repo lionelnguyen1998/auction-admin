@@ -76,7 +76,7 @@
                   <li class="nav-item"><a class="nav-link" href="#bid" data-toggle="tab">値段</a></li>
                   <li class="nav-item"><a class="nav-link" href="#comment" data-toggle="tab">コメントする</a></li>
                   @if ($index == 6)
-                    <li class="nav-item"><a class="nav-link" href="#buy" data-toggle="tab">Đấu giá thành công</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#buy" data-toggle="tab">オークションが成功した</a></li>
                   @endif
                 </ul>
               </div><!-- /.card-header -->
@@ -114,10 +114,10 @@
                             <div class="row">
                                 <div class="col-12 col-sm-12">
                                 <h3>アイテムの情報</h3>
-                                <p>Tên sản phẩm: {{ $item[0]["name"] }}</p>
-                                <p>Thương hiệu: {{ $item[0]["brands"]["name"] }}</p>
-                                <p>Số series: {{ $item[0]["series"] ?? '--' }}</p>
-                                <p>Thông tin khác: {{ $item[0]["description"] }}</p>
+                                <p>名前: {{ $item[0]["name"] }}</p>
+                                <p>ブランド: {{ $item[0]["brands"]["name"] }}</p>
+                                <p>シリーズ: {{ $item[0]["series"] ?? '--' }}</p>
+                                <p>他の情報: {{ $item[0]["description"] }}</p>
                                 <hr>
                                 </div>
                              </div>
@@ -185,20 +185,18 @@
                   @if ($index == 6)
                     <div class="tab-pane" id="buy">
                       <div class="card-body">
-                        <strong><i class="fas fa-book mr-1"></i> Thông tin người mua</strong>
-
+                        <strong><i class="fas fa-book mr-1"></i>買った人の情報</strong>
                         <p class="text-muted">
-                        <b>Tên : </b> {{ $buyInfo['item_info']['buying_user']['name'] }}
+                        <b>名前 : </b> {{ $buyInfo['item_info']['buying_user']['name'] }}
                         </p>
-                        <p class="text-muted"><b>Số điện thoại : </b> {{ $buyInfo['item_info']['buying_user']['phone'] }}</p>
-                        <p class="text-muted"><b>Địa chỉ : </b> {{ $buyInfo['item_info']['buying_user']['address'] }}</p>
-                        <p class="text-muted"><b>Email : </b> {{ $buyInfo['item_info']['buying_user']['email'] }}</p>
+                        <p class="text-muted"><b>電話番号 : </b> {{ $buyInfo['item_info']['buying_user']['phone'] }}</p>
+                        <p class="text-muted"><b>住所  : </b> {{ $buyInfo['item_info']['buying_user']['address'] }}</p>
+                        <p class="text-muted"><b>メール : </b> {{ $buyInfo['item_info']['buying_user']['email'] }}</p>
 
                         <hr>
-                        <strong><i class="far fa-file-alt mr-1"></i> Thông tin sản phẩm</strong>
-
-                        <p class="text-muted"><b>Giá bán : </b>{{ $buyInfo['item_info']["max_price"] }}</p>
-                        <p class="text-muted"><b>Thông tin khác : </b>{{ $buyInfo['item_info']["selling_info"] }}</p>
+                        <strong><i class="far fa-file-alt mr-1"></i>アイテムの情報</strong>
+                        <p class="text-muted"><b>値段： </b>{{ $buyInfo['item_info']["max_price"] }}</p>
+                        <p class="text-muted"><b>他の情報: </b>{{ $buyInfo['item_info']["selling_info"] }}</p>
                       </div>
                     </div>
                   @endif
