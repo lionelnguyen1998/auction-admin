@@ -65,8 +65,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('list', [CategoryController::class, 'index'])->name('listCategories');
         Route::get('create', [CategoryController::class, 'create'])->name('createCategory');
         Route::post('store', [CategoryController::class, 'store'])->name('insertcategories');
-        Route::get('insertCategory/{count_number}/{category_id}', [CategoryController::class, 'insertCategory'])->name('insertCategoryValue');
-        Route::post('storeCategoryValue', [CategoryController::class, 'storeCategoryValue'])->name('storecategoryvalues');
         Route::get('view/{categoryId}', [CategoryController::class, 'view'])->name('viewCategory');
         Route::get('edit/{categoryId}', [CategoryController::class, 'edit'])->name('editCategory');
         Route::post('update', [CategoryController::class, 'update'])->name('updatecategory');

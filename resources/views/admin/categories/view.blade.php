@@ -14,7 +14,7 @@
             </ol>
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
 
     <!-- Main content -->
@@ -34,32 +34,24 @@
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>名前（日本語）</b></b> <p class="float-right">{{ $category['name'] }}</p>
-                  </li>
-                  <li class="list-group-item">
-                    <b>名前（英語）</b></b> <p class="float-right">{{ $category['name_en'] }}</p>
+                    <b>名前</b></b> <p class="float-right">{{ $category['name'] }}</p>
                   </li>
                   <li class="list-group-item">
                     <b>アイテムの合計</b> <p class="float-right">{{ $countItems }}</p>
                   </li>
                 </ul>
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
           </div>
-          <!-- /.col -->
           <div class="col-md-9">
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active" href="#list_item" data-toggle="tab">アイテム</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#category_values" data-toggle="tab">技術の情報</a></li>
                 </ul>
-              </div><!-- /.card-header -->
+              </div>
               <div class="card-body">
                 <div class="tab-content">
-                  <!-- /.tab-pane -->
                     <div class="active tab-pane" id="list_item">
                         <div class="col-12">
                             <!-- /.card-header -->
@@ -92,28 +84,13 @@
                             <!-- /.card-body -->
                         </div>
                     </div>
-                  <!-- /.tab-pane -->
-                  <div class="tab-pane" id="category_values">
-                    <ul class="list-group list-group-unbordered mb-6">
-                        @foreach ($categoryValues as $key => $value)
-                            <li class="list-group-item">
-                                <p>{{ $value['category_value_id'] }}</p> <b class="float-right">{{ $value['name'] }}</b>
-                            </li>
-                        @endforeach
-                    </ul>
-                  </div>
                 </div>
-                <!-- /.tab-content -->
-              </div><!-- /.card-body -->
+              </div>
             </div>
-            <!-- /.card -->
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-    <!-- /.content -->
 @endsection
 @section('footer')
     <script>
