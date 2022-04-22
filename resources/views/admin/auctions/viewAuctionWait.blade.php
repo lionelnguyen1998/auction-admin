@@ -115,10 +115,10 @@
                               <div class="row">
                                   <div class="col-12 col-sm-12">
                                   <h3>アイテムの情報</h3>
-                                  <p>Tên sản phẩm: {{ $item[0]["name"] }}</p>
-                                  <p>Thương hiệu: {{ $item[0]["brands"]["name"] }}</p>
-                                  <p>Số series: {{ $item[0]["series"] ?? '--' }}</p>
-                                  <p>Thông tin khác: {{ $item[0]["description"] }}</p>
+                                  <p>名前: {{ $item[0]["name"] }}</p>
+                                  <p>ブランド: {{ $item[0]["brands"]["name"] }}</p>
+                                  <p>シリーズ: {{ $item[0]["series"] ?? '--' }}</p>
+                                  <p>他の情報: {{ $item[0]["description"] }}</p>
                                   <hr>
                                   </div>
                               </div>
