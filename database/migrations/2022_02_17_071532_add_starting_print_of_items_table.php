@@ -15,7 +15,7 @@ class AddStartingPrintOfItemsTable extends Migration
     {
         Schema::table('items', function (Blueprint $table) {
             $table->text('selling_info')->nullable()->after('name');
-            $table->unsignedInteger('starting_price')->after('name');
+            $table->string('starting_price', 60)->after('name');
         });
     }
 
