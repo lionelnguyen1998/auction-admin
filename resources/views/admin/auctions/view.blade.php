@@ -41,10 +41,10 @@
                     <b>終わる時間</b> <p class="float-right">{{ $auction[0]["end_date"] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>始値</b> <p class="float-right">{{ number_format($auction[0]["items"][0]["starting_price"]) }}</p>
+                    <b>始値</b> <p class="float-right">{{ number_format($auction[0]["items"][0]["starting_price"]) }}　円</p>
                   </li>
                   <li class="list-group-item">
-                    <b>最後値段</b> <p class="float-right">{{ number_format($maxPrice) }}</p>
+                    <b>最後値段</b> <p class="float-right">{{ number_format($maxPrice) }}　円</p>
                   </li>
                   <li class="list-group-item">
                     @php
@@ -141,7 +141,7 @@
                       </div>
                       <!-- /.user-block -->
                       <p>
-                        {{ number_format($bid['price']) }}
+                        {{ number_format($bid['price']) }}　円
                       </p>
 
                       <p>
@@ -195,7 +195,7 @@
 
                         <hr>
                         <strong><i class="far fa-file-alt mr-1"></i>アイテムの情報</strong>
-                        <p class="text-muted"><b>値段： </b>{{ $buyInfo['item_info']["max_price"] }}</p>
+                        <p class="text-muted"><b>値段： </b>{{ number_format($buyInfo['item_info']["max_price"]) }}　円</p>
                         <p class="text-muted"><b>他の情報: </b>{{ $buyInfo['item_info']["selling_info"] }}</p>
                       </div>
                     </div>
