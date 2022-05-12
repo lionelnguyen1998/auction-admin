@@ -41,10 +41,10 @@
                     <b>終わる時間</b> <p class="float-right">{{ $auction[0]["end_date"] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>始値</b> <p class="float-right">{{ $auction[0]["items"][0]["starting_price"] }}</p>
+                    <b>始値</b> <p class="float-right">{{ number_format($auction[0]["items"][0]["starting_price"]) }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>最後値段</b> <p class="float-right">{{ $maxPrice }}</p>
+                    <b>最後値段</b> <p class="float-right">{{ number_format($maxPrice) }}</p>
                   </li>
                   <li class="list-group-item">
                     @php
@@ -141,7 +141,7 @@
                       </div>
                       <!-- /.user-block -->
                       <p>
-                        {{ $bid['price'] }}
+                        {{ number_format($bid['price']) }}
                       </p>
 
                       <p>

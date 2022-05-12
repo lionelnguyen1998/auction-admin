@@ -43,7 +43,7 @@
                   <li class="list-group-item">
                     <b>始値</b> 
                     @if (isset($auction[0]["items"][0]))
-                      <p class="float-right">{{ $auction[0]["items"][0]["starting_price"] }}</p>
+                      <p class="float-right">{{ number_format($auction[0]["items"][0]["starting_price"]) }}</p>
                     @else
                       <p class="float-right"></p>
                     @endif
