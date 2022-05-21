@@ -75,7 +75,7 @@
                                             <td>{{ $item['brands']['name'] ?? '--' }}</td>
                                             <td>{{ $item['series'] ?? '--' }}</td>
                                             <td>{{ $item['name'] }}</td>
-                                            <td>{{ $item['starting_price'] ?? '--' }}</td>
+                                            <td>{{ number_format($item['starting_price']) ?? '--' }} 円</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

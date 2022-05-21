@@ -41,7 +41,7 @@
                     <b>オークション</b></b> <p class="float-right">{{ $item[0]["auctions"]["title"] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>始値</b> <p class="float-right">{{ $item[0]["starting_price"] }}</p>
+                    <b>始値</b> <p class="float-right">{{ number_format($item[0]["starting_price"])}} 円</p>
                   </li>
                 </ul>
               </div>
@@ -77,7 +77,7 @@
                             <div class="row mb-3">
                                 <div class="col-12 col-sm-12">
                                 <div class="col-12">
-                                  <img @if(isset($images)) src="{{ $images[0] }}" @else src="adafs" @endif class="product-image" alt="Product Image">
+                                  <img @if(isset($images[0])) src="{{ $images[0] }}" @else src="adafs" @endif class="product-image" alt="Product Image">
                                 </div>
                                 <div class="col-12 product-image-thumbs">
                                   @foreach($images as $key => $image)
@@ -92,7 +92,7 @@
                                 <p>名前: {{ $item[0]["name"] }}</p>
                                 <p>ブランド: {{ $item[0]["brands"]["name"] }}</p>
                                 <p>シリーズ: {{ $item[0]["series"] ?? '--' }}</p>
-                                <p>他の情報: {{ $item[0]["description"] }}</p>
+                                <p style="white-space:pre-line">他の情報: {{ $item[0]["description"] }}</p>
                                 <hr>
                                 </div>
                              </div>

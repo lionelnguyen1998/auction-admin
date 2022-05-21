@@ -118,7 +118,7 @@
                                   <p>名前: {{ $item[0]["name"] }}</p>
                                   <p>ブランド: {{ $item[0]["brands"]["name"] }}</p>
                                   <p>シリーズ: {{ $item[0]["series"] ?? '--' }}</p>
-                                  <p>他の情報: {{ $item[0]["description"] }}</p>
+                                  <p style="white-space:pre-line">他の情報: {{ $item[0]["description"] }}</p>
                                   <hr>
                                   </div>
                               </div>
