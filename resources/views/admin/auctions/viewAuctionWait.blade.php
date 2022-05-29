@@ -5,11 +5,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{ $auction[0]["title"] }} の詳細</h1>
+            <h1>{{ $auction[0]["title"] }}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('listAuctionsIsWait') }}">オークション評価一覧</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('listAuctionsIsWait') }}">{{__('message.auctions_wait.list')}}</a></li>
               <li class="breadcrumb-item active">{{ $auction[0]["title"] }}</li>
             </ol>
           </div>
@@ -35,15 +35,15 @@
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>始まる時間</b> <p class="float-right">{{ $auction[0]["start_date"] }}</p>
+                    <b>{{__('message.detail.start_date')}}</b> <p class="float-right">{{ $auction[0]["start_date"] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>終わる時間</b> <p class="float-right">{{ $auction[0]["end_date"] }}</p>
+                    <b>{{__('message.detail.end_date')}}</b> <p class="float-right">{{ $auction[0]["end_date"] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>始値</b> 
+                    <b>{{__('message.detail.first_price')}}</b> 
                     @if (isset($auction[0]["items"][0]))
-                      <p class="float-right">{{ number_format($auction[0]["items"][0]["starting_price"]) }} 円</p>
+                      <p class="float-right">{{ number_format($auction[0]["items"][0]["starting_price"]) }} {{__('message.detail.money')}}</p>
                     @else
                       <p class="float-right"></p>
                     @endif
@@ -54,10 +54,10 @@
                   @endphp
                   @if ($index == 4)
                     <li class="list-group-item">
-                      <a class="btn btn-success" style="color:white" data-toggle="modal" data-target="#modal-accept">アクセプタンス</a>  
+                      <a class="btn btn-success" style="color:white" data-toggle="modal" data-target="#modal-accept">{{__('message.auctions_wait.accept')}}</a>  
                       <p class="float-right">
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-deny">
-                          断る
+                        {{__('message.auctions_wait.deny')}}
                         </button>
                       </p>
                     </li>
@@ -77,7 +77,7 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#item" data-toggle="tab">アイテムの情報</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#item" data-toggle="tab">{{__('message.detail.item_detail')}}</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -114,17 +114,17 @@
                               </div>
                               <div class="row">
                                   <div class="col-12 col-sm-12">
-                                  <h3>アイテムの情報</h3>
-                                  <p>名前: {{ $item[0]["name"] }}</p>
-                                  <p>ブランド: {{ $item[0]["brands"]["name"] }}</p>
-                                  <p>シリーズ: {{ $item[0]["series"] ?? '--' }}</p>
-                                  <p style="white-space:pre-line">他の情報: {{ $item[0]["description"] }}</p>
+                                  <h3>{{__('message.detail.item_detail')}}</h3>
+                                  <p>{{__('message.detail.item_name')}}: {{ $item[0]["name"] }}</p>
+                                  <p>{{__('message.detail.brand')}}: {{ $item[0]["brands"]["name"] }}</p>
+                                  <p>{{__('message.detail.series')}}: {{ $item[0]["series"] ?? '--' }}</p>
+                                  <p style="white-space:pre-line">{{__('message.detail.des')}}: {{ $item[0]["description"] }}</p>
                                   <hr>
                                   </div>
                               </div>
                             @else 
                               <div class="row mb-3">
-                                  <p>アイテムの情報がありません</p>
+                                  <p>{{__('message.auctions_wait.no_item')}}</p>
                               </div>
                             @endif
                         </div>
@@ -145,7 +145,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" style="color:#F70202"><b>断る理由！</b></h4>
+              <h4 class="modal-title" style="color:#F70202"><b>{{__('message.modal.deny')}}</b></h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -159,8 +159,8 @@
               </div>
               <!-- /.card-body -->
               <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                <button type="submit" class="btn btn-primary">確認</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('message.modal.cancel')}}</button>
+                <button type="submit" class="btn btn-primary">{{__('message.modal.confirm')}}</button>
               </div>
               @csrf
             </form>
@@ -175,15 +175,15 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" style="color:#F70202"><b>本当にアクセプタンス！</b></h4>
+              <h4 class="modal-title" style="color:#F70202"><b>{{__('message.modal.accept')}}</b></h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <form>
               <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                <a href="{{ route('acceptAuction', ['auctionId' => $auction[0]["auction_id"]]) }}" class="btn btn-primary">確認</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{__('message.modal.cancel')}}</button>
+                <a href="{{ route('acceptAuction', ['auctionId' => $auction[0]["auction_id"]]) }}" class="btn btn-primary">{{__('message.modal.confirm')}}</a>
               </div>
               @csrf
             </form>

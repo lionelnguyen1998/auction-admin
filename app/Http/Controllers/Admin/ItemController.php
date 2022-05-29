@@ -22,7 +22,7 @@ class ItemController extends Controller
     public function index()
     {
         return view('admin.items.list', [
-            'title' => 'アイテム',
+            'title' => __('message.item.list'),
             'items' => $this->itemService->getAllItems()
         ]);
     }
@@ -31,7 +31,7 @@ class ItemController extends Controller
     {
         $auctionId = Item::findOrFail($itemId)->auction_id;
         return view('admin.items.view', [
-            'title' => 'アイテムの詳細',
+            'title' => __('message.title.item_detail'),
             'item' => $this->itemService->getItem($itemId),
             'images' => $this->itemService->getImageLists($itemId),
         ]);

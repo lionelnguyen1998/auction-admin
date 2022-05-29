@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>オークション</h1>
+            <h1>{{__('message.auctions.auction')}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('admin') }}">ホーム</a></li>
-              <li class="breadcrumb-item active">オークション</li>
+              <li class="breadcrumb-item"><a href="{{ route('admin') }}">{{__('message.auctions.home')}}</a></li>
+              <li class="breadcrumb-item active">{{__('message.auctions.auction')}}</li>
             </ol>
           </div>
         </div>
@@ -30,20 +30,20 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>オークション　ID</th>
-                    <th>作る人</th>
-                    <th>カテゴリー</th>
-                    <th>テーマ</th>
-                    <th>始まる時間</th>
-                    <th>終わる時間</th>
-                    <th>スターテス</th>
+                    <th>{{__('message.auctions.id')}}</th>
+                    <th>{{__('message.auctions.user_create')}}</th>
+                    <th>{{__('message.auctions.category')}}</th>
+                    <th>{{__('message.auctions.title')}}</th>
+                    <th>{{__('message.auctions.start_date')}}</th>
+                    <th>{{__('message.auctions.end_date')}}</th>
+                    <th>{{__('message.auctions.status')}}</th>
                     <th>&nbsp;</th>
                   </tr>
                   </thead>
                   <tbody>
                     @foreach ($auctions as $key => $auction)
                     @php
-                    $status = config('const.status');
+                    $status = __('message.status');
                     $index = $auction['status'];
                     @endphp
                       @if ($index != 4 && $index != 5)
@@ -90,7 +90,7 @@
                           <div class="modal-dialog">
                               <div class="modal-content">
                               <div class="modal-header">
-                                  <h4 class="modal-title" style="color:red">本当に削除しますか？</h4>
+                                  <h4 class="modal-title" style="color:red">{{__('message.modal.title')}}</h4>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true"></span>&times;</span>
                                   </button>
@@ -98,8 +98,8 @@
                               <form action="{{ route('deleteAuction', ['auctionId' => $auction['auction_id']]) }}" method="GET">
                                   <!-- /.card-body -->
                                   <div class="modal-footer justify-content-between">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                                  <button type="submit" class="btn btn-danger">確認</button>
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">{{__('message.modal.cancel')}}</button>
+                                  <button type="submit" class="btn btn-danger">{{__('message.modal.confirm')}}</button>
                                   </div>
                                   @csrf
                               </form>

@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Services\AuctionAdminService;
 use App\Models\Auction;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\App;
 
 class MainController extends Controller
 {
     protected $auctionService;
+    
     public function __construct(AuctionAdminService $auctionService)
     {
         $this->auctionService = $auctionService;
@@ -25,7 +28,7 @@ class MainController extends Controller
         
             foreach ($auctions as $key => $value) {
                 $auction = Auction::findOrFail($value->auction_id);
-                if ($auction && ($value->status != 4) && ($value->status != 6)) {
+                if ($auction && ($value->status != 4) && ($value->status != 6) && ($value->status != 7) && ($value->status != 8)) {
                     if ($value->start_date <= now() && $value->end_date > now()) {
                         $auction->status = 1;
                         $auction->update();
@@ -40,7 +43,7 @@ class MainController extends Controller
                     
                 if (($value->status == 4) && ($value->end_date < now())) {
                     $auction->status = 5;
-                    $auction->reason = 'Đã quá thời gian duyệt';
+                    $auction->reason = 'Đã quá thời gian duyệt/許可する時間が過ごしました。';
                     $auction->update();
 
                     $itemId = Item::where('auction_id', '=', $value->auction_id)
@@ -59,8 +62,15 @@ class MainController extends Controller
         }
         
         return view('admin.home', [
-            'title' => 'ホームページ',
+            'title' => __('message.title.homepage'),
             'general' => $this->auctionService->getGeneralInfo()
         ]);
+    }
+
+    public function changeLanguage($language)
+    {
+        \Session::put('website_language', $language);
+    
+        return redirect()->back();
     }
 }

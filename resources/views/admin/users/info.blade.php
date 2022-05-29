@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>管理者</h1>
+            <h1>{{ __('message.user.admin')}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('listUser') }}">ユーザー一覧</a></li>
-              <li class="breadcrumb-item active">情報</li>
+              <li class="breadcrumb-item"><a href="{{ route('listUser') }}">{{ __('message.user.list')}}</a></li>
+              <li class="breadcrumb-item active">{{ __('message.user.info')}}</li>
             </ol>
           </div>
         </div>
@@ -33,25 +33,25 @@
                 </div>
               <h2><strong>{{ $user->name }}</strong></h2>
               <p class="lead mb-5">{{ $user->address }}<br>
-                電話: {{ $user->phone }}
+              {{ __('message.user.phone')}}: {{ $user->phone }}
               </p>
             </div>
           </div>
           <div class="col-7">
             <div class="form-group">
-              <label for="name">名前</label>
+              <label for="name">{{ __('message.user.name')}}</label>
               <input type="text" id="name" class="form-control" value="{{ $user->name }}" disabled />
             </div>
             @php
-            $role = config('const.role');
+            $role = __('message.role');
             $index = $user->role;
             @endphp
             <div class="form-group">
-              <label for="role">役割</label>
+              <label for="role">{{ __('message.user.role')}}</label>
               <input type="text" id="role" disabled value="{{ $role[$index] }}" class="form-control" />
             </div>
             <div class="form-group">
-              <button class="btn btn-primary"><a href="{{ route('editUser', ['userId' => auth()->user()->user_id]) }}" style="color:white">編集</a></button>
+              <button class="btn btn-primary"><a href="{{ route('editUser', ['userId' => auth()->user()->user_id]) }}" style="color:white">{{ __('message.button.edit')}}</a></button>
             </div>
           </div>
         </div>

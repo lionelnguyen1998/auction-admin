@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="{{ route('admin') }}" class="brand-link">
     <img src="/template/images/logo.jpg" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">オークション</span>
+    <span class="brand-text font-weight-light">{{__('message.sidebar.logo')}}</span>
     </a>
 
     <!-- Sidebar -->
@@ -16,7 +16,7 @@
                     <a href="" class="nav-link">
                     <i class="nav-icon fas fa-gavel"></i>
                     <p>
-                    オークション管理
+                    {{__('message.sidebar.auctions_manage')}}
                         <i class="right fas fa-angle-left"></i>
                     </p>
                     </a>
@@ -24,13 +24,13 @@
                         <li class="nav-item">
                             <a href="{{ route('listAuctions') }}" class="nav-link">
                                 <i class="nav-icon fas fa-check"></i>
-                                <p>オークション一覧</p>
+                                <p>{{__('message.sidebar.auctions_list')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('listAuctionsIsWait') }}" class="nav-link">
                                 <i class="nav-icon fas fa-check"></i>
-                                <p>オークション評価</p>
+                                <p>{{__('message.sidebar.auctions_wait')}}</p>
                             </a>
                         </li>
                     </ul>
@@ -39,7 +39,7 @@
                     <a href="{{ route('listUser') }}" class="nav-link">
                     <i class="nav-icon fas fa-user"></i>
                     <p>
-                        ユーザー管理
+                    {{__('message.sidebar.user_manage')}}
                     </p>
                     </a>
                 </li>
@@ -47,7 +47,7 @@
                     <a href="" class="nav-link">
                     <i class="nav-icon fas fa-cubes"></i>
                     <p>
-                        商品管理
+                    {{__('message.sidebar.item_manage')}}
                         <i class="right fas fa-angle-left"></i>
                     </p>
                     </a>
@@ -55,19 +55,19 @@
                         <li class="nav-item">
                             <a href="{{ route('listCategories') }}" class="nav-link">
                                 <i class="nav-icon fas fa-check"></i>
-                                <p>カテゴリー一覧</p>
+                                <p>{{__('message.sidebar.category_list')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('listItems') }}" class="nav-link">
                                 <i class="nav-icon fas fa-check"></i>
-                                <p>商品一覧</p>
+                                <p>{{__('message.sidebar.item')}}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('listBrands') }}" class="nav-link">
                                 <i class="nav-icon fas fa-check"></i>
-                                <p>ブランド一覧</p>
+                                <p>{{__('message.sidebar.brand_list')}}</p>
                             </a>
                         </li>
                     </ul>
@@ -76,7 +76,7 @@
                     <a href="{{ route('listNews') }}" class="nav-link">
                     <i class="nav-icon fas fa-newspaper"></i>
                     <p>
-                        ニュスー管理
+                    {{__('message.sidebar.news_manage')}}
                     </p>
                     </a>
                 </li>
@@ -84,7 +84,7 @@
                     <a href="{{ route('listSliders') }}" class="nav-link">
                     <i class="nav-icon fas fa-sliders-h"></i>
                     <p>
-                        スライダー管理
+                    {{__('message.sidebar.slider_manage')}}
                     </p>
                     </a>
                 </li>

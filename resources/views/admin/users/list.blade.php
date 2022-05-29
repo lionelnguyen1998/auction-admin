@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>ユーザー一覧</h1>
+            <h1>{{__('message.user.list')}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('admin') }}">ホーム</a></li>
-              <li class="breadcrumb-item active">ユーザー一覧</li>
+              <li class="breadcrumb-item"><a href="{{ route('admin') }}">{{__('message.user.home')}}</a></li>
+              <li class="breadcrumb-item active">{{__('message.user.list')}}</li>
             </ol>
           </div>
         </div>
@@ -30,24 +30,24 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <a style="color:white"   href="{{ route('createUser') }}">
                     <button type="button" class="btn btn-block btn-success" style="margin-bottom:10px; width:150px">
-                      追加
+                    {{__('message.user.add')}}
                     </button>
                   </a>
                   <thead>
                   <tr>
-                    <th style="width:50px">ユーザーID</th>
-                    <th>役割</th>
-                    <th>名前</th>
-                    <th>メール</th>
-                    <th>住所</th>
-                    <th>電話</th>
+                    <th style="width:50px">{{__('message.user.id')}}</th>
+                    <th>{{__('message.user.role')}}</th>
+                    <th>{{__('message.user.name')}}</th>
+                    <th>{{__('message.user.email')}}</th>
+                    <th>{{__('message.user.address')}}</th>
+                    <th>{{__('message.user.phone')}}</th>
                     <th>&nbsp;</th>
                   </tr>
                   </thead>
                   <tbody>
                     @foreach ($users as $key => $user)
                     @php
-                    $role = config('const.role');
+                    $role = __('message.role');
                     $index = $user['role'];
                     @endphp
                         <tr>
@@ -73,7 +73,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title" style="color:#F70202"><b>本当に削除しますか？</b></h4>
+                                    <h4 class="modal-title" style="color:#F70202"><b>{{__('message.modal.title')}}</b></h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true"></span>&times;</span>
                                     </button>
@@ -82,8 +82,8 @@
                                 <form action="{{ route('deleteUser', ['userId' => $user->user_id]) }}" method="GET">
                                     <!-- /.card-body -->
                                     <div class="modal-footer justify-content-between">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                                    <button type="submit" class="btn btn-danger">確認</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">{{__('message.modal.cancel')}}</button>
+                                    <button type="submit" class="btn btn-danger">{{__('message.modal.confirm')}}</button>
                                     </div>
                                     @csrf
                                 </form>

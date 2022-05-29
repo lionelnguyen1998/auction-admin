@@ -33,7 +33,7 @@ class AuctionController extends Controller
     public function index(Request $request)
     {
         return view('admin.auctions.list', [
-            'title' => 'オークション一覧',
+            'title' => __('message.title.auctions'),
             'auctions' => $this->auctionService->getListAuctions()
         ]);
     }
@@ -55,7 +55,7 @@ class AuctionController extends Controller
             $buy = $this->auctionService->getBuyInfo($auctionId);
         }
         return view('admin.auctions.view', [
-            'title' => 'オークション詳細',
+            'title' => __('message.title.auction_detail'),
             'auction' => $this->auctionService->getDetailAuctions($auctionId),
             'maxPrice' => $this->auctionService->getMaxPrice($auctionId),
             'bids' => $this->auctionService->getBids($auctionId),
@@ -72,7 +72,7 @@ class AuctionController extends Controller
     public function list()
     {
         return view('admin.auctions.wait', [
-            'title' => 'オークション評価',
+            'title' => __('message.title.auctions_wait'),
             'auctions' => $this->auctionService->getListAuctions()
         ]);
     }
@@ -86,7 +86,7 @@ class AuctionController extends Controller
 
         if (isset($itemId[0])) {
             return view('admin.auctions.viewAuctionWait', [
-                'title' => 'オークション詳細',
+                'title' => __('message.title.auction_detail'),
                 'auction' => $this->auctionService->getDetailAuctions($auctionId),
                 'userSelling' => $this->auctionService->getSellingUser($auctionId),
                 'item' => $this->itemService->getItem($itemId),
@@ -94,7 +94,7 @@ class AuctionController extends Controller
             ]);
         } else {
             return view('admin.auctions.viewAuctionWait', [
-                'title' => 'オークション詳細',
+                'title' => __('message.title.auction_detail'),
                 'auction' => $this->auctionService->getDetailAuctions($auctionId),
                 'userSelling' => $this->auctionService->getSellingUser($auctionId),
             ]);
@@ -128,7 +128,7 @@ class AuctionController extends Controller
         Favorite::where('auction_id', '=', $auctionId)->delete();
         Auction::find($auctionId)->delete();
 
-        return redirect()->route('listAuctions')->with('message', '削除しました！');
+        return redirect()->route('listAuctions')->with('message', __('message.toast.delete'));
     }
 
     //reject auctions
@@ -144,7 +144,7 @@ class AuctionController extends Controller
         $reason = $request->reason;
 
         if ($reason == null) {
-            return redirect()->back()->with('warning', '理由を入力しませんでした！');
+            return redirect()->back()->with('warning', __('message.toast.warning_reason'));
         } else {
             $auction->reason = $reason;
             $auction->update();
@@ -164,6 +164,6 @@ class AuctionController extends Controller
             Auction::findOrFail($auctionId)->delete();
         }
 
-        return redirect()->route('listAuctionsIsWait')->with('message', '削除しました！');
+        return redirect()->route('listAuctionsIsWait')->with('message', __('message.toast.delete'));
     }
 }

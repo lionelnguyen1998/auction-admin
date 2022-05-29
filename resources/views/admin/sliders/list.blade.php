@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>スライダー一覧</h1>
+            <h1>{{ __('message.slider.list')}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('admin') }}">ホーム</a></li>
-              <li class="breadcrumb-item active">スライダー一覧</li>
+              <li class="breadcrumb-item"><a href="{{ route('admin') }}">{{ __('message.slider.home')}}</a></li>
+              <li class="breadcrumb-item active">{{ __('message.slider.list')}}</li>
             </ol>
           </div>
         </div>
@@ -30,21 +30,21 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <a style="color:white"   href="{{ route('createSlider') }}">
                     <button type="button" class="btn btn-block btn-success" style="margin-bottom:10px; width:150px">
-                      追加
+                    {{ __('message.slider.add')}}
                     </button>
                   </a>
                   <thead>
                   <tr>
-                    <th>スライダーID</th>
-                    <th>テーマ</th>
-                    <th>写真</th>
+                    <th>{{ __('message.slider.id')}}</th>
+                    <th>{{ __('message.slider.type')}}</th>
+                    <th>{{ __('message.slider.image')}}</th>
                     <th>&nbsp;</th>
                   </tr>
                   </thead>
                   <tbody>
                     @foreach ($sliders as $key => $slider)
                     @php
-                    $sliderConst = config('const.typeSlider');
+                    $sliderConst = __('message.typeSlider');
                     $index = $slider["type"];
                     @endphp
                         <tr>

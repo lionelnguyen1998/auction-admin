@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">ホームページ</h1>
+            <h1 class="m-0">{{ __('message.homepage.title') }}</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -21,20 +21,20 @@
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-                <h3>{{ $general['all'] }}<sup style="font-size: 20px">オークション</sup></h3>
-                <p>合計</p>
+                <h3>{{ $general['all'] }}<sup style="font-size: 20px">{{ __('message.homepage.auctions') }}</sup></h3>
+                <p>{{ __('message.homepage.total') }}</p>
               </div>
-              <a href="{{ route('listAuctions') }}" class="small-box-footer">もっと見る<i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('listAuctions') }}" class="small-box-footer">{{ __('message.homepage.more_see') }}<i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3>{{ $general['status4'] }}<sup style="font-size: 20px">オークション</sup></h3>
-                <p>{{ config('const.status.4') }}</p>
+                <h3>{{ $general['status4'] }}<sup style="font-size: 20px">{{ __('message.homepage.auctions') }}</sup></h3>
+                <p>{{ __('message.status.4') }}</p>
               </div>
-              <a href="{{ route('listAuctionsIsWait') }}" class="small-box-footer">もっと見る　<i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('listAuctionsIsWait') }}" class="small-box-footer">{{ __('message.homepage.more_see') }}<i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -42,11 +42,11 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>{{ $general['status1'] }}<sup style="font-size: 20px">オークション</sup></h3>
+                <h3>{{ $general['status1'] }}<sup style="font-size: 20px">{{ __('message.homepage.auctions') }}</sup></h3>
 
-                <p>{{ config('const.status.1') }}</p>
+                <p>{{ __('message.status.1') }}</p>
               </div>
-              <a href="{{ route('listAuctions') }}" class="small-box-footer">もっと見る　<i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('listAuctions') }}" class="small-box-footer">{{ __('message.homepage.more_see') }}<i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -54,11 +54,11 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>{{ $general['status2'] }}<sup style="font-size: 20px">オークション</sup></h3>
+                <h3>{{ $general['status2'] }}<sup style="font-size: 20px">{{ __('message.homepage.auctions') }}</sup></h3>
 
-                <p>{{ config('const.status.2') }}</p>
+                <p>{{ __('message.status.2') }}</p>
               </div>
-              <a href="{{ route('listAuctions') }}" class="small-box-footer">もっと見る　<i class="fas fa-arrow-circle-right"></i></a>
+              <a href="{{ route('listAuctions') }}" class="small-box-footer">{{ __('message.homepage.more_see') }}<i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -72,7 +72,7 @@
               <div class="card-header border-0">
                 <h3 class="card-title">
                   <i class="fas fa-map-marker-alt mr-1"></i>
-                  地図
+                  {{ __('message.homepage.map') }}
                 </h3>
                 <!-- card tools -->
                 <div class="card-tools">

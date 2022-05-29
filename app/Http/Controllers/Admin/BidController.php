@@ -11,6 +11,6 @@ class BidController extends Controller
     public function destroy($bidId) 
     {
         Bid::where('bid_id', $bidId)->delete();
-        return redirect()->back()->with('message','削除しました！');
+        return redirect()->back()->with('message', __('message.toast.delete'));
     }
 }

@@ -9,17 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class SliderController extends Controller
 {
-    public function __construct()
-    {
-        $this->messageRequired = config('message.MSG_01');
-        $this->messageUnique = config('message.MSG_04');
-    }
-
     public function index()
     {
         $slider = Slider::all();
         return view('admin.sliders.list', [
-            'title' => 'スライダー一覧',
+            'title' => __('message.slider.list'),
             'sliders' => $slider,
         ]);
     }
@@ -27,7 +21,7 @@ class SliderController extends Controller
     public function create()
     {
         return view('admin.sliders.create', [
-            'title' => 'スライダー追加',
+            'title' => __('message.slider.add_page'),
         ]);
     }
 
@@ -45,8 +39,8 @@ class SliderController extends Controller
         }
 
         $messages = [
-            'required' => $this->messageRequired,
-            'unique' => $this->messageUnique,
+            'required' => __('message.validation.required'),
+            'unique' => __('message.validation.uniqueSlider'),
         ];
 
         $validated = Validator::make($request, $rules, $messages);
@@ -69,7 +63,7 @@ class SliderController extends Controller
             'type' => $request['type']
         ]);
 
-        return redirect()->route('listSliders')->with('message','追加しました！');
+        return redirect()->route('listSliders')->with('message', __('message.toast.add'));
     }
 
     public function edit($sliderId)
@@ -79,7 +73,7 @@ class SliderController extends Controller
             ->toArray();
 
         return view('admin.sliders.create', [
-            'title' => 'スライダー編集',
+            'title' => __('message.slider.edit'),
             'slider' => $slider
         ]);
     }
@@ -87,7 +81,7 @@ class SliderController extends Controller
     public function delete($sliderId)
     {
         $delete = Slider::findOrFail($sliderId)->delete();
-        return redirect()->route('listSliders')->with('message','削除しました！');
+        return redirect()->route('listSliders')->with('message', __('message.toast.delete'));
     }
 
     public function update(Request $request)
@@ -110,6 +104,6 @@ class SliderController extends Controller
             $sliderUpdate->update();
         }
 
-        return redirect()->route('listSliders')->with('info','編集しました！');
+        return redirect()->route('listSliders')->with('info', __('message.toast.edit'));
     }
 }

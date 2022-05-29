@@ -25,7 +25,7 @@ class CategoryController extends Controller
     public function index()
     {
         return view('admin.categories.list', [
-            'title' => 'カテゴリー一覧',
+            'title' => __('message.category.list'),
             'categories' => $this->categoryService->getCategoryList()
         ]);
     }
@@ -33,7 +33,7 @@ class CategoryController extends Controller
     public function create()
     {
         return view('admin.categories.create', [
-            'title' => 'カテゴリー追加'
+            'title' => __('message.category.add_page')
         ]);
     }
 
@@ -60,7 +60,7 @@ class CategoryController extends Controller
         $categoryId = $category->category_id;
         $countAttribute = $request->count_number;
 
-        return redirect()->route('listCategories')->with('message','追加しました！');
+        return redirect()->route('listCategories')->with('message',__('message.toast.add'));
     }
 
     public function insertCategory($countAttribute, $categoryId)
@@ -75,7 +75,7 @@ class CategoryController extends Controller
     public function edit($categoryId) 
     {
         return view('admin.categories.edit',[
-            'title' => 'カテゴリー編集',
+            'title' => __('message.category.edit'),
             'category' => $this->categoryService->getCategory($categoryId),
         ]);
     }
@@ -104,13 +104,13 @@ class CategoryController extends Controller
             $category->update();
         }
 
-        return redirect()->route('listCategories')->with('info','編集しました！');
+        return redirect()->route('listCategories')->with('info',__('message.toast.edit'));
     }
 
     public function view($categoryId) 
     {
         return view('admin.categories.view', [
-            'title' => 'カテゴリー詳細',
+            'title' => __('message.title.category_detail'),
             'category' => $this->categoryService->getCategory($categoryId),
             'countItems' => $this->itemService->getCountItems($categoryId),
             'items' => $this->itemService->getListItems($categoryId),
@@ -125,8 +125,8 @@ class CategoryController extends Controller
         if ($countItem == 0) {
             Category::find($categoryId)->delete();
         } else {
-            return redirect()->route('listCategories')->with('warning','削除できません！');
+            return redirect()->route('listCategories')->with('warning',__('message.toast.no_delete'));
         }
-        return redirect()->route('listCategories')->with('message','削除しました！');
+        return redirect()->route('listCategories')->with('message',__('message.toast.delete'));
     }
 }

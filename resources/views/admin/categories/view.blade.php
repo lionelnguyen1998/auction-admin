@@ -5,11 +5,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>カテゴリー詳細</h1>
+            <h1>{{ __('message.category.detail') }}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('listCategories') }}">カテゴリー一覧</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('listCategories') }}">{{ __('message.category.list') }}</a></li>
               <li class="breadcrumb-item active">{{ $category['name'] }}</li>
             </ol>
           </div>
@@ -34,10 +34,10 @@
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>名前</b></b> <p class="float-right">{{ $category['name'] }}</p>
+                    <b>{{ __('message.category.name') }}</b></b> <p class="float-right">{{ $category['name'] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>アイテムの合計</b> <p class="float-right">{{ $countItems }}</p>
+                    <b>{{ __('message.category.total') }}</b> <p class="float-right">{{ $countItems }}</p>
                   </li>
                 </ul>
               </div>
@@ -47,7 +47,7 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#list_item" data-toggle="tab">アイテム</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#list_item" data-toggle="tab">{{ __('message.item.item') }}</a></li>
                 </ul>
               </div>
               <div class="card-body">
@@ -59,12 +59,12 @@
                                 <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
-                                    <th style="width:50px">アイテムID</th>
-                                    <th>オークションID</th>
-                                    <th>ブランド</th>
-                                    <th>シリーズ</th>
-                                    <th>名前</th>
-                                    <th>始値</th>
+                                    <th style="width:50px">{{ __('message.item.id') }}</th>
+                                    <th>{{ __('message.item.auction') }}</th>
+                                    <th>{{ __('message.item.brand') }}</th>
+                                    <th>{{ __('message.item.series') }}</th>
+                                    <th>{{ __('message.item.name') }}</th>
+                                    <th>{{ __('message.item.first_price') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -75,7 +75,7 @@
                                             <td>{{ $item['brands']['name'] ?? '--' }}</td>
                                             <td>{{ $item['series'] ?? '--' }}</td>
                                             <td>{{ $item['name'] }}</td>
-                                            <td>{{ number_format($item['starting_price']) ?? '--' }} 円</td>
+                                            <td>{{ number_format($item['starting_price']) ?? '--' }} {{ __('message.item.money') }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

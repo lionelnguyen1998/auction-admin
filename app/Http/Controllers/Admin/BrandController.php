@@ -19,7 +19,7 @@ class BrandController extends Controller
     public function index()
     {
         return view('admin.brands.list', [
-            'title' => 'ブランド一覧',
+            'title' => __('message.brand.list'),
             'brands' => $this->brandService->getListBrands()
         ]);
     }
@@ -27,7 +27,7 @@ class BrandController extends Controller
     public function create()
     {
         return view('admin.brands.create', [
-            'title' => 'ブランド追加'
+            'title' => __('message.brand.add_page')
         ]);
     }
 
@@ -49,13 +49,13 @@ class BrandController extends Controller
             'brand_info' => $brandInfo ?? null
         ]);
 
-        return redirect()->route('listBrands')->with('message', '追加しました！');
+        return redirect()->route('listBrands')->with('message', __('message.toast.add'));
     }
 
     public function edit($brandId)
     {
         return view('admin.brands.edit', [
-            'title' => 'ブランド編集',
+            'title' => __('message.brand.edit'),
             'brand' => $this->brandService->getBrand($brandId)
         ]);
     }
@@ -82,7 +82,7 @@ class BrandController extends Controller
             $brand->update();
         }
 
-        return redirect()->route('listBrands')->with('info', '編集しました！');
+        return redirect()->route('listBrands')->with('info', __('message.toast.edit'));
     }
 
     public function destroy($brandId) 
@@ -93,9 +93,9 @@ class BrandController extends Controller
         if ($countItem == 0) {
             $brand = Brand::findOrFail($brandId)->delete();
         } else {
-            return redirect()->back()->with('warning', '削除できません！');
+            return redirect()->back()->with('warning', __('message.toast.no_delete'));
         }
 
-        return redirect()->route('listBrands')->with('message', '削除しました！');
+        return redirect()->route('listBrands')->with('message', __('message.toast.delete'));
     }
 }
