@@ -27,17 +27,16 @@ class CategoryAdminService implements CategoryAdminServiceInterface
 
         if (isset($request["category_id"])) {
             $categoryId = $request["category_id"];
-            $rules['name'] = "required|max:255|min:0|unique:categories,name,$categoryId,category_id,deleted_at,NULL";
+            $rules['name'] = "required|max:255|unique:categories,name,$categoryId,category_id,deleted_at,NULL";
         } else {
-            $rules['name'] = "required|max:255|min:0|unique:categories,name";
+            $rules['name'] = "required|max:255|unique:categories,name";
         }
 
         $messages = [
-            'required' => '必須項目が未入力です。',
-            'max' => ':max文字以下入力してください。 ',
-            'name.unique' => '既に使用されています。',
-            'min' => ':attributeは少なくとも:minでなければなりません。',
-            'integer' => '番号を入力してください',
+            'required' => __('message.validation.required'),
+            'max' => sprintf(__('message.validation.max'), ':max'),
+            'name.unique' => __('message.validation.uniqueCategory'),
+            'integer' =>  __('message.validation.integer'),
         ];
 
         $attributes = [

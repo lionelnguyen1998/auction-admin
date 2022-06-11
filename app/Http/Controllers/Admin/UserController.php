@@ -26,7 +26,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.users.list', [
-            'title' => 'ユーザー一覧',
+            'title' => __('message.user.list'),
             'users' => $this->userService->getUserList()
         ]);
     }
@@ -40,7 +40,7 @@ class UserController extends Controller
     public function show($userId)
     {
         return view('admin.users.view', [
-            'title' => 'ユーザー詳細', 
+            'title' => __('message.title.user_detail'), 
             'user' => $this->userService->getUserInfo($userId)
         ]);
     }
@@ -48,7 +48,7 @@ class UserController extends Controller
     public function create()
     {
         return view('admin.users.create', [
-            'title' => 'ユーザー追加'
+            'title' => __('message.user.create')
         ]);
     }
 
@@ -74,13 +74,13 @@ class UserController extends Controller
             'user_create' => auth()->user()->user_id,
         ]);
 
-        return redirect()->route('listUser')->with('message','追加しました！');
+        return redirect()->route('listUser')->with('message', __('message.toast.add'));
     }
 
     public function edit($userId)
     {
         return view('admin.users.create', [
-            'title' => 'ユーザー編集',
+            'title' => __('message.user.edit'),
             'user' => $this->userService->getAdminInfo($userId)
         ]);
     }
@@ -109,14 +109,14 @@ class UserController extends Controller
             $user->update();
         }
 
-        return redirect()->route('listUser')->with('info','編集しました！');
+        return redirect()->route('listUser')->with('info',__('message.toast.edit'));
     }
 
     public function info() 
     {
         $userId = auth()->user()->user_id;
         return view('admin.users.info', [
-            'title' => '管理者情報',
+            'title' => __('message.title.admin_info'),
             'user' => $this->userService->getAdminInfo($userId)
         ]);
     }
@@ -137,10 +137,10 @@ class UserController extends Controller
             ->toArray();
 
         if ($userSelling || $userBid) {
-            return redirect()->back()->with('warning', 'アカウントがアクテイブしています');
+            return redirect()->back()->with('warning', __('message.toast.account_active'));
         } else {
             $user = User::where('user_id', $userId)->delete();
-            return redirect()->route('listUser')->with('message','削除しました！');
+            return redirect()->route('listUser')->with('message', __('message.toast.delete'));
         }
     }
 }

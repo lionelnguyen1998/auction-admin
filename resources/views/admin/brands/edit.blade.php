@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1>ブランド</h1>
+            <h1>{{ __('message.brand.edit') }}</h1>
           </div>
           <div class="col-sm-12">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('listBrands') }}">ブランド一覧</a></li>
-              <li class="breadcrumb-item active">ブランド編集</li>
+              <li class="breadcrumb-item"><a href="{{ route('listBrands') }}">{{ __('message.brand.list') }}</a></li>
+              <li class="breadcrumb-item active">{{ __('message.brand.edit') }}</li>
             </ol>
           </div>
         </div>
@@ -30,14 +30,14 @@
                 <input type="hidden" name="brand_id" value="{{ $brand[0]['brand_id'] }}"/>
                 <div class="card-body" style="width:70%;margin-left:15%">
                   <div class="form-group">
-                    <label for="name">名前 <i class="fa fa-asterisk" aria-hidden="true" style="color:red"></i></label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="名前を入力してください" value="{{ old('name') ?? $brand[0]['name'] }}">
+                    <label for="name">{{ __('message.brand.name') }} <i class="fa fa-asterisk" aria-hidden="true" style="color:red"></i></label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('message.brand.name_input') }}" value="{{ old('name') ?? $brand[0]['name'] }}">
                     @if($errors->has('name'))
                     <label class="control-label" for="inputError" style="color: red; padding-left: 5px;">{{ $errors->first('name')}}</label><br/>
                     @endif
                   </div>
                   <div class="form-group">
-                    <label for="brand_info">ブランドの情報</label>
+                    <label for="brand_info">{{ __('message.brand.brand_info') }}</label>
                     <textarea id="summernote" name="brand_info">
                         {{ $brand[0]['brand_info'] }}
                     </textarea>
@@ -46,7 +46,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer" style="width:100%">
-                  <button type="submit" class="btn btn-primary float-right">編集</button>
+                  <button type="submit" class="btn btn-primary float-right">{{ __('message.button.edit') }}</button>
                 </div>
                 @csrf
               </form>

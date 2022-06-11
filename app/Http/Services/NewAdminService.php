@@ -7,12 +7,6 @@ use Illuminate\Support\Facades\Validator;
 
 class NewAdminService implements NewAdminServiceInterface
 {
-    public function __construct()
-    {
-        $this->messageRequired = config('message.MSG_01');
-        $this->messageErrorMax = config('message.MSG_03');
-    }
-
     public function getListNews()
     {
         $news = News::with('users')
@@ -30,8 +24,8 @@ class NewAdminService implements NewAdminServiceInterface
         ];
 
         $messages = [
-            'required' => $this->messageRequired,
-            'max' => sprintf($this->messageErrorMax, ':max')
+            'required' => __('message.validation.required'),
+            'max' => sprintf(__('message.validation.max'), ':max')
         ];
 
         $attributes = [

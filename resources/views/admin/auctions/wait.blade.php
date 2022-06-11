@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>オークション評価</h1>
+            <h1>{{__('message.auctions_wait.title')}}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('admin') }}">ホーム</a></li>
-              <li class="breadcrumb-item active">オークション評価</li>
+              <li class="breadcrumb-item"><a href="{{ route('admin') }}">{{__('message.auctions_wait.home')}}</a></li>
+              <li class="breadcrumb-item active">{{__('message.auctions_wait.title')}}</li>
             </ol>
           </div>
         </div>
@@ -30,13 +30,13 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>オークションID</th>
-                    <th>作る人</th>
-                    <th>カテゴリー</th>
-                    <th>テーマ</th>
-                    <th>始まる時間</th>
-                    <th>終わる時間</th>
-                    <th>スターテス</th>
+                    <th>{{__('message.auctions.id')}}</th>
+                    <th>{{__('message.auctions.user_create')}}</th>
+                    <th>{{__('message.auctions.category')}}</th>
+                    <th>{{__('message.auctions.title')}}</th>
+                    <th>{{__('message.auctions.start_date')}}</th>
+                    <th>{{__('message.auctions.end_date')}}</th>
+                    <th>{{__('message.auctions.status')}}</th>
                     <th>&nbsp;</th>
                   </tr>
                   </thead>
@@ -55,7 +55,7 @@
                             <td>{{ $auction['start_date'] }}</td>
                             <td>{{ $auction['end_date'] }}</td>
                             <td>
-                              <p class="btn btn-info">{{ $status[$index] }}</p>
+                              <p class="btn btn-info">{{__('message.status.4')}}</p>
                             </td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="{{ route('viewAuctionIsWait', ['auctionId' => $auction['auction_id']]) }}">

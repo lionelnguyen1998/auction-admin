@@ -18,7 +18,7 @@ class NewController extends Controller
     public function index()
     {
         return view('admin.news.list', [
-            'title' => 'ニュース一覧',
+            'title' => __('message.news.list'),
             'news' => $this->newService->getListNews()
         ]);
     }
@@ -26,7 +26,7 @@ class NewController extends Controller
     public function create()
     {
         return view('admin.news.create', [
-            'title' => 'ニュース追加'
+            'title' => __('message.news.add_page')
         ]);
     }
 
@@ -50,13 +50,13 @@ class NewController extends Controller
             'title' => $title,
         ]);
 
-        return redirect()->route('listNews')->with('message','追加しました！');
+        return redirect()->route('listNews')->with('message', __('message.toast.add'));
     }
 
     public function edit($newId)
     {
         return view('admin.news.create', [
-            'title' => 'ニュース編集',
+            'title' => __('message.news.edit'),
             'new' => $this->newService->getInfoNew($newId)
         ]);
     }
@@ -64,7 +64,7 @@ class NewController extends Controller
     public function delete($newId)
     {
         $delete = News::findOrFail($newId)->delete();
-        return redirect()->route('listNews')->with('message','削除しました！');
+        return redirect()->route('listNews')->with('message', __('message.toast.delete'));
     }
 
     public function update(Request $request, $newId)
@@ -90,13 +90,13 @@ class NewController extends Controller
             $newUpdate->update();
         }
 
-        return redirect()->route('listNews')->with('info','編集しました！');
+        return redirect()->route('listNews')->with('info', __('message.toast.edit'));
     }
 
     public function view($newId)
     {
         return view('admin.news.create', [
-            'title' => 'ニュース詳細',
+            'title' => __('message.title.news_detail'),
             'newView' => $this->newService->getInfoNew($newId)
         ]);
     }

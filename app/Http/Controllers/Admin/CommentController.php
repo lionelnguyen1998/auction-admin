@@ -17,7 +17,7 @@ class CommentController extends Controller
     public function destroy($commentId)
     {
         Comment::where('comment_id', $commentId)->delete();
-        return redirect()->back()->with('message','削除しました！');
+        return redirect()->back()->with('message',__('message.toast.delete'));
     }
 
     public function create(Request $request)

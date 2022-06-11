@@ -25,7 +25,7 @@ class LoginController extends Controller
     public function index()
     {
         return view('admin.users.login', [
-            'title' => 'ログイン'
+            'title' => __('message.title.login')
         ]);
     }
 
@@ -70,10 +70,10 @@ class LoginController extends Controller
             'password' => $password,
             'role' => 2,
             ])) {
-                Session::flash('error', 'アカウントは権限がありません');
+                Session::flash('error', __('message.login.miss'));
                 return redirect()->back();
         } else {
-            Session::flash('error', 'メールとパスワードは違いました');
+            Session::flash('error', __('message.login.user'));
             return redirect()->back();
         }
     }

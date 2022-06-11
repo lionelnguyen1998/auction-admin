@@ -10,12 +10,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-12">
-            <h1>@if (isset($slider)) スライダー編集 @else スライダー追加 @endif</h1>
+            <h1>@if (isset($slider)) {{ __('message.slider.edit')}} @else {{ __('message.slider.add_page')}} @endif</h1>
           </div>
           <div class="col-sm-12">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('listSliders') }}">スライダー一覧</a></li>
-              <li class="breadcrumb-item active">@if(isset($slider)) スライダー編集 @else スライダー追加 @endif</li>
+              <li class="breadcrumb-item"><a href="{{ route('listSliders') }}">{{ __('message.slider.list')}}</a></li>
+              <li class="breadcrumb-item active">@if(isset($slider)) {{ __('message.slider.edit')}} @else {{ __('message.slider.add_page')}} @endif</li>
             </ol>
           </div>
         </div>
@@ -38,7 +38,7 @@
                     <input type="hidden" value="{{ $slider[0]['slider_id'] }}" name="slider_id"/>
                   @endif
                   <div class="form-group">
-                    <label for="image">写真</label>
+                    <label for="image">{{ __('message.slider.image')}}</label>
                     <div class="input-group">
                         <input type="file" style="margin-bottom:5px" class="form-control" id="upload" value="{{ old('thumb') }}">
                         <input type="hidden" name="thumb" id="thumb" @if (isset($slider)) value="{{$slider[0]['image']}}" @else value="{{ old('thumb') }}" @endif>
@@ -53,19 +53,19 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label>デーマ</label>
+                    <label>{{ __('message.slider.type')}}</label>
                     <select class="form-control select2" style="width: 100%;" name="type">
                     @if (isset($slider[0]['type']))
                       @php
-                      $sliderConst = config('const.typeSlider');
+                      $sliderConst = __('message.typeSlider');
                       $index = $slider[0]['type'];
                       @endphp
                       <option selected="selected" hidden value="{{ $index }}">{{ $sliderConst[$index] }}</option>
-                      @foreach (config('const.typeSlider') as $key => $type)
+                      @foreach ($sliderConst as $key => $type)
                           <option value="{{ $key }}">{{ $type }}</option>
                       @endforeach
                     @else 
-                      @foreach (config('const.typeSlider') as $key => $type)
+                      @foreach (__('message.typeSlider') as $key => $type)
                           <option selected="selected" value="{{ $key }}">{{ $type }}</option>
                       @endforeach
                     @endif
@@ -78,7 +78,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer" style="width:100%">
-                  <button type="submit" class="btn btn-primary float-right">@if (isset($slider)) 編集 @else 送信 @endif</button>
+                  <button type="submit" class="btn btn-primary float-right">@if (isset($slider)) {{ __('message.button.edit')}} @else {{ __('message.button.send')}} @endif</button>
                 </div>
                 @csrf
               </form>

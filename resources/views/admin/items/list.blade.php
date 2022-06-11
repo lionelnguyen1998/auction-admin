@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>アイテム一覧</h1>
+            <h1>{{ __('message.item.list') }}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('admin') }}">ホーム</a></li>
-              <li class="breadcrumb-item active">アイテム一覧</li>
+              <li class="breadcrumb-item"><a href="{{ route('admin') }}">{{ __('message.item.home') }}</a></li>
+              <li class="breadcrumb-item active">{{ __('message.item.list') }}</li>
             </ol>
           </div>
         </div>
@@ -29,12 +29,12 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th style="width:50px">アイテムID</th>
-                    <th>カテゴリー</th>
-                    <th>オークション</th>
-                    <th>ブランド</th>
-                    <th>シリーズ</th>
-                    <th>名前</th>
+                    <th style="width:50px">{{ __('message.item.id') }}</th>
+                    <th>{{ __('message.item.category') }}</th>
+                    <th>{{ __('message.item.auction') }}</th>
+                    <th>{{ __('message.item.brand') }}</th>
+                    <th>{{ __('message.item.series') }}</th>
+                    <th>{{ __('message.item.name') }}</th>
                     <th>&nbsp;</th>
                   </tr>
                   </thead>

@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>カテゴリー一覧</h1>
+            <h1>{{ __('message.category.list') }}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('admin') }}">ホーム</a></li>
-              <li class="breadcrumb-item active">カテゴリー一覧</li>
+              <li class="breadcrumb-item"><a href="{{ route('admin') }}">{{ __('message.category.home') }}</a></li>
+              <li class="breadcrumb-item active">{{ __('message.category.list') }}</li>
             </ol>
           </div>
         </div>
@@ -29,21 +29,21 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <a style="color:white" href="{{ route('createCategory') }}">
                     <button type="button" class="btn btn-block btn-success" style="margin-bottom:10px; width:150px">
-                      追加
+                    {{ __('message.category.add') }}
                     </button>
                   </a>
                   <thead>
                   <tr>
-                    <th>カテゴリーID</th>
-                    <th>名前</th>
-                    <th>タイプ</th>
+                    <th>{{ __('message.category.ID') }}</th>
+                    <th>{{ __('message.category.name') }}</th>
+                    <th>{{ __('message.category.type') }}</th>
                     <th style="width:90px">&nbsp;</th>
                   </tr>
                   </thead>
                   <tbody>
                     @foreach ($categories as $key => $category)
                     @php
-                    $categoryParent = config('const.categories');
+                    $categoryParent = __('message.categoryType');
                     $index = $category["type"];
                     @endphp
                         <tr>
@@ -68,7 +68,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title" style="color:#F70202"><b>本当に削除しますか？</b></h4>
+                                        <h4 class="modal-title" style="color:#F70202"><b>{{ __('message.modal.title') }}</b></h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true"></span>&times;</span>
                                         </button>
@@ -76,8 +76,8 @@
                                     <form action="{{ route('deleteCategory', ['categoryId' => $category["category_id"]]) }}" method="GET">
                                         <!-- /.card-body -->
                                         <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                                        <button type="submit" class="btn btn-danger">確認</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('message.modal.cancel') }}</button>
+                                        <button type="submit" class="btn btn-danger">{{ __('message.modal.confirm') }}</button>
                                         </div>
                                         @csrf
                                     </form>

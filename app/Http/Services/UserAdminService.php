@@ -7,14 +7,6 @@ use Illuminate\Support\Facades\Validator;
 
 class UserAdminService implements UserAdminServiceInterface
 {
-    public function __construct()
-    {
-        //Error Messages
-        $this->messageRequired = config('message.MSG_01');
-        $this->messageErrorFormatEmail = config('message.MSG_02');
-        $this->messageErrorMax = config('message.MSG_03');
-    }
-
     //login validation
     public function loginValidation($request) 
     {
@@ -24,9 +16,9 @@ class UserAdminService implements UserAdminServiceInterface
         ];
 
         $messages = [
-            'required' => $this->messageRequired,
-            'max' => sprintf($this->messageErrorMax, ':max'),
-            'email' => $this->messageErrorFormatEmail
+            'required' => __('message.validation.required'),
+            'max' => sprintf(__('message.validation.max'), ':max'),
+            'email' => __('message.validation.email_format')
         ];
 
         $attribute = [
@@ -85,9 +77,10 @@ class UserAdminService implements UserAdminServiceInterface
         }
 
         $messages = [
-            'required' => $this->messageRequired,
-            'max' => sprintf($this->messageErrorMax, ':max'),
-            'email' => $this->messageErrorFormatEmail
+            'required' => __('message.validation.required'),
+            'max' => sprintf(__('message.validation.max'), ':max'),
+            'email' => __('message.validation.email_format'),
+            'unique' => __('message.validation.unique')
         ];
 
         $attribute = [

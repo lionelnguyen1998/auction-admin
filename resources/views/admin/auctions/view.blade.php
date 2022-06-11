@@ -5,11 +5,11 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{ $auction[0]["title"] }}の詳細</h1>
+            <h1>{{ $auction[0]["title"] }}</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('listAuctions') }}">オークション一覧</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('listAuctions') }}">{{__('message.detail.auctions')}}</a></li>
               <li class="breadcrumb-item active">{{ $auction[0]["title"] }}</li>
             </ol>
           </div>
@@ -35,20 +35,20 @@
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>始める時間</b> <p class="float-right">{{ $auction[0]["start_date"] }}</p>
+                    <b>{{__('message.detail.start_date')}}</b> <p class="float-right">{{ $auction[0]["start_date"] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>終わる時間</b> <p class="float-right">{{ $auction[0]["end_date"] }}</p>
+                    <b>{{__('message.detail.end_date')}}</b> <p class="float-right">{{ $auction[0]["end_date"] }}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>始値</b> <p class="float-right">{{ $auction[0]["items"][0]["starting_price"] }}</p>
+                    <b>{{__('message.detail.first_price')}}</b> <p class="float-right">{{ number_format($auction[0]["items"][0]["starting_price"]) }}　{{__('message.detail.money')}}</p>
                   </li>
                   <li class="list-group-item">
-                    <b>最後値段</b> <p class="float-right">{{ $maxPrice }}</p>
+                    <b>{{__('message.detail.max_price')}}</b> <p class="float-right">{{ number_format($maxPrice) }}　{{__('message.detail.money')}}</p>
                   </li>
                   <li class="list-group-item">
                     @php
-                        $status = config('const.status');
+                        $status = __('message.status');
                         $index = $auction[0]['status'];
                     @endphp
                     @if ($index == 1)
@@ -72,11 +72,11 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#item" data-toggle="tab">アイテムの情報</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#bid" data-toggle="tab">値段</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#comment" data-toggle="tab">コメントする</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#item" data-toggle="tab">{{__('message.detail.item_detail')}}</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#bid" data-toggle="tab">{{__('message.detail.bid')}}</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#comment" data-toggle="tab">{{__('message.detail.comment')}}</a></li>
                   @if ($index == 6)
-                    <li class="nav-item"><a class="nav-link" href="#buy" data-toggle="tab">オークションが成功した</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#buy" data-toggle="tab">{{__('message.detail.auctions_success')}}</a></li>
                   @endif
                 </ul>
               </div><!-- /.card-header -->
@@ -113,11 +113,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-12 col-sm-12">
-                                <h3>アイテムの情報</h3>
-                                <p>名前: {{ $item[0]["name"] }}</p>
-                                <p>ブランド: {{ $item[0]["brands"]["name"] }}</p>
-                                <p>シリーズ: {{ $item[0]["series"] ?? '--' }}</p>
-                                <p>他の情報: {{ $item[0]["description"] }}</p>
+                                <h3>{{__('message.detail.item_detail')}}</h3>
+                                <p>{{__('message.detail.item_name')}}: {{ $item[0]["name"] }}</p>
+                                <p>{{__('message.detail.brand')}}: {{ $item[0]["brands"]["name"] }}</p>
+                                <p>{{__('message.detail.series')}}: {{ $item[0]["series"] ?? '--' }}</p>
+                                <p style="white-space:pre-line">{{__('message.detail.des')}}: {{ $item[0]["description"] }}</p>
                                 <hr>
                                 </div>
                              </div>
@@ -141,13 +141,13 @@
                       </div>
                       <!-- /.user-block -->
                       <p>
-                        {{ $bid['price'] }}
+                        {{ number_format($bid['price']) }}　{{__('message.detail.money')}}
                       </p>
 
                       <p>
-                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> シェア</a>
-                        <a href="#" class="link-black text-sm mr-2"><i class="far fa-thumbs-up mr-1"></i> いいね</a>
-                        <a href="{{ route('deleteBid', ['bidId' => $bid['bid_id']]) }}" class="link-black text-sm"><i class="fas fa-trash mr-1"></i> 削除</a>
+                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> {{__('message.detail.share')}}</a>
+                        <a href="#" class="link-black text-sm mr-2"><i class="far fa-thumbs-up mr-1"></i> {{__('message.detail.like')}}</a>
+                        <a href="{{ route('deleteBid', ['bidId' => $bid['bid_id']]) }}" class="link-black text-sm"><i class="fas fa-trash mr-1"></i> {{__('message.detail.delete')}}</a>
                       </p>
                     </div>
                     @endforeach
@@ -174,9 +174,9 @@
                       </p>
 
                       <p>
-                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> シェア</a>
-                        <a href="#" class="link-black text-sm mr-2"><i class="far fa-thumbs-up mr-1"></i> いいね</a>
-                        <a href="{{ route('deleteComment', ['commentId' => $comment['comment_id']]) }}" class="link-black text-sm"><i class="fas fa-trash mr-1"></i> 削除</a>
+                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> {{__('message.detail.share')}}</a>
+                        <a href="#" class="link-black text-sm mr-2"><i class="far fa-thumbs-up mr-1"></i> {{__('message.detail.like')}}</a>
+                        <a href="{{ route('deleteComment', ['commentId' => $comment['comment_id']]) }}" class="link-black text-sm"><i class="fas fa-trash mr-1"></i> {{__('message.detail.delete')}}</a>
                       </p>
                     </div>
                     @endforeach
@@ -185,18 +185,17 @@
                   @if ($index == 6)
                     <div class="tab-pane" id="buy">
                       <div class="card-body">
-                        <strong><i class="fas fa-book mr-1"></i>買った人の情報</strong>
+                        <strong><i class="fas fa-book mr-1"></i>{{__('message.detail.sell_info')}}</strong>
                         <p class="text-muted">
-                        <b>名前 : </b> {{ $buyInfo['item_info']['buying_user']['name'] }}
+                        <b>{{__('message.user.name')}} : </b> {{ $buyInfo['item_info']['buying_user']['name'] }}
                         </p>
-                        <p class="text-muted"><b>電話番号 : </b> {{ $buyInfo['item_info']['buying_user']['phone'] }}</p>
-                        <p class="text-muted"><b>住所  : </b> {{ $buyInfo['item_info']['buying_user']['address'] }}</p>
-                        <p class="text-muted"><b>メール : </b> {{ $buyInfo['item_info']['buying_user']['email'] }}</p>
-
+                        <p class="text-muted"><b>{{__('message.user.phone')}} : </b> {{ $buyInfo['item_info']['buying_user']['phone'] }}</p>
+                        <p class="text-muted"><b>{{__('message.user.address')}}  : </b> {{ $buyInfo['item_info']['buying_user']['address'] }}</p>
+                        <p class="text-muted"><b>{{__('message.user.email')}} : </b> {{ $buyInfo['item_info']['buying_user']['email'] }}</p>
                         <hr>
-                        <strong><i class="far fa-file-alt mr-1"></i>アイテムの情報</strong>
-                        <p class="text-muted"><b>値段： </b>{{ $buyInfo['item_info']["max_price"] }}</p>
-                        <p class="text-muted"><b>他の情報: </b>{{ $buyInfo['item_info']["selling_info"] }}</p>
+                        <strong><i class="far fa-file-alt mr-1"></i>{{__('message.detail.item_detail')}}</strong>
+                        <p class="text-muted"><b>{{__('message.detail.max_price')}}： </b>{{ number_format($buyInfo['item_info']["max_price"]) }}　{{__('message.detail.money')}}</p>
+                        <p class="text-muted"><b>{{__('message.detail.dif_info')}}: </b>{{ $buyInfo['item_info']["selling_info"] }}</p>
                       </div>
                     </div>
                   @endif

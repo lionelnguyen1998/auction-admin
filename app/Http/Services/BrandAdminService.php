@@ -30,16 +30,15 @@ class BrandAdminService implements BrandAdminServiceInterface
 
         if (isset($request["brand_id"])) {
             $brandId = $request["brand_id"];
-            $rules['name'] = "required|max:255|min:0|unique:brands,name,$brandId,brand_id,deleted_at,NULL";
+            $rules['name'] = "required|max:255|unique:brands,name,$brandId,brand_id,deleted_at,NULL";
         } else {
-            $rules['name'] = "required|max:255|min:0|unique:brands,name";
+            $rules['name'] = "required|max:255|unique:brands,name";
         }
 
         $messages = [
-            'required' => '必須項目が未入力です。',
-            'max' => ':max文字以下入力してください。 ',
-            'unique' => '既に使用されています。',
-            'min' => ':attributeは少なくとも:minでなければなりません。'
+            'required' => __('message.validation.required'),
+            'max' => sprintf(__('message.validation.max'), ':max'),
+            'unique' => __('message.validation.uniqueBrand'),
         ];
 
         $attributes = [
