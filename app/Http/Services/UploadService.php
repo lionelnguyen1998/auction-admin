@@ -21,7 +21,7 @@ class UploadService implements UploadServiceInterface
 
                 // $url = 'http://admin.localhost:443/';
                 
-                return $url . '/storage/' . $pathFull . '/' . $name;
+                // return $url . '/storage/' . $pathFull . '/' . $name;
             } catch (\Exception $error) {
                 return false;
             }
