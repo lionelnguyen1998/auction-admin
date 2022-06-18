@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Services\AuctionAdminService;
 use App\Models\Auction;
+use App\Models\Item;
+use App\Models\Image;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\App;
 

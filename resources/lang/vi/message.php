@@ -113,7 +113,8 @@ return [
         2 => 'Thời trang',
         3 => 'Sức khỏe & Sắc đẹp',
         4 => 'Dụng cụ gia đình',
-        5 => 'Khác'
+        5 => 'Phương tiện giao thông',
+        6 => 'Khác'
     ],
     'category' => [
         'list' => 'Danh sách loại sản phẩm',
