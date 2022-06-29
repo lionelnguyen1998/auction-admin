@@ -17,7 +17,7 @@ class CreateBidsTable extends Migration
             $table->increments('bid_id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('auction_id');
-            $table->string('price', 60);
+            $table->integer('price', 20);
             $table->timestamps();
             $table->softDeletes();
         });
