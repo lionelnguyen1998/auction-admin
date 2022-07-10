@@ -50,7 +50,7 @@
                         <tr>
                             <td>{{ $auction['auction_id'] }}</td>
                             <td>{{ $auction['users']['name'] }}</td>
-                            <td>{{ $auction['category']['name'] }}</td>
+                            <td>{{ $auction['category']['name'] ?? '' }}</td>
                             <td>{{ $auction['title'] }}</td>
                             <td>{{ $auction['start_date'] }}</td>
                             <td>{{ $auction['end_date'] }}</td>
