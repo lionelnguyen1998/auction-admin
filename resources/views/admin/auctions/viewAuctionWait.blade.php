@@ -54,7 +54,9 @@
                   @endphp
                   @if ($index == 4)
                     <li class="list-group-item">
+                      @if (isset($item)) 
                       <a class="btn btn-success" style="color:white" data-toggle="modal" data-target="#modal-accept">{{__('message.auctions_wait.accept')}}</a>  
+                      @endif
                       <p class="float-right">
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-deny">
                         {{__('message.auctions_wait.deny')}}
