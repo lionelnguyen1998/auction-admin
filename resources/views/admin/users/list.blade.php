@@ -61,6 +61,9 @@
                               <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-{{ $key }}">
                                   <i class="fas fa-trash"></i>
                               </a>
+                              <a class="btn btn-info btn-sm" href="{{ route('editUser', ['userId' => $user->user_id]) }}">
+                                    <i class="fas fa-edit"></i>
+                              </a>
                               @if ($user->user_create == auth()->user()->user_id)
                                 <a class="btn btn-info btn-sm" href="{{ route('editUser', ['userId' => $user->user_id]) }}">
                                     <i class="fas fa-edit"></i>
