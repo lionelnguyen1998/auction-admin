@@ -64,11 +64,11 @@
                               <a class="btn btn-info btn-sm" href="{{ route('editUser', ['userId' => $user->user_id]) }}">
                                     <i class="fas fa-edit"></i>
                               </a>
-                              @if ($user->user_create == auth()->user()->user_id)
+                              <!-- @if ($user->user_create == auth()->user()->user_id)
                                 <a class="btn btn-info btn-sm" href="{{ route('editUser', ['userId' => $user->user_id]) }}">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                              @endif
+                              @endif -->
                             </td>
                         </tr>
                         <!-- /.modal -->
